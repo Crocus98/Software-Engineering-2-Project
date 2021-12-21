@@ -1,0 +1,152 @@
+<?xml version="1.0"?>
+<alloy>
+
+<view nodetheme="Martha">
+
+<defaultnode/>
+
+<defaultedge/>
+
+<node>
+   <type name="String"/>
+   <type name="univ"/>
+</node>
+
+<node color="Black">
+   <type name="Discussion"/>
+   <type name="Time"/>
+</node>
+
+<node color="Blue">
+   <type name="Forecast"/>
+</node>
+
+<node color="Gray">
+   <type name="Post"/>
+</node>
+
+<node color="Green">
+   <type name="FarmProduction"/>
+   <type name="WaterData"/>
+</node>
+
+<node color="Red">
+   <type name="HumidityOfSoil"/>
+</node>
+
+<node color="White">
+   <type name="Request"/>
+</node>
+
+<node color="Yellow">
+   <type name="Farm"/>
+   <type name="User"/>
+   <type name="Visit"/>
+</node>
+
+<node numberatoms="inherit">
+   <type name="Int"/>
+   <type name="seq/Int"/>
+</node>
+
+<node shape="Box">
+   <type name="Agronomist"/>
+</node>
+
+<node shape="Ellipse" color="Green">
+   <type name="Answer"/>
+</node>
+
+<node shape="Hexagon" color="White">
+   <type name="DateTime"/>
+</node>
+
+<node shape="House">
+   <type name="PolicyMaker"/>
+</node>
+
+<node shape="Inv Triangle" color="Red">
+   <type name="DailyPlan"/>
+</node>
+
+<node shape="Lined Diamond" color="Gray">
+   <type name="Date"/>
+</node>
+
+<node shape="Parallelogram" color="Blue">
+   <type name="Area"/>
+</node>
+
+<node shape="Trapezoid">
+   <type name="Farmer"/>
+</node>
+
+<edge attribute="no">
+   <relation name="farmProduction"> <type name="Farm"/> <type name="FarmProduction"/> </relation>
+   <relation name="humidityOfSoil"> <type name="Farm"/> <type name="HumidityOfSoil"/> </relation>
+   <relation name="visit"> <type name="DailyPlan"/> <type name="Visit"/> </relation>
+   <relation name="waterData"> <type name="Farm"/> <type name="WaterData"/> </relation>
+</edge>
+
+<edge attribute="yes">
+   <relation name="date"> <type name="DateTime"/> <type name="Date"/> </relation>
+   <relation name="time"> <type name="DateTime"/> <type name="Time"/> </relation>
+</edge>
+
+<edge visible="no" attribute="yes">
+   <relation name="address"> <type name="Farm"/> <type name="Int"/> </relation>
+   <relation name="amountOfProduction"> <type name="FarmProduction"/> <type name="Int"/> </relation>
+   <relation name="classification"> <type name="Forecast"/> <type name="Int"/> </relation>
+   <relation name="comment"> <type name="Answer"/> <type name="Int"/> </relation>
+   <relation name="comment"> <type name="Post"/> <type name="Int"/> </relation>
+   <relation name="comment"> <type name="Request"/> <type name="Int"/> </relation>
+   <relation name="comment"> <type name="Visit"/> <type name="Int"/> </relation>
+   <relation name="date"> <type name="Answer"/> <type name="DateTime"/> </relation>
+   <relation name="date"> <type name="DailyPlan"/> <type name="DateTime"/> </relation>
+   <relation name="date"> <type name="Discussion"/> <type name="DateTime"/> </relation>
+   <relation name="date"> <type name="Post"/> <type name="DateTime"/> </relation>
+   <relation name="date"> <type name="Request"/> <type name="DateTime"/> </relation>
+   <relation name="date"> <type name="Visit"/> <type name="DateTime"/> </relation>
+   <relation name="day"> <type name="Date"/> <type name="Int"/> </relation>
+   <relation name="day"> <type name="Forecast"/> <type name="DateTime"/> </relation>
+   <relation name="day"> <type name="HumidityOfSoil"/> <type name="DateTime"/> </relation>
+   <relation name="day"> <type name="WaterData"/> <type name="DateTime"/> </relation>
+   <relation name="dimension"> <type name="Farm"/> <type name="Int"/> </relation>
+   <relation name="excecution"> <type name="DailyPlan"/> <type name="Int"/> </relation>
+   <relation name="hour"> <type name="Time"/> <type name="Int"/> </relation>
+   <relation name="humidity"> <type name="HumidityOfSoil"/> <type name="Int"/> </relation>
+   <relation name="id"> <type name="Answer"/> <type name="Int"/> </relation>
+   <relation name="id"> <type name="Area"/> <type name="Int"/> </relation>
+   <relation name="id"> <type name="DailyPlan"/> <type name="Int"/> </relation>
+   <relation name="id"> <type name="Discussion"/> <type name="Int"/> </relation>
+   <relation name="id"> <type name="Farm"/> <type name="Int"/> </relation>
+   <relation name="id"> <type name="FarmProduction"/> <type name="Int"/> </relation>
+   <relation name="id"> <type name="Forecast"/> <type name="Int"/> </relation>
+   <relation name="id"> <type name="HumidityOfSoil"/> <type name="Int"/> </relation>
+   <relation name="id"> <type name="Post"/> <type name="Int"/> </relation>
+   <relation name="id"> <type name="Request"/> <type name="Int"/> </relation>
+   <relation name="id"> <type name="User"/> <type name="Int"/> </relation>
+   <relation name="id"> <type name="Visit"/> <type name="Int"/> </relation>
+   <relation name="id"> <type name="WaterData"/> <type name="Int"/> </relation>
+   <relation name="mail"> <type name="User"/> <type name="Int"/> </relation>
+   <relation name="minute"> <type name="Time"/> <type name="Int"/> </relation>
+   <relation name="month"> <type name="Date"/> <type name="Int"/> </relation>
+   <relation name="name"> <type name="Area"/> <type name="Int"/> </relation>
+   <relation name="name"> <type name="User"/> <type name="Int"/> </relation>
+   <relation name="password"> <type name="User"/> <type name="Int"/> </relation>
+   <relation name="problemFaced"> <type name="FarmProduction"/> <type name="Int"/> </relation>
+   <relation name="quantity"> <type name="WaterData"/> <type name="Int"/> </relation>
+   <relation name="requestState"> <type name="Request"/> <type name="Int"/> </relation>
+   <relation name="surname"> <type name="User"/> <type name="Int"/> </relation>
+   <relation name="title"> <type name="Discussion"/> <type name="Int"/> </relation>
+   <relation name="typeOfProduction"> <type name="FarmProduction"/> <type name="Int"/> </relation>
+   <relation name="typeOfRequest"> <type name="Answer"/> <type name="Int"/> </relation>
+   <relation name="typeOfRequest"> <type name="Request"/> <type name="Int"/> </relation>
+   <relation name="visitState"> <type name="Visit"/> <type name="Int"/> </relation>
+   <relation name="year"> <type name="Date"/> <type name="Int"/> </relation>
+   <relation name="year"> <type name="FarmProduction"/> <type name="DateTime"/> </relation>
+</edge>
+
+</view>
+
+</alloy>
