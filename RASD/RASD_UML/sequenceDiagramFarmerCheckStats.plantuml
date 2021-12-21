@@ -1,0 +1,18 @@
+@startuml
+skinparam style strictuml
+skinparam monochrome true
+
+Activate Farmer
+Activate DREAM
+
+Farmer->DREAM : openHomePage()
+
+Farmer<--DREAM: HomePage
+
+loop
+Farmer->DREAM: selectPeriod(start, end)
+DREAM-->Farmer: updatePage
+end
+
+
+@enduml

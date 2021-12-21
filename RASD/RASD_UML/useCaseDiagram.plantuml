@@ -1,0 +1,79 @@
+@startuml
+
+skinparam style strictuml
+skinparam monochrome true
+skinparam actorstyle  awesome
+
+
+:Agronomist:
+:PolicyMaker:
+
+:Farmer:
+
+package "DREAM" {
+
+left to right direction
+
+
+together {
+    (Check statistics)
+    (Check Area Data)
+    
+}
+
+together {
+    (Check Field Data)
+    (Creation of a request)
+    (answer to request)
+    (close a request)
+
+}
+
+together {
+    (Creation of a forum post)
+(Creation of a forum discussion)
+}
+
+together {
+    (Check the daily plan)
+    (Edit the daily plan)
+(Validate the daily plan)
+}
+
+(Production Data upload)
+
+
+
+
+(Check statistics).>(Check Area Data) : <<Include>>
+(Check Area Data).>(Check Field Data) : <<Include>>
+
+(Creation of a forum discussion).> (Creation of a forum post) : <<Include>>
+
+:PolicyMaker:-->(Check statistics)
+
+
+:Agronomist:-->(Check Area Data) 
+:Agronomist:-->(Creation of a request)
+:Agronomist:-->(answer to request)
+:Agronomist:-->(close a request)
+:Agronomist:-->(Check the daily plan)
+:Agronomist:-->(Edit the daily plan)
+:Agronomist:-->(Validate the daily plan)
+
+
+
+(Check Field Data)<--:Farmer:
+(Creation of a request)<--:Farmer:
+(answer to request)<--:Farmer:
+(close a request)<--:Farmer:
+(Creation of a forum discussion)<--:Farmer:
+(Creation of a forum post)<--:Farmer:
+(Production Data upload)<--:Farmer:
+
+
+}
+
+
+
+@enduml

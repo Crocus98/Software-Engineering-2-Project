@@ -1,0 +1,33 @@
+@startuml
+
+skinparam style strictuml
+skinparam monochrome true
+
+(*) --> "open requests page"
+
+"open requests page"-->"create new request"
+
+"open requests page"-->"select open request"
+
+"select open request"-->"show answers"
+
+"show answers"-->"insert comment"
+
+"show answers"-->(*)
+
+"create new request"-->"select help/suggestion"
+
+"select help/suggestion"-->"insert comment"
+
+"insert comment"-->"    send    "
+
+"receive answers"-->"insert comment"
+
+
+"receive answers"->"    close request   "
+
+"    send    "-->"receive answers"
+
+"    close request   "-->(*)
+
+@enduml

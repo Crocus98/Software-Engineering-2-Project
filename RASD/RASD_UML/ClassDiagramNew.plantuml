@@ -1,0 +1,160 @@
+@startuml
+
+'skinparam style strictuml
+'skinparam monochrome true
+
+User <|--Farmer
+User <|--Agronomist
+User <|--PolicyMaker
+Area "1" o--"1..*" Farm : Contains
+Farmer "1"--"1" Farm
+Agronomist "0-1"--"0-1" Area
+Farm "1"--"0..*"FarmProduction
+Farm "1"--"0..*"HumidityOfSoil
+Farm "1"--"0..*"WaterData
+Agronomist"1"--"0..*" DailyPlan
+Visit "0..*"--"1" Farm
+DailyPlan "1" o--"0..*" Visit : Contains
+Discussion "1" o--"0..*" Post : Contains
+Farmer "1"--"0..*" Post
+Area "1"--"0..*"Forecast
+Farmer "1"--"0..*" Request
+'Agronomist "1"--"0..*" Request
+Discussion"0..*"--"0..*"Farmer
+Request "1"--"0..*"Answer
+Answer "0..*"--"0..*" Farmer
+Answer "0..*"--"0..*" Agronomist
+
+class User #white {
+    +id : String
+    +name : String
+    +password : String
+    +surname: String
+    +mail : String
+}
+
+class PolicyMaker #white {
+     
+    
+}
+
+class Farmer  #white{
+         
+
+}
+
+class Agronomist #white {
+        
+}
+
+class Discussion #white {
+    +id : String
+    +date : Date
+    +title : String
+    
+}
+
+class Post  #white{
+    +id : String
+    +user : User
+    +date : Date
+    +comment : String
+}
+
+class Request #white {
+    +id : String
+    +comment : String
+    +typeOfRequest : TypeOfRequest
+    +date : Date
+    +RequestState : RequestState
+}
+
+class Answer #white {
+    +id : String
+    +comment : String
+    +typeOfRequest : TypeOfRequest
+    +date : Date
+}
+
+
+class Farm #white{
+    +id : String
+    +dimension : int
+    +address : String
+    
+}
+
+class FarmProduction #white{
+    +id : String
+    +typeOfProduction : String
+    +amountOfProduction: int
+    +year: Date
+    +problemFaced: String
+}
+
+class HumidityOfSoil #white{
+    +id : String
+    +umidity : Float
+    +day : Date
+
+}
+
+class WaterData #white{
+    +id : String
+    +quantity : int
+    +day : Date
+}
+
+class Area #white {
+    +id: int
+    +name: String
+}
+
+class Forecast #white{
+    +id : String
+    +classification : int
+    +day: Date
+}
+
+class Visit #white{
+    +id : String
+    +date : Date
+    +comment : String
+    +VisitState: VisitState
+}
+
+class DailyPlan #white{
+    +id : String
+    +date : Date
+    +execution : Execution
+
+}
+
+enum Execution #white{
+    NEW
+    PARTIALLYDONE
+    DONE
+}
+
+enum VisitState #white{
+    NEW
+    DONE
+    NOTDONE
+}
+
+enum TypeOfRequest #white{
+    HELP
+    SUGGESTION
+}
+
+enum RequestState #white{
+    OPEN
+    CLOSED
+}
+
+@enduml
+
+
+
+
+

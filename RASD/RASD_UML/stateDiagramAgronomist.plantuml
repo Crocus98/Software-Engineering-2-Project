@@ -1,0 +1,31 @@
+@startuml
+
+skinparam style strictuml
+skinparam monochrome true
+skinparam linetype ortho
+
+(*) --> "open daily plan page"
+
+
+"open daily plan page"-->"select the day of interest"
+"select the day of interest"-->"change status"
+
+"select the day of interest"-->"show daily plan"
+"show daily plan"-->(*)
+"show daily plan"-->"select time of visit"
+"show daily plan"-->"select an available farmer"
+"select an available farmer"-->"change time of visit"
+"change time of visit"-->"update plan"
+"select time of visit"-->[slot: empty]"add a farmer from list"
+"add a farmer from list"-->"update plan"
+"select time of visit"-->[slot: full]"change a farmer already in daily plan"
+"change a farmer already in daily plan"-->"update plan"
+"update plan"-->"change status"
+-->(*)
+
+
+
+
+
+
+@enduml

@@ -1,0 +1,14 @@
+@startuml
+skinparam style strictuml
+skinparam monochrome true
+
+Activate User
+Activate DREAM
+
+User->DREAM : logout()
+
+DREAM-->User: redirect to loginpage
+
+
+
+@enduml

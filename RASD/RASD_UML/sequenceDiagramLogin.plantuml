@@ -1,0 +1,23 @@
+@startuml
+skinparam style strictuml
+skinparam monochrome true
+
+Activate User
+Activate DREAM
+
+User->DREAM : openLoginForm()
+User<--DREAM: loginForm
+User->DREAM: sendLogin(username,password)
+DREAM->DREAM: checkLogin()
+
+alt correct credentials
+
+DREAM-->User: redirect to mainpage
+
+else incorrect credentials
+
+DREAM-->User: redirect to loginpage
+
+end
+
+@enduml

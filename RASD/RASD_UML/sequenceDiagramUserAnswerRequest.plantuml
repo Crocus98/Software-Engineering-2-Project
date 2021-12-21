@@ -1,0 +1,30 @@
+@startuml
+skinparam style strictuml
+skinparam monochrome true
+
+Activate User
+Activate DREAM
+
+User->DREAM : openHomePage()
+
+User<--DREAM: HomePage
+
+User->DREAM: SelectOpenRequest(Request)
+
+User<--DREAM: RequestForm
+
+User->DREAM: sendRequestData(Type, text)
+
+User<--DREAM: RequestPreview
+
+User->DREAM: send()
+
+DREAM->Users: broadcastRequest(type, text, state)
+Activate Users
+DREAM<--Users
+Deactivate Users
+
+DREAM-->User: confirmation
+
+
+@enduml

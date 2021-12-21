@@ -1,0 +1,52 @@
+@startuml
+skinparam style strictuml
+skinparam monochrome true
+
+Activate Farmer
+Activate DREAM
+
+Farmer->DREAM: ClickRequest()
+
+Farmer<--DREAM: RequestForm
+
+Farmer->DREAM: SelectTypeOfRequest(Type)
+
+alt Help request
+Farmer<--DREAM: HelpRequestForm
+Farmer->DREAM: sendRequestData(Type: Help, text)
+
+Farmer<--DREAM: RequestPreview
+
+Farmer->DREAM: send()
+
+DREAM->Agronomist: broadcastRequest(type, text, state)
+Activate Agronomist
+DREAM<--Agronomist
+Deactivate Agronomist
+DREAM->Farmers: broadcastRequest(type, text, state)
+Activate Farmers
+DREAM<--Farmers
+Deactivate Farmers
+
+else suggestion
+Farmer<--DREAM: SuggestionForm
+Farmer->DREAM: sendRequestData(type, text, state)
+
+Farmer<--DREAM: RequestPreview
+
+Farmer->DREAM: send()
+
+DREAM->Agronomist: broadcastRequest(type, text, state)
+Activate Agronomist
+DREAM<--Agronomist
+Deactivate Agronomist
+DREAM->Farmers: broadcastRequest(Type, text)
+Activate Farmers
+DREAM<--Farmers
+Deactivate Farmers
+
+
+end
+
+
+@enduml

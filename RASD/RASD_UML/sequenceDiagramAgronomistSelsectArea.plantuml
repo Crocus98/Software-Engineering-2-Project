@@ -1,0 +1,20 @@
+@startuml
+skinparam style strictuml
+skinparam monochrome true
+
+Activate Agronomist
+Activate DREAM
+
+Agronomist->DREAM : openStatPage()
+
+Agronomist<--DREAM: StatPage
+
+loop
+Agronomist->DREAM: selectPeriod(start, end)
+Agronomist->DREAM: selectFarmerFromList(Farmer)
+Agronomist->DREAM: selectRankingFromList(Ranking)
+DREAM-->Agronomist: updatePage
+end
+
+
+@enduml

@@ -1,0 +1,32 @@
+@startuml
+skinparam style strictuml
+skinparam monochrome true
+
+Activate Farmer
+Activate DREAM
+
+Farmer->DREAM : openHomePage()
+
+Farmer<--DREAM: HomePage
+
+
+Farmer->DREAM: insertDataForm()
+Farmer<--DREAM: InsertDataForm
+Farmer<--DREAM: SendProductionData(Period, Quantity, Type, Message)
+Farmer<--DREAM: ProductionPreview
+
+Farmer->DREAM: send()
+
+DREAM->DREAM: checkDataFormat()
+
+alt Correct format
+
+DREAM-->Farmer: confirmation
+
+else incorrect format
+
+DREAM-->Farmer: redirect to InsertDataForm 
+
+end
+
+@enduml

@@ -1,0 +1,24 @@
+@startuml
+skinparam style strictuml
+skinparam monochrome true
+skinparam actorstyle  awesome
+
+:User:
+
+package "DREAM" {
+
+left to right direction
+
+together {
+    (Login)
+    (Logout)
+}
+
+:User:-->(Login)
+:User:-->(Logout)
+
+}
+
+
+
+@enduml

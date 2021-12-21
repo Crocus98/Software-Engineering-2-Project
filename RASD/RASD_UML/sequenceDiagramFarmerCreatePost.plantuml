@@ -1,0 +1,56 @@
+@startuml
+
+skinparam style strictuml
+skinparam monochrome true
+
+Activate Farmer
+Activate DREAM
+
+Farmer->DREAM : openForumPage()
+
+Farmer<--DREAM: ForumPage
+
+alt select discussion
+Farmer->DREAM: OpenDiscussion()
+Farmer<--DREAM: DiscussionPage
+
+Farmer->DREAM: CreatePost()
+Farmer<--DREAM: PostForm
+Farmer->DREAM: CreatePostForm(Message)
+Farmer<--DREAM: PostPreview
+
+Farmer->DREAM: send()
+DREAM->Farmers: broadcastRequest(Message)
+
+Activate Farmers
+Farmers-->DREAM
+Deactivate Farmers
+
+else create discussion
+Farmer->DREAM: CreateDiscussion()
+Farmer<--DREAM: CreateDiscussionForm
+
+Farmer->DREAM: CreateDiscussion(Title, description)
+
+Farmer<--DREAM: PostForm
+Farmer->DREAM: CreatePostForm(Message)
+
+Farmer<--DREAM: PostPreview
+
+Farmer->DREAM: send()
+
+DREAM->Farmers: broadcastRequest(title, description, text)
+Activate Farmers
+Farmers-->DREAM
+Deactivate Farmers
+
+end
+
+
+
+DREAM-->Farmer: confirmation
+
+
+
+
+@enduml

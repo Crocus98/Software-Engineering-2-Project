@@ -1,0 +1,21 @@
+@startuml
+skinparam style strictuml
+skinparam monochrome true
+
+Activate Agronomist
+Activate DREAM
+
+Agronomist->DREAM : OpenHomePage()
+
+Agronomist<--DREAM: HomePage
+
+
+Agronomist->DREAM : OpenDailyPlanListPage()
+
+Agronomist<--DREAM: DailyPlanPage
+
+Agronomist->DREAM: selectPlanFromList(Date)
+DREAM-->Agronomist: dailyPlan
+
+
+@enduml
