@@ -1,0 +1,58 @@
+@startuml
+'skinparam style strictuml
+'skinparam monochrome true
+skinparam actorStyle awsome
+
+actor Farmer #Coral
+participant WebApp #Coral
+participant WebServer #LightSkyBlue
+'participant UserManager #LightSkyBlue
+'participant DataMiner #LightSkyBlue
+'participant DailyPlanManager #LightSkyBlue
+'participant ForumManager #LightSkyBlue
+participant RequestManager #LightSkyBlue
+'participant WeatherForecastManager #LightSkyBlue
+
+participant QueryManager #LightSkyBlue
+participant DBMS
+
+'participant WeatherForecastService #ADD1B2
+
+Activate Farmer
+Activate WebApp
+
+
+Farmer->WebApp: clickCreateRequestButton()
+
+WebApp-->Farmer: NewRequestForm
+
+Farmer->WebApp: clickSubmitRequestForm()
+
+WebApp->WebServer: createNewRequest(Type, Message)
+Activate WebServer
+
+WebServer->RequestManager: dispatch
+Activate RequestManager
+
+RequestManager->QueryManager: updateRequest(Type, Message)
+Activate QueryManager
+
+QueryManager->DBMS: RunQuery()
+
+Activate DBMS
+
+DBMS-->QueryManager : 
+
+Deactivate DBMS
+QueryManager-->RequestManager: 
+
+Deactivate QueryManager
+
+RequestManager-->WebServer
+Deactivate RequestManager
+WebServer-->WebApp: RequestListPage
+WebApp-->Farmer: RequestListPage
+
+
+
+@enduml

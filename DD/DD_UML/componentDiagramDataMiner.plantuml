@@ -1,0 +1,50 @@
+@startuml
+
+@startuml
+'!theme cerulean
+'!theme materia-outline
+'skinparam style strictuml
+'skinparam monochrome true
+'skinparam RoundCorner 15
+'skinparam Linetype polyline
+'skinparam Linetype ortho
+'left to right direction
+skinparam componentStyle uml2
+
+rectangle {
+
+    rectangle #LightSkyBlue {
+        
+        
+        component "Data Miner"#white{
+
+        '---------------------------------
+        ' set colorColor
+        [ETL]#white
+        [Miner Algorithm]#white
+                
+        '---------------------------------
+
+        }
+
+        'Interface "User Interface" as UserInt
+        Interface "Query Interface" as QueryInt
+        Interface "Data Miner Interface" as DataMinerInt
+        'Interface "Router Interface" as RouterInt
+        
+        [ETL]-r-(QueryInt
+        [Miner Algorithm]-r-(QueryInt
+        
+        [ETL]-l-DataMinerInt
+        [Miner Algorithm]-l-DataMinerInt
+        
+        [Miner Algorithm]--[ETL]
+
+    }
+}
+
+
+
+
+
+@enduml

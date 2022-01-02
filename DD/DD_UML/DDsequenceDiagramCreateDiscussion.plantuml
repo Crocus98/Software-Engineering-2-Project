@@ -1,0 +1,92 @@
+@startuml
+'skinparam style strictuml
+'skinparam monochrome true
+skinparam actorStyle awsome
+
+actor Farmer #Coral
+participant WebApp #Coral
+participant WebServer #LightSkyBlue
+'participant FarmerManager #LightSkyBlue
+'participant DataMiner #LightSkyBlue
+'participant DailyPlanManager #LightSkyBlue
+participant ForumManager #LightSkyBlue
+'participant ForumManager #LightSkyBlue
+'participant WeatherForecastManager #LightSkyBlue
+
+participant QueryManager #LightSkyBlue
+participant DBMS
+
+'participant WeatherForecastService #ADD1B2
+
+Activate Farmer
+Activate WebApp
+
+
+Farmer->WebApp: clickCreateDiscussionButton()
+
+WebApp-->Farmer: NewDiscussionForm
+
+Farmer->WebApp: clickSubmitDiscussionForm()
+
+WebApp->WebServer: createNewDiscussion(Title, Description)
+Activate WebServer
+
+WebServer->ForumManager: dispatch
+Activate ForumManager
+
+ForumManager->QueryManager: updateDiscussion(Title, Description)
+Activate QueryManager
+
+QueryManager->DBMS: RunQuery()
+
+Activate DBMS
+
+DBMS-->QueryManager : 
+
+Deactivate DBMS
+QueryManager-->ForumManager: 
+
+Deactivate QueryManager
+
+ForumManager-->WebServer
+Deactivate ForumManager
+WebServer-->WebApp: DiscussionPage
+WebApp-->Farmer: DiscussionPage
+
+'''''''''''''''''''''''''''''''''''''''''
+
+Farmer->WebApp: clickCreatePostButton()
+
+WebApp-->Farmer: NewPostForm
+
+Farmer->WebApp: clickSubmitPostForm()
+
+WebApp->WebServer: createNewPost(Message)
+
+WebServer->ForumManager: dispatch
+Activate ForumManager
+
+ForumManager->QueryManager: updatePost(Discussion, Post)
+Activate QueryManager
+
+QueryManager->DBMS: RunQuery()
+
+Activate DBMS
+
+DBMS-->QueryManager : 
+
+Deactivate DBMS
+QueryManager-->ForumManager: 
+
+Deactivate QueryManager
+
+ForumManager-->WebServer
+Deactivate ForumManager
+WebServer-->WebApp: DiscussionPage
+WebApp-->Farmer: DiscussionPage
+
+
+
+
+
+@enduml

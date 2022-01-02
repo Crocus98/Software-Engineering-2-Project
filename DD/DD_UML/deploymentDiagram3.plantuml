@@ -1,0 +1,60 @@
+@startuml
+
+'skinparam style strictuml
+'skinparam monochrome true
+'skinparam RoundCorner 15
+'skinparam Linetype ortho
+left to right direction
+'skinparam componentStyle uml2
+
+
+'card "<<Server>> DREAM server" {
+
+node "<<device>> :AWS infrastructure" {
+    
+
+
+node "<<execution environment>> :AWS database" {
+    [DBMS]
+}
+
+node "<<execution environment>>  :AWS VM " {
+    
+
+    [Application Server]#LightSkyBlue
+}
+
+node "<<execution environment>>  :AWS VM" {
+    
+
+    [Web Application]#coral
+}
+
+}
+
+
+node "<<device>> :Personal Computer" {
+    node "<<Web browser>>" {
+    
+
+    [DREAM Web site]#Coral
+}
+
+   
+}
+
+
+[Application Server]--[DBMS]: <<protocol>> :JPA
+[Web Application]--[DREAM Web site]: <<protocol>> :HTTP 
+[Web Application]--[Application Server]
+
+
+
+
+
+
+
+
+
+
+@enduml

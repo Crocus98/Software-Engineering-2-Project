@@ -1,0 +1,133 @@
+@startuml
+'skinparam style strictuml
+'skinparam monochrome true
+skinparam actorStyle awsome
+
+actor User #Coral
+participant WebApp #Coral
+participant WebServer #LightSkyBlue
+participant UserManager #LightSkyBlue
+participant DataMiner #LightSkyBlue
+participant DailyPlanManager #LightSkyBlue
+'participant ForumManager #LightSkyBlue
+'participant RequestManager #LightSkyBlue
+'participant WeatherForecastManager #LightSkyBlue
+
+participant QueryManager #LightSkyBlue
+participant DBMS
+
+'participant WeatherForecastService #ADD1B2
+
+Activate User 
+Activate WebApp
+
+User->WebApp: inserts username and password
+WebApp-->User
+
+User->WebApp: clickLoginButton()
+
+WebApp->WebServer: login(username, password)
+Activate WebServer
+
+WebServer->UserManager: dispatch
+Activate UserManager
+
+UserManager->QueryManager: getUseryCredentials(username,password)
+Activate QueryManager
+
+QueryManager->DBMS: RunQuery()
+
+Activate DBMS
+
+DBMS-->QueryManager : queryResult
+QueryManager-->UserManager: queryResult
+
+alt Policy Maker
+
+    UserManager-->WebServer: Confirmation
+
+    WebServer-->WebApp:Confirmation
+    WebApp-->User: Correct Credentials
+
+    UserManager->DataMiner: getPolicyMakerData(PolicyMaker)
+    Activate DataMiner
+    DataMiner-->QueryManager: getPolicyMakerData(PolicyMaker)
+    QueryManager->DBMS: RunQuery()
+    DBMS-->QueryManager : queryResult
+    QueryManager-->DataMiner: queryResult
+    DataMiner-->UserManager: queryResult
+    Deactivate DataMiner
+    UserManager-->WebServer: PolicyMakerData
+
+    
+    WebServer-->WebApp: Homepage
+
+    Activate WebApp
+    WebApp-->User: Homepage
+    Deactivate WebApp
+
+else Agronomist
+
+    UserManager-->WebServer: Confirmation
+
+    WebServer-->WebApp:Confirmation
+    WebApp-->User: Correct Credentials
+    
+    UserManager-->DataMiner: getAgronomistData(area)
+    Activate DataMiner
+    DataMiner-->QueryManager: getAgronomistData(area)
+    QueryManager->DBMS: RunQuery()
+    
+    DBMS-->QueryManager : queryResult
+    QueryManager-->DataMiner: queryResult
+    DataMiner-->UserManager: queryResult
+    Deactivate DataMiner
+    UserManager-->WebServer: AgronomistData
+
+
+    WebServer->DailyPlanManager: getDailyPlanData(Agronomist)
+    Activate DailyPlanManager
+    DailyPlanManager->QueryManager: getDailyPlanData(Agronomist)
+    QueryManager->DBMS: RunQuery()
+    
+    DBMS-->QueryManager : queryResult
+    QueryManager-->DailyPlanManager: queryResult
+    DailyPlanManager-->WebServer: queryResult
+    Deactivate DailyPlanManager
+
+    WebServer-->WebApp : Homepage
+
+    Activate WebApp
+    WebApp-->User: Homepage
+    Deactivate WebApp
+
+
+else Farmer
+
+    UserManager-->WebServer: Confirmation
+
+    WebServer-->WebApp:Confirmation
+    WebApp-->User: Correct Credentials
+
+    UserManager-->DataMiner: getFarmerData(area)
+    Activate DataMiner
+    DataMiner-->QueryManager: getFarmerData(area)
+    QueryManager->DBMS: RunQuery()
+    
+    DBMS-->QueryManager : queryResult
+    QueryManager-->DataMiner: queryResult
+    DataMiner-->UserManager: queryResult
+    Deactivate DataMiner
+    UserManager-->WebServer: FarmerData
+
+    WebServer-->WebApp : Homepage
+
+    Activate WebApp
+    WebApp-->User: Homepage
+    Deactivate WebApp
+   
+
+
+end
+
+@enduml

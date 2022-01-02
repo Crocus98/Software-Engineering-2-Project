@@ -1,0 +1,55 @@
+@startuml
+'skinparam style strictuml
+'skinparam monochrome true
+skinparam actorStyle awsome
+
+actor User #Coral
+participant WebApp #Coral
+participant WebServer #LightSkyBlue
+participant UserManager #LightSkyBlue
+participant QueryManager #LightSkyBlue
+participant DBMS
+
+Activate User 
+Activate WebApp
+
+User->WebApp: inserts username and password
+WebApp-->User
+
+User->WebApp: clickLoginButton()
+
+WebApp->WebServer: login(username, password)
+Activate WebServer
+
+WebServer->UserManager: dispatch
+Activate UserManager
+
+UserManager->QueryManager: getUserCredentials(username,password)
+Activate QueryManager
+
+QueryManager->DBMS: RunQuery()
+
+Activate DBMS
+
+DBMS-->QueryManager : queryResult
+QueryManager-->UserManager: queryResult
+
+Deactivate DBMS
+
+alt correct credentials
+
+UserManager-->WebServer: Confirmation
+WebServer-->WebApp:Confirmation
+WebApp-->User: Correct Credentials
+
+
+else incorrect credentials
+
+UserManager-->WebServer: Error
+WebServer-->WebApp: Error
+WebApp-->User: Incorrect credentials
+
+
+end
+
+@enduml

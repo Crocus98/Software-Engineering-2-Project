@@ -1,0 +1,55 @@
+@startuml
+'skinparam style strictuml
+'skinparam monochrome true
+skinparam actorStyle awsome
+
+actor User #Coral
+participant WebApp #Coral
+participant WebServer #LightSkyBlue
+participant UserManager #LightSkyBlue
+participant DataMiner #LightSkyBlue
+participant DailyPlanManager #LightSkyBlue
+participant ForumManager #LightSkyBlue
+participant RequestManager #LightSkyBlue
+participant WeatherForecastManager #LightSkyBlue
+
+participant QueryManager #LightSkyBlue
+participant DBMS
+
+participant WeatherForecastService #ADD1B2
+
+Activate User 
+Activate WebApp
+
+User->WebApp: inserts username and password
+WebApp-->User
+
+User->WebApp: clickLoginButton()
+
+WebApp->WebServer: login(username, password)
+Activate WebServer
+
+WebServer->UserManager: dispatch
+Activate UserManager
+
+UserManager->QueryManager: getUseryCredentials(username,password)
+Activate QueryManager
+
+QueryManager->DBMS: RunQuery()
+
+Activate DBMS
+
+DBMS-->QueryManager : queryResult
+QueryManager-->UserManager: queryResult
+
+UserManager-->WebServer: Confirmation token
+
+WebServer-->WebApp:Confirmation token
+WebApp-->User: Correct Credentials
+
+
+
+
+end
+
+@enduml
