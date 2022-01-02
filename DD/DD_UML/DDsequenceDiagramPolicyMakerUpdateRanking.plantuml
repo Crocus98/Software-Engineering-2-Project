@@ -1,0 +1,79 @@
+@startuml
+'skinparam style strictuml
+'skinparam monochrome true
+skinparam actorStyle awsome
+
+actor PolicyMaker #Coral
+participant WebApp #Coral
+participant WebServer #LightSkyBlue
+participant UserManager #LightSkyBlue
+participant DataMiner #LightSkyBlue
+'participant DailyPlanManager #LightSkyBlue
+'participant ForumManager #LightSkyBlue
+'participant RequestManager #LightSkyBlue
+'participant WeatherForecastManager #LightSkyBlue
+
+participant QueryManager #LightSkyBlue
+participant DBMS
+
+'participant WeatherForecastService #ADD1B2
+
+Activate PolicyMaker 
+Activate WebApp
+
+PolicyMaker->WebApp: clickRankingButton()
+
+WebApp->WebServer: getRanking()
+Activate WebServer
+
+WebServer->UserManager: dispatch
+Activate UserManager
+
+UserManager->DataMiner: getPoliciMakerRanking()
+Activate DataMiner
+DataMiner-->QueryManager: getPoliciMakerRanking()
+QueryManager->DBMS: RunQuery()
+DBMS-->QueryManager : queryResult
+QueryManager-->DataMiner: queryResult
+DataMiner-->UserManager: queryResult
+Deactivate DataMiner
+UserManager-->WebServer: PolicyMakerRanking
+
+WebServer-->WebApp: RankingPage
+
+WebApp-->PolicyMaker: RankingPage
+
+opt select Ranking
+PolicyMaker->WebApp: selectRanking(Ranking)
+end
+
+opt select period
+PolicyMaker->WebApp: selectPeriod(start, end)
+end
+
+opt select area
+PolicyMaker->WebApp: selectArea(Area)
+end
+
+PolicyMaker->WebApp: clickUpdateRankingButton()
+
+WebApp->WebServer: updateRanking(data)
+
+WebServer->UserManager: dispatch
+
+UserManager->DataMiner: updatePolicyMakerRanking(data)
+Activate DataMiner
+DataMiner-->QueryManager: updatePolicyMakerRanking(data)
+QueryManager->DBMS: RunQuery()
+DBMS-->QueryManager : queryResult
+QueryManager-->DataMiner: queryResult
+DataMiner-->UserManager: queryResult
+Deactivate DataMiner
+UserManager-->WebServer: PolicyMakerRanking
+
+WebServer-->WebApp: RankingPage
+
+WebApp-->PolicyMaker: RankingPage
+
+
+@enduml

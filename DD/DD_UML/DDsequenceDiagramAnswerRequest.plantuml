@@ -1,0 +1,89 @@
+@startuml
+'skinparam style strictuml
+'skinparam monochrome true
+
+
+
+skinparam actorStyle awsome
+
+actor User #Coral
+participant WebApp #Coral
+participant WebServer #LightSkyBlue
+'participant UserManager #LightSkyBlue
+'participant DataMiner #LightSkyBlue
+'participant DailyPlanManager #LightSkyBlue
+'participant ForumManager #LightSkyBlue
+participant RequestManager #LightSkyBlue
+'participant WeatherForecastManager #LightSkyBlue
+
+participant QueryManager #LightSkyBlue
+participant DBMS
+
+'participant WeatherForecastService #ADD1B2
+
+Activate User
+Activate WebApp
+
+
+User->WebApp: selectRequest()
+
+WebApp->WebServer: getRequestAnswers(Request)
+Activate WebServer
+
+WebServer->RequestManager: dispatch
+Activate RequestManager
+
+RequestManager->QueryManager: getRequest(Request)
+Activate QueryManager
+
+QueryManager->DBMS: RunQuery()
+
+Activate DBMS
+
+DBMS-->QueryManager: queryResult
+
+Deactivate DBMS
+QueryManager-->RequestManager:queryResult
+
+Deactivate QueryManager
+
+RequestManager-->WebServer: queryResult
+Deactivate RequestManager
+WebServer-->WebApp: RequestAnswerPage
+WebApp-->User: RequestAnswerPage
+
+''''''''''''''''''''''''''''''''
+User->WebApp: compileAnswerForm
+
+User->WebApp: clickSendAnswerButton()
+
+WebApp->WebServer: createAnswer(Request, Message)
+
+Activate WebServer
+
+WebServer->RequestManager: dispatch
+Activate RequestManager
+
+RequestManager->QueryManager: updateAnswer(Request, Message)
+Activate QueryManager
+
+QueryManager->DBMS: RunQuery()
+
+Activate DBMS
+
+DBMS-->QueryManager : 
+
+Deactivate DBMS
+QueryManager-->RequestManager: 
+
+Deactivate QueryManager
+
+RequestManager-->WebServer
+Deactivate RequestManager
+WebServer-->WebApp: RequestAnswerPage
+WebApp-->User: RequestAnswerPage
+
+
+
+
+@enduml

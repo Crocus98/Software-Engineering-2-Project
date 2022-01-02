@@ -1,0 +1,56 @@
+@startuml
+
+@startuml
+'!theme cerulean
+'!theme materia-outline
+'skinparam style strictuml
+'skinparam monochrome true
+'skinparam RoundCorner 15
+'skinparam Linetype polyline
+'skinparam Linetype ortho
+left to right direction
+skinparam componentStyle uml2
+
+rectangle {
+
+    rectangle #LightSkyBlue {
+        
+        
+        component "Forum Manager"#white{
+
+        '---------------------------------
+        ' set colorColor
+        [Discussion Handler]#white
+        [Post Handler]#white
+        [Message Dispatcher]#white
+        
+        '---------------------------------
+
+        }
+
+        Interface "Forum Interface" as ForumInt
+        Interface "Query Interface" as QueryInt
+        
+        'Interface "Router Interface" as RouterInt
+        
+        [Discussion Handler]-d-(QueryInt
+        [Post Handler]-d-(QueryInt
+        [Message Dispatcher]-d-(QueryInt
+
+
+        [Discussion Handler]-u-ForumInt
+        [Post Handler]-u-ForumInt
+        [Message Dispatcher]-u-ForumInt
+
+        [Discussion Handler]--[Post Handler]
+        [Post Handler]--[Message Dispatcher]
+        [Message Dispatcher]--[Discussion Handler]
+
+    }
+}
+
+
+
+
+
+@enduml

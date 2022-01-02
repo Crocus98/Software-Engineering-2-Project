@@ -1,0 +1,32 @@
+@startuml
+'skinparam style strictuml
+'skinparam monochrome true
+skinparam actorStyle awsome
+
+actor User #Coral
+participant WebApp #Coral
+participant WebServer #LightSkyBlue
+participant UserManager #LightSkyBlue
+'participant QueryManager #LightSkyBlue
+'participant DBMS
+
+Activate User 
+Activate WebApp
+
+User->WebApp: clickLogoutButton()
+
+WebApp->WebServer: logout()
+Activate WebServer
+
+WebServer->UserManager: dispatch
+Activate UserManager
+
+UserManager->UserManager: logout()
+
+UserManager-->WebServer
+
+WebServer-->WebApp: LoginPage
+
+WebApp-->User: LoginPage
+
+@enduml

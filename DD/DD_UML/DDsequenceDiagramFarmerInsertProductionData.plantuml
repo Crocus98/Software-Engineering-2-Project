@@ -1,0 +1,80 @@
+@startuml
+'skinparam style strictuml
+'skinparam monochrome true
+skinparam actorStyle awsome
+
+actor Farmer #Coral
+participant WebApp #Coral
+participant WebServer #LightSkyBlue
+participant UserManager #LightSkyBlue
+'participant DataMiner #LightSkyBlue
+'participant DailyPlanManager #LightSkyBlue
+'participant ForumManager #LightSkyBlue
+
+'participant WeatherForecastManager #LightSkyBlue
+
+participant QueryManager #LightSkyBlue
+participant DBMS
+
+'participant WeatherForecastService #ADD1B2
+
+Activate Farmer
+Activate WebApp
+
+Farmer->WebApp: clickInsertProductionButton()
+activate WebServer
+WebApp->WebServer: getProduction(Farmer)
+WebServer->UserManager: dispatch
+Activate UserManager
+
+UserManager->QueryManager: getProduction(Farmer)
+Activate QueryManager
+
+QueryManager->DBMS: RunQuery()
+
+Activate DBMS
+
+DBMS-->QueryManager : QueryResult
+
+Deactivate DBMS
+QueryManager-->UserManager: QueryResult
+Deactivate QueryManager
+
+UserManager-->WebServer: QueryResult
+Deactivate UserManager
+
+WebServer-->WebApp: ProductionData
+
+WebApp-->Farmer: ProductionPage
+
+Farmer->WebApp: clickSubmitProductionForm(Data, Message)
+
+WebApp->WebServer: createNewProduction(Data, Message)
+
+WebServer->UserManager: dispatch
+Activate UserManager
+
+UserManager->QueryManager: updateProduction(Data, Message)
+Activate QueryManager
+
+QueryManager->DBMS: RunQuery()
+
+Activate DBMS
+
+DBMS-->QueryManager : 
+
+Deactivate DBMS
+QueryManager-->UserManager: 
+
+Deactivate QueryManager
+
+UserManager-->WebServer
+Deactivate UserManager
+WebServer-->WebApp: ProductionPage
+WebApp-->Farmer: ProductionPage
+
+
+
+
+
+@enduml

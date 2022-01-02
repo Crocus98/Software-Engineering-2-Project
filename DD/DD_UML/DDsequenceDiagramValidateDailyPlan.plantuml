@@ -1,0 +1,107 @@
+@startuml
+'skinparam style strictuml
+'skinparam monochrome true
+skinparam actorStyle awsome
+
+actor Agronomist #Coral
+participant WebApp #Coral
+participant WebServer #LightSkyBlue
+'participant UserManager #LightSkyBlue
+participant DailyPlanManager #LightSkyBlue
+'participant ForumManager #LightSkyBlue
+'participant RequestManager #LightSkyBlue
+'participant WeatherForecastManager #LightSkyBlue
+
+participant QueryManager #LightSkyBlue
+participant DBMS
+
+'participant WeatherForecastService #ADD1B2
+
+Activate Agronomist
+Activate WebApp
+
+
+Agronomist->WebApp: clickDailyPlanButton()
+
+WebApp->WebServer: openDailyPlanList()
+Activate WebServer
+
+WebServer->DailyPlanManager: dispatch
+Activate DailyPlanManager
+
+DailyPlanManager->QueryManager: getDailyPlanList(username)
+Activate QueryManager
+
+QueryManager->DBMS: RunQuery()
+
+Activate DBMS
+
+DBMS-->QueryManager : queryResult
+
+Deactivate DBMS
+QueryManager-->DailyPlanManager: queryResult
+
+Deactivate QueryManager
+
+DailyPlanManager-->WebServer: DailyPlanList
+Deactivate DailyPlanManager
+WebServer-->WebApp:DailyPlanListPage
+WebApp-->Agronomist:DailyPlanListPage
+
+Agronomist->WebApp: clickDailyPlan()
+WebApp->WebServer: selectDailyPlan(DailyPlan)
+
+WebServer->DailyPlanManager: dispatch
+Activate DailyPlanManager
+
+DailyPlanManager->QueryManager: getDailyPlan(Date)
+Activate QueryManager
+
+QueryManager->DBMS: RunQuery()
+
+Activate DBMS
+
+DBMS-->QueryManager : queryResult
+
+Deactivate DBMS
+QueryManager-->DailyPlanManager: queryResult
+
+Deactivate QueryManager
+
+DailyPlanManager-->WebServer: DailyPlan
+
+Deactivate DailyPlanManager
+
+WebServer-->WebApp: DailyPlanPage
+
+WebApp-->Agronomist: DailyPlanPage
+
+''''''''''''''''''
+
+Agronomist->WebApp: clickValidateDailyPlanButton()
+
+WebApp->WebServer: validateDailyPlan(dailyPlan)
+
+WebServer->DailyPlanManager: dispatch
+Activate DailyPlanManager
+
+DailyPlanManager->QueryManager: validateDailyPlan(dailyPlan)
+Activate QueryManager
+
+QueryManager->DBMS: RunQuery()
+
+Activate DBMS
+
+DBMS-->QueryManager : queryResult
+
+Deactivate DBMS
+QueryManager-->DailyPlanManager: queryResult
+
+Deactivate QueryManager
+
+DailyPlanManager-->WebServer: DailyPlanList
+Deactivate DailyPlanManager
+WebServer-->WebApp:DailyPlanListPage
+WebApp-->Agronomist:DailyPlanListPage
+
+@enduml
