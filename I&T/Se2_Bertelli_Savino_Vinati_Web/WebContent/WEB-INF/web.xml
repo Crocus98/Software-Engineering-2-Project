@@ -5,6 +5,6 @@ xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/
 id="WebApp_ID" version="4.0">
   <display-name>Se2_Bertelli_Savino_Vinati_Web</display-name>
   <welcome-file-list>
-    <welcome-file>index.html</welcome-file>
+    <welcome-file>GoToLoginPage</welcome-file>
   </welcome-file-list>
 </web-app>
