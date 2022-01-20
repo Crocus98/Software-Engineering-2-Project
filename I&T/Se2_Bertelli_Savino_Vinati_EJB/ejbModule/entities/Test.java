@@ -15,10 +15,8 @@ public class Test implements Serializable {
 
 	private String testvalue;
 
-
 	public Test() {
 	}
-
 
 	public int getId() {
 		return this.id;

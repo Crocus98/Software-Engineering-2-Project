@@ -20,9 +20,6 @@ public class GoToLoginPage extends HttpServlet {
 		super();
 	}
 
-	public void init() throws ServletException {
-	}
-
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
@@ -34,8 +31,5 @@ public class GoToLoginPage extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 		doGet(request, response);
-	}
-
-	public void destroy() {
 	}
 }
