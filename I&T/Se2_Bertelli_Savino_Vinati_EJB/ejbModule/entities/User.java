@@ -26,6 +26,8 @@ public class User implements Serializable {
 	@JoinColumn(name="idusertype")
 	private Usertype usertype;
 	
+	@OneToOne(mappedBy="user")
+	private Farm farm;
 
 	public String getName() {
 		return name;

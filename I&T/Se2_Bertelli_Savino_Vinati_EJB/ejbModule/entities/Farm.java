@@ -18,7 +18,7 @@ public class Farm implements Serializable {
 
 	private int dimension;
 	
-	@ManyToOne
+	@OneToOne
 	@JoinColumn(name="idfarmer")
 	private User user;
 

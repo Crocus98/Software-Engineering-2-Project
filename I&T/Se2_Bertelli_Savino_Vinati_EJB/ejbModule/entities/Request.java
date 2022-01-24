@@ -30,7 +30,7 @@ public class Request implements Serializable {
 	@JoinColumn(name="idfarmer")
 	private User user;
 
-	@OneToMany(mappedBy="request", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy="request")
 	private List<Answer> answers;
 	
 	public Request() {

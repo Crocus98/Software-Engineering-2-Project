@@ -2,7 +2,6 @@ package entities;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.*;
 
@@ -26,10 +25,9 @@ public class Answer implements Serializable {
 	@JoinColumn(name="idrequest")
 	private Request request;
 	
-	@ManyToMany
+	@ManyToOne
 	@JoinColumn(name="idreplier")
-	private List<User> user;
-	
+	private User user;
 	
 	public Answer() {
 		
@@ -67,15 +65,12 @@ public class Answer implements Serializable {
 		this.request = request;
 	}
 
-	public List<User> getUser() {
+	public User getUser() {
 		return user;
 	}
 
-	public void setUser(List<User> user) {
+	public void setUser(User user) {
 		this.user = user;
 	}
-
-
-
 
 }
