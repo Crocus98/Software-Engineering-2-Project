@@ -7,6 +7,7 @@
 		<class>entities.User</class>
 		<class>entities.Farm</class>
 		<class>entities.Area</class>
+		<class>entities.Forecast</class>
 		<shared-cache-mode>NONE</shared-cache-mode>
 		<properties>
 			<property name="eclipselink.logging.level" value="FINE" />
