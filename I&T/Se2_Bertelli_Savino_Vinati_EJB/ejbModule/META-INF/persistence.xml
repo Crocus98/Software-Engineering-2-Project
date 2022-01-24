@@ -4,6 +4,9 @@
 		<jta-data-source>ProjectSE</jta-data-source>
 		<class>entities.Test</class>
 		<class>entities.Usertype</class>
+		<class>entities.User</class>
+		<class>entities.Farm</class>
+		<class>entities.Area</class>
 		<shared-cache-mode>NONE</shared-cache-mode>
 		<properties>
 			<property name="eclipselink.logging.level" value="FINE" />
