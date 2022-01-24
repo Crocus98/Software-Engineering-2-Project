@@ -3,6 +3,7 @@
 	<persistence-unit name="BertelliSavinoVinatiProject" transaction-type="JTA">
 		<jta-data-source>ProjectSE</jta-data-source>
 		<class>entities.Test</class>
+		<class>entities.Usertype</class>
 		<shared-cache-mode>NONE</shared-cache-mode>
 		<properties>
 			<property name="eclipselink.logging.level" value="FINE" />
