@@ -52,13 +52,4 @@ public class Dailyplan implements Serializable {
 		this.user = user;
 	}
 
-	public List<Visit> getVisits() {
-		return visits;
-	}
-
-	public void setVisits(List<Visit> visits) {
-		this.visits = visits;
-	}
-
-
 }
