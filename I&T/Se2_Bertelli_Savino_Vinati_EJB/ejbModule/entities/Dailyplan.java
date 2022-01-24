@@ -17,6 +17,7 @@ public class Dailyplan implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
+	@Temporal(TemporalType.DATE)
 	private Date date;
 	
 	@ManyToOne
@@ -41,6 +42,22 @@ public class Dailyplan implements Serializable {
 
 	public void setDate(Date date) {
 		this.date = date;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public List<Visit> getVisits() {
+		return visits;
+	}
+
+	public void setVisits(List<Visit> visits) {
+		this.visits = visits;
 	}
 
 

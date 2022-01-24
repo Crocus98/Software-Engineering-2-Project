@@ -16,16 +16,12 @@ public class Visit implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date datehour;
 
 	private String comment;
 	
 	private int state;
-
-	public Visit() {
-		
-	}
 	
 	@ManyToOne
 	@JoinColumn(name="iddailyplan")
@@ -34,6 +30,10 @@ public class Visit implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="idfarm")
 	private Farm farm;
+	
+	public Visit() {
+		
+	}
 
 	public int getId() {
 		return this.id;
@@ -66,5 +66,22 @@ public class Visit implements Serializable {
 	public void setState(int state) {
 		this.state = state;
 	}
+
+	public Dailyplan getDailyplan() {
+		return dailyplan;
+	}
+
+	public void setDailyplan(Dailyplan dailyplan) {
+		this.dailyplan = dailyplan;
+	}
+
+	public Farm getFarm() {
+		return farm;
+	}
+
+	public void setFarm(Farm farm) {
+		this.farm = farm;
+	}
+
 
 }
