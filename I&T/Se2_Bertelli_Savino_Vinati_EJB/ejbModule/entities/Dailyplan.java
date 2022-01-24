@@ -22,9 +22,6 @@ public class Dailyplan implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="idagronomist")
 	private User user;
-	
-	@OneToMany(mappedBy="dailyplan", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<Visit> visits;
 
 	public Dailyplan() {
 		
