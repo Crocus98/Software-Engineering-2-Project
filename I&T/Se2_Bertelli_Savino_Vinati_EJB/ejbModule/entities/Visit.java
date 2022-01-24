@@ -16,6 +16,7 @@ public class Visit implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
+	
 	private Date datehour;
 
 	private String comment;
@@ -65,15 +66,5 @@ public class Visit implements Serializable {
 	public void setState(int state) {
 		this.state = state;
 	}
-
-	public int getIdfarm() {
-		return idfarm;
-	}
-
-	public void setIdfarm(int idfarm) {
-		this.idfarm = idfarm;
-	}
-
-
 
 }
