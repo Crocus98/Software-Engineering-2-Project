@@ -9,6 +9,7 @@
 		<class>entities.Area</class>
 		<class>entities.Forecast</class>
 		<class>entities.Humidityofsoil</class>
+		<class>entities.Production</class>
 		<shared-cache-mode>NONE</shared-cache-mode>
 		<properties>
 			<property name="eclipselink.logging.level" value="FINE" />
