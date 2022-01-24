@@ -19,7 +19,6 @@ public class Discussion implements Serializable {
 	
 	private String title;
 
-	
 	@OneToOne
 	@JoinColumn(name="idfarmer")
 	private User user;

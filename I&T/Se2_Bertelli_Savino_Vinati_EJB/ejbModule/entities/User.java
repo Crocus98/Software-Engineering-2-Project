@@ -1,6 +1,7 @@
 package entities;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
 
 @Entity
@@ -24,6 +25,7 @@ public class User implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="idusertype")
 	private Usertype usertype;
+	
 
 	public String getName() {
 		return name;
