@@ -2,17 +2,48 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" media="all" href="../CSS/login.css" th:href="@{/css/login.css}" />
 	<title>DREAM - Login page</title>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/fontawesome.css">
 </head>
 <body>
-	<h1>DREAM</h1>
-	<div>
-		<form action="CheckLogin" method="POST">
-			Mail: <input type="text" name="mail" required> <br>
-			Password: <input type="password" name="pwd" required><br>
-			<input type="submit" value="Login">
-			<p th:text=" ${errorMsg}"></p>
-		</form>
+<div class="container">
+	<div class="screen">
+		<div class="screen__content">
+			<form class="login" action="CheckLogin" method="POST">
+			<p class="title">D.R.E.A.M.</p>
+				<div class="login__field">
+					<i class="login__icon fas fa-user"></i>
+					<input type="text" class="login__input" placeholder="User name / Email"  name="mail" required>
+				</div>
+				<div class="login__field">
+					<i class="login__icon fas fa-lock"></i>
+					<input type="password" class="login__input" placeholder="Password" name="pwd" required>
+				</div>
+				<button class="button login__submit" type="submit" value="Login">
+					<span class="button__text">Log In Now</span>
+					<i class="button__icon fas fa-chevron-right"></i>			
+				</button>
+				<br>	
+				<p class="error_text" th:text=" ${errorMsg}"></p>				
+			</form>
+
+		</div>
+		<div class="screen__background">
+			<span class="screen__background__shape screen__background__shape4"></span>
+			<span class="screen__background__shape screen__background__shape3"></span>		
+			<span class="screen__background__shape screen__background__shape2"></span>
+			<span class="screen__background__shape screen__background__shape1"></span>
+		</div>		
 	</div>
+</div>
+
+	
 </body>
 </html>
+
+
+
+
+			
