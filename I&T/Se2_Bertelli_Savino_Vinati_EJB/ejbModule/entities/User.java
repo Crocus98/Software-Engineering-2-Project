@@ -4,9 +4,14 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
+import enums.Usertype;
+
 @Entity
 @Table(name = "user", schema="se2_bertelli_savino_vinati")
-@NamedQuery(name="User.findAll", query="SELECT u FROM User u")
+@NamedQueries({
+	@NamedQuery(name="User.findAll", query="SELECT u FROM User u"),
+	@NamedQuery(name = "User.checkCredentials", query = "SELECT u FROM User u  WHERE u.mail = ?1 and u.password = ?2")
+	})
 public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -22,8 +27,6 @@ public class User implements Serializable {
 
 	private String password;
 	
-	@ManyToOne
-	@JoinColumn(name="idusertype")
 	private Usertype usertype;
 	
 	@OneToOne(mappedBy="user")
