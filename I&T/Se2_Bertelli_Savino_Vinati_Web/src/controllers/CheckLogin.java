@@ -49,6 +49,9 @@ public class CheckLogin extends HttpServlet {
 		if(!isBadRequest) {
 			try {
 				user = userService.checkCredentials(mail, pwd);
+				if(user == null) {
+					throw new CredentialsException("ERROR: Wrong mail or password.");
+				}
 			} 
 			catch (CredentialsException | NonUniqueResultException e) {
 				isBadRequest = true;

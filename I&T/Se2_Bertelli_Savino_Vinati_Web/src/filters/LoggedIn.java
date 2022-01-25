@@ -39,9 +39,8 @@ public class LoggedIn implements Filter {
 			res.sendRedirect(loginpath);
 			return;
 		}
-		// pass the request along the filter chain
+		
 		chain.doFilter(request, response);
-
 	}
 
 	public void init(FilterConfig fConfig) throws ServletException {
