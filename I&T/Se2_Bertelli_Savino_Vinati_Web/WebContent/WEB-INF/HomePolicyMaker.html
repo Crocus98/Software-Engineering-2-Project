@@ -2,23 +2,35 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
-<link rel="stylesheet" type="text/css" media="all" href="../CSS/policymaker.css" th:href="@{/css/policymaker.css}" />
+<link rel="stylesheet" type="text/css" media="all" href="../CSS/policymaker2.css" th:href="@{/css/policymaker2.css}" />
 <title>Home Policy Maker</title>
 </head>
-<body>
-<div>
-<div class="sidebar">
-  <a class="active" href="#home">Home</a>
-  <a href="#news">Ranking</a>
-  <a th:href="@{/Logout}">Logout</a>
-</div>
-<div class="content">
-  <p th:text="${'Nice to see you again ' + session.user.name + ' ' + session.user.surname}"></p><br>
-  <h2>Responsive Sidebar Example</h2>
-  <p>This example use media queries to transform the sidebar to a top navigation bar when the screen size is 700px or less.</p>
-  <p>We have also added a media query for screens that are 400px or less, which will vertically stack and center the navigation links.</p>
-  <h3>Resize the browser window to see the effect.</h3>
-</div>
+<div class="page">
+  <header tabindex="0">D.R.E.A.M.</header>
+  <div id="nav-container">
+    <div class="bg"></div>
+    <div class="button" tabindex="0">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div id="nav-content" tabindex="0">
+      <ul>
+        <li><a class="active" href="#0">Home</a></li>
+        <li><a href="#0">Ranking</a></li>
+        <li><a th:href="@{/Logout}">Logout</a></li>
+        <li class="small"><p th:text="${'Nice to see you again ' + session.user.name + ' ' + session.user.surname}"></p></li>
+      </ul>
+    </div>
+  </div>
+
+  <main>
+    <div class="content">
+      <h2>Off-screen navigation using <span>:focus-within</span></h2>
+      <p>Adding yet another pure CSS technique to the list of off-screen navigation by "hacking" the :focus-within pseudo-class. Have a look at the code to see how it works.</p>
+      <small><strong>NB!</strong> Use a browser that supports :focus-within</small>
+    </div>
+  </main>
 </div>
 
 </body>

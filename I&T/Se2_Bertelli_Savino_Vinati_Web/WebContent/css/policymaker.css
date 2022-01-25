@@ -1,8 +1,29 @@
-@import url('https://fonts.googleapis.com/css?family=Raleway:400,700');
-
 body {
 	  margin: 0;
   font-family: "Lato", sans-serif;
+}
+
+.nav {
+	position: sticky;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	height: 60px;
+	top: 0;
+}
+
+.nav {
+	background: #8D6DC8;
+}
+
+.nav title{
+	margin: 100px 30px;
+	display: inline-block;
+}
+
+.nav item{
+	display: inline-block;
+		margin: 100px 30px;
 }
 
 .sidebar {
@@ -23,12 +44,18 @@ body {
 }
  
 .sidebar a.active {
-  background-color: #8D6DC8;
+  background-color: #616161;
   color: white;
 }
 
+.webapp {
+  padding: 3px;
+  background-color: #212121;
+  color: #5b5b5b;
+}
+
 .sidebar a:hover:not(.active) {
-  background-color: #555;
+  background-color: #8D6DC8;
   color: white;
 }
 
