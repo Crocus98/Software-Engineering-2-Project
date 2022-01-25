@@ -1,10 +1,25 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
+<link rel="stylesheet" type="text/css" media="all" href="../CSS/policymaker.css" th:href="@{/css/policymaker.css}" />
 <title>Home Policy Maker</title>
 </head>
 <body>
-	<h1>Home Policy Maker</h1>
+<div>
+<div class="sidebar">
+  <a class="active" href="#home">Home</a>
+  <a href="#news">Ranking</a>
+  <a th:href="@{/Logout}">Logout</a>
+</div>
+<div class="content">
+  <p th:text="${'Nice to see you again ' + session.user.name + ' ' + session.user.surname}"></p><br>
+  <h2>Responsive Sidebar Example</h2>
+  <p>This example use media queries to transform the sidebar to a top navigation bar when the screen size is 700px or less.</p>
+  <p>We have also added a media query for screens that are 400px or less, which will vertically stack and center the navigation links.</p>
+  <h3>Resize the browser window to see the effect.</h3>
+</div>
+</div>
+
 </body>
 </html>
