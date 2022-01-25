@@ -6,6 +6,9 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import enums.RequestState;
+import enums.RequestType;
+
 
 @Entity
 @Table(name = "request", schema="se2_bertelli_savino_vinati")
@@ -22,9 +25,9 @@ public class Request implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date datehour;
 	
-	private int state;
+	private RequestState state;
 	
-	private int type;
+	private RequestType type;
 	
 	@ManyToOne
 	@JoinColumn(name="idfarmer")
@@ -53,22 +56,6 @@ public class Request implements Serializable {
 		this.comment = comment;
 	}
 
-	public int getState() {
-		return state;
-	}
-
-	public void setState(int state) {
-		this.state = state;
-	}
-
-	public int getType() {
-		return type;
-	}
-
-	public void setType(int type) {
-		this.type = type;
-	}
-
 	public User getUser() {
 		return user;
 	}
@@ -83,6 +70,22 @@ public class Request implements Serializable {
 
 	public void setAnswers(List<Answer> answers) {
 		this.answers = answers;
+	}
+
+	public RequestState getState() {
+		return state;
+	}
+
+	public void setState(RequestState state) {
+		this.state = state;
+	}
+
+	public RequestType getType() {
+		return type;
+	}
+
+	public void setType(RequestType type) {
+		this.type = type;
 	}
 
 

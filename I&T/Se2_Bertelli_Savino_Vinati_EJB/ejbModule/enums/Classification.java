@@ -13,19 +13,19 @@ public enum Classification {
 	public static Classification getClassificationFromInt(int value) {
 		switch (value) {
 			case 0:
-				return Classification.Extremly_Heavy_Rainfall;
+				return Classification.Extremly_Heavy_Rainfall; // x > 204 (Value in mm)
 			case 1:
-				return Classification.VeryHeavyRainfall;
+				return Classification.VeryHeavyRainfall; // 115 < x <= 204
 			case 2:
-				return Classification.Heavy_Rainfall;
+				return Classification.Heavy_Rainfall; // 64 < x <= 115
 			case 3:
-				return Classification.Moderate_Rainfall;
+				return Classification.Moderate_Rainfall; // 15 < x <= 64
 			case 4:
-				return Classification.Light_Rainfall;
+				return Classification.Light_Rainfall; // 2 < x <= 15
 			case 5:
-				return Classification.Very_Light_Rainfall;
+				return Classification.Very_Light_Rainfall; // 0 < x <= 2
 			case 6:
-				return Classification.No_Rainfall;
+				return Classification.No_Rainfall; // x = 0
 		}
 		return null;
 	}

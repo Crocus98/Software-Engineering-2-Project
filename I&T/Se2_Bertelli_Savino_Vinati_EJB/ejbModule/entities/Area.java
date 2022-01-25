@@ -15,6 +15,10 @@ public class Area implements Serializable {
 	private int id;
 
 	private String name;
+	
+	@OneToOne
+	@JoinColumn(name="idagronomist")
+	private User user;
 
 	public Area() {
 		
@@ -34,6 +38,14 @@ public class Area implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 }
