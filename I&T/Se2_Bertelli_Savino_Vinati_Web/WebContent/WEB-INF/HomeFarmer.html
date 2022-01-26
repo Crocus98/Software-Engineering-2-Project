@@ -2,40 +2,46 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
-<link rel="stylesheet" type="text/css" media="all" href="../CSS/farmer.css" th:href="@{/css/farmer.css}" />
+<link rel="stylesheet" type="text/css" media="all"
+	href="../CSS/farmer.css" th:href="@{/css/farmer.css}" />
 <title>Home Farmer</title>
 </head>
 <body>
-<div class="page">
-  <header tabindex="0">D.R.E.A.M.</header>
-  <div id="nav-container">
-    <div class="bg"></div>
-    <div class="button" tabindex="0">
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-    </div>
-    <div id="nav-content" tabindex="0">
-      <ul>
-        <li><a class="active" href="#0">Home</a></li>
-        <li><a href="#0">Insert Production</a></li>
-        <li><a href="#0">Requests List</a></li>
-        <li><a href="#0">Create Request</a></li>
-        <li><a href="#0">Forum</a></li>
-        <li><a th:href="@{/Logout}">Logout</a></li>
-        <li class="small"><p th:text="${'Nice to see you again ' + session.user.name + ' ' + session.user.surname}"></p></li>
-      </ul>
-    </div>
-  </div>
+	<div class="page">
+		<header tabindex="0">D.R.E.A.M.</header>
+		<div id="nav-container">
+			<div class="bg"></div>
+			<div class="button" tabindex="0">
+				<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+					class="icon-bar"></span>
+			</div>
+			<div id="nav-content" tabindex="0">
+				<ul>
+					<li><a class="active" href="#0">Home</a></li>
+					<li><a href="#0">Insert Production</a></li>
+					<li><a href="#0">Requests List</a></li>
+					<li><a href="#0">Create Request</a></li>
+					<li><a href="#0">Forum</a></li>
+					<li><a th:href="@{/Logout}">Logout</a></li>
+					<li class="small"><p
+							th:text="${'Nice to see you again ' + session.user.name + ' ' + session.user.surname}"></p></li>
+				</ul>
+			</div>
+		</div>
 
-  <main>
-    <div class="content">
-      <h2>Off-screen navigation using <span>:focus-within</span></h2>
-      <p>Adding yet another pure CSS technique to the list of off-screen navigation by "hacking" the :focus-within pseudo-class. Have a look at the code to see how it works.</p>
-      <small><strong>NB!</strong> Use a browser that supports :focus-within</small>
-    </div>
-  </main>
-</div>
+		<main>
+			<div class="content">
+				<h2>
+					Off-screen navigation using <span>:focus-within</span>
+				</h2>
+				<p>Adding yet another pure CSS technique to the list of
+					off-screen navigation by "hacking" the :focus-within pseudo-class.
+					Have a look at the code to see how it works.</p>
+				<small><strong>NB!</strong> Use a browser that supports
+					:focus-within</small>
+			</div>
+		</main>
+	</div>
 
 </body>
 </html>
