@@ -10,6 +10,7 @@ import enums.Usertype;
 @Table(name = "user", schema="se2_bertelli_savino_vinati")
 @NamedQueries({
 	@NamedQuery(name="User.findAll", query="SELECT u FROM User u"),
+	@NamedQuery(name="User.findAllFarmers", query="SELECT u FROM User u WHERE u.usertype = enums.Usertype.Farmer"),
 	@NamedQuery(name = "User.checkCredentials", query = "SELECT u FROM User u  WHERE u.mail = ?1 and u.password = ?2")
 	})
 public class User implements Serializable {
@@ -78,6 +79,14 @@ public class User implements Serializable {
 
 	public void setUsertype(Usertype usertype) {
 		this.usertype = usertype;
+	}
+
+	public Farm getFarm() {
+		return farm;
+	}
+
+	public void setFarm(Farm farm) {
+		this.farm = farm;
 	}
 
 }

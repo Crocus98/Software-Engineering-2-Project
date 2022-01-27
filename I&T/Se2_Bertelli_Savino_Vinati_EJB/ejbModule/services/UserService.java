@@ -37,4 +37,8 @@ public class UserService {
 		throw new NonUniqueResultException("ERROR: More than one user registered with the same credentials.");
 	}
 	
+	public User getUserById(int id) {
+		return em.find(User.class, id);
+	}
+	
 }
