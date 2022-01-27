@@ -1,6 +1,7 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.*;
@@ -62,12 +63,13 @@ public class Farm implements Serializable {
 		return productions;
 	}
 	
-	public Double getProductionAmountM2() {
+	public Double getProductionAmountM2(Date fromDate) {
 		Double temp = 0.0;
 		if(this.getProductions() != null) {
-			
 			for (int i = 0; i < this.getProductions().size(); i++) {
-				temp += this.getProductions().get(i).getAmount();
+				if(fromDate == null || this.getProductions().get(i).getDate().after(fromDate)) {
+					temp += this.getProductions().get(i).getAmount();
+				}
 			}
 			temp /= (double)this.dimension;
 		}

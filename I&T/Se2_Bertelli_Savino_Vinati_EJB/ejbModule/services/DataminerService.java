@@ -1,16 +1,20 @@
 package services;
 
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NonUniqueResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
 
+import entities.Area;
 import entities.User;
-import exceptions.FindBestOrWorstUserException;
+import exceptions.FarmersOrderingException;
+import exceptions.FindBestOrWorstFarmerException;
 
 @Stateless
 public class DataminerService {
@@ -23,20 +27,46 @@ public class DataminerService {
 		
 	}
 	
-	public User getBestFarmer(boolean value) throws FindBestOrWorstUserException {
+	public List<User> getFarmersInLexicographicOrder(int limit_number, boolean desc, Area area, Date date) 
+			throws FarmersOrderingException { //Leave area and date null if you want data for all dates and areas
 		List<User> result = null;
 		try {
-			result = em.createNamedQuery("User.findAllFarmers",User.class).getResultList();
-			Collections.sort(result, (a,b) -> b.getFarm().getProductionAmountM2().compareTo(a.getFarm().getProductionAmountM2()));
-			for (int i = 0; i<result.size(); i++)
-			{
-				System.out.println(result.get(i).getMail());
+			if(area == null) {
+				result = em.createNamedQuery("User.findAllFarmers",User.class).getResultList();
 			}
-		} 
-		catch (PersistenceException e) {
-			throw new FindBestOrWorstUserException("ERROR: Could not find the best farmer.");
+			else {
+				result = em.createNamedQuery("User.findAllFarmersPerArea",User.class).setParameter(1, area.getId()).getResultList();
+			}
 		}
-		return null;
+		catch (PersistenceException e) {
+			throw new FarmersOrderingException("ERROR: Could not create a farmer ordering.");
+		}
+		
+		//Order the list of farmers
+		if(desc == true) { //DESC
+			Collections.sort(result, (a,b) -> b.compareTo(a, date));
+		}
+		else { //ASC
+			Collections.sort(result, (a,b) -> a.compareTo(b, date));
+		}
+		
+		return result;
 	}
 	
+	public User getBestFarmer(boolean desc, Area area, Date date) throws FindBestOrWorstFarmerException {
+		List<User> user = null;
+		try {
+			user = getFarmersInLexicographicOrder(1, desc, area, date);
+		}
+		catch(FarmersOrderingException e){
+			throw new FindBestOrWorstFarmerException("ERROR: Could not find the best farmer.");
+		}
+		if(user.isEmpty()) {
+			return null;
+		}
+		else if (user.size() == 1) {
+			return user.get(0);
+		}
+		throw new NonUniqueResultException("WARNING: More than one user is in first position, check manually.");
+	}
 }

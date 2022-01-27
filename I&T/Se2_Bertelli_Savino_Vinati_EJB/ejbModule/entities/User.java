@@ -1,6 +1,7 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.*;
 
@@ -11,6 +12,7 @@ import enums.Usertype;
 @NamedQueries({
 	@NamedQuery(name="User.findAll", query="SELECT u FROM User u"),
 	@NamedQuery(name="User.findAllFarmers", query="SELECT u FROM User u WHERE u.usertype = enums.Usertype.Farmer"),
+	@NamedQuery(name="User.findAllFarmersPerArea", query="SELECT u FROM User u WHERE u.farm.area.id = ?1"),
 	@NamedQuery(name = "User.checkCredentials", query = "SELECT u FROM User u  WHERE u.mail = ?1 and u.password = ?2")
 	})
 public class User implements Serializable {
@@ -87,6 +89,22 @@ public class User implements Serializable {
 
 	public void setFarm(Farm farm) {
 		this.farm = farm;
+	}
+
+	public int compareTo(User user, Date date) {
+		double value_this = this.getFarm().getProductionAmountM2(date);
+		double value_that = user.getFarm().getProductionAmountM2(date);
+		double epsilon = 0.000001d;
+		
+		if(Math.abs(value_this - value_that) < epsilon) {
+			return 0;
+		}
+		else if(value_this > value_that) {
+			return -1;
+		}
+		else {
+			return 1;
+		}
 	}
 
 }

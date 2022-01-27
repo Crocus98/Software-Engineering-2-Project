@@ -18,7 +18,6 @@ public class TestService {
 	
 	public void addToDb (String a) {
 		try {
-			dataminerService.getBestFarmer(false);
 			Test test = new Test();
 			test.setTestvalue("TestSuccessful " + a);
 			em.persist(test);
