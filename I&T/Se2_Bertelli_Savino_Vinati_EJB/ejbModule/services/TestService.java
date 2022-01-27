@@ -18,6 +18,7 @@ public class TestService {
 	
 	public void addToDb (String a) {
 		try {
+			dataminerService.getFarmersInLexicographicOrder(1, true, null, null);
 			Test test = new Test();
 			test.setTestvalue("TestSuccessful " + a);
 			em.persist(test);

@@ -28,7 +28,7 @@ public class DataminerService {
 	}
 	
 	public List<User> getFarmersInLexicographicOrder(int limit_number, boolean desc, Area area, Date date) 
-			throws FarmersOrderingException { //Leave area and date null if you want data for all dates and areas
+			throws FarmersOrderingException { //Leave area and date null if you want data for all dates and areas. Limit number = n of objects wanted
 		List<User> result = null;
 		try {
 			if(area == null) {
@@ -50,7 +50,7 @@ public class DataminerService {
 			Collections.sort(result, (a,b) -> a.compareTo(b, date));
 		}
 		
-		return result;
+		return result.subList(0, limit_number);
 	}
 	
 	public User getBestFarmer(boolean desc, Area area, Date date) throws FindBestOrWorstFarmerException {
