@@ -2,10 +2,14 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
-<link rel="stylesheet" type="text/css" media="all"
-	href="../CSS/policymaker.css" th:href="@{/css/policymaker.css}" />
+<link rel="stylesheet" type="text/css" media="all" href="../CSS/policymaker.css" th:href="@{/css/policymaker.css}" />
+<link rel="shortcut icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico">
+<link rel="mask-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-8f3771b1072e3c38bd662872f6b673a722f4b3ca2421637d5596661b4e2132cc.svg" color="#111">
+<link rel="canonical" href="https://codepen.io/ericmahoney/pen/oNLMOYw">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 <title>Home Policy Maker</title>
 </head>
+
 <body>
 	<div class="page">
 		<header tabindex="0">D.R.E.A.M.</header>
@@ -25,35 +29,57 @@
 				</ul>
 			</div>
 		</div>
-		
+		<main>
 		<div class="content">
-			<div class="container">
-				<h2>Farmer production summary</h2>
+						<div class="grid-wrapper">
+  <div class="grid-item featured-large">Regular Content A</div>
+  <div class="grid-item">Regular Content B</div>
+  
+  <div class="grid-item">Regular Content D</div>
+  <div class="grid-item">Regular Content E</div>
+  <div class="grid-item featured-top">
+<h2>Farmer production summary</h2>
 				<div>
 					<canvas id="canvas"></canvas>
 				</div>
-			</div>
+
+
+</div>
+  <div class="grid-item">Regular Content G</div>
+  <div class="grid-item">Regular Content H</div>
+  <div class="grid-item">Regular Content I</div>
+  <div class="grid-item">Regular Content J</div>
+  <div class="grid-item">Regular Content K</div>
+  <div class="grid-item">Regular Content L</div>
+</div>
+		
+		
+		
+				
+	<p></p>						
 		</div>
+		
+	</main>
 	</div>
+	
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
 	<script>
 		var lineChartData = {
 			labels : [ "Data 1", "Data 2", "Data 3", "Data 4", "Data 5",
 					"Data 6", "Data 7" ],
 			datasets : [ {
-				fillColor : "rgba(220,220,220,0)",
+				fillColor : "rgba(202,60,60,0)",
 				strokeColor : "rgba(220,180,0,1)",
 				pointColor : "rgba(220,180,0,1)",
 				data : [ 20, 30, 80, 20, 40, 10, 60 ]
 			}, {
-				fillColor : "rgba(151,187,205,0)",
+				fillColor : "rgba(202,60,60,0)",
 				strokeColor : "rgba(151,187,205,1)",
 				pointColor : "rgba(151,187,205,1)",
 				data : [ 60, 10, 40, 30, 80, 30, 20 ]
-			} ]
-
+			} ],
 		}
-
+		
 		Chart.defaults.global.animationSteps = 50;
 		Chart.defaults.global.tooltipYPadding = 16;
 		Chart.defaults.global.tooltipCornerRadius = 0;
@@ -61,7 +87,8 @@
 		Chart.defaults.global.tooltipFillColor = "rgba(0,160,0,0.8)";
 		Chart.defaults.global.animationEasing = "easeOutBounce";
 		Chart.defaults.global.responsive = true;
-		Chart.defaults.global.scaleLineColor = "black";
+		Chart.defaults.global.scaleLineColor = "white";
+		Chart.defaults.global.scaleFontSize = 16;
 		Chart.defaults.global.scaleFontSize = 16;
 
 		var ctx = document.getElementById("canvas").getContext("2d");
@@ -69,7 +96,8 @@
 			pointDotRadius : 10,
 			bezierCurve : false,
 			scaleShowVerticalLines : false,
-			scaleGridLineColor : "black"
+			scaleGridLineColor : "white",
+		
 		});
 	</script>
 </body>
