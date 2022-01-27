@@ -5,6 +5,7 @@ public enum Classification {
 	Light_Rainfall(4), Very_Light_Rainfall(5), No_Rainfall(6);
 
 	private final int value;
+	
 
 	Classification(int value) {
 		this.value = value;

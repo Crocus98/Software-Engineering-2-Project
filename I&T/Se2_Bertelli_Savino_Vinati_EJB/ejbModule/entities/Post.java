@@ -8,7 +8,10 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "post", schema="se2_bertelli_savino_vinati")
-@NamedQuery(name="Post.findAll", query="SELECT p FROM Post p")
+@NamedQueries({
+	@NamedQuery(name="Post.findAll", query="SELECT p FROM Post p"),
+	@NamedQuery(name="Post.findByDiscussion", query="SELECT p FROM Post p WHERE p.discussion.id = ?1")
+})
 public class Post implements Serializable {
 	private static final long serialVersionUID = 1L;
 
