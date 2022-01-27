@@ -49,7 +49,9 @@ public class DataminerService {
 		else { //ASC
 			Collections.sort(result, (a,b) -> a.compareTo(b, date));
 		}
-		
+		if(limit_number <= 0 || limit_number >= result.size()) {
+			return result;
+		}
 		return result.subList(0, limit_number);
 	}
 	

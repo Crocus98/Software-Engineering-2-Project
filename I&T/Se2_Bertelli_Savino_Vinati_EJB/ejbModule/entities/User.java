@@ -2,6 +2,9 @@ package entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.persistence.*;
 
@@ -94,17 +97,56 @@ public class User implements Serializable {
 	public int compareTo(User user, Date date) {
 		double value_this = this.getFarm().getProductionAmountM2(date);
 		double value_that = user.getFarm().getProductionAmountM2(date);
-		double epsilon = 0.000001d;
 		
+		if(compare(value_this, value_that) == 0) {
+			value_this = calculateEntropy(this.getFarm().getArea().getForecastsValue(date));
+			value_that = calculateEntropy(user.getFarm().getArea().getForecastsValue(date));
+			if(compare(value_that, value_this) == 0) {
+				value_this = this.getFarm().getWaterconsumptionM2(date);
+				value_that = user.getFarm().getWaterconsumptionM2(date);
+				if(compare(value_that, value_this) == 0) {
+					value_this = calculateEntropy(this.getFarm().getHumidityofsoilValue(date));
+					value_that = calculateEntropy(user.getFarm().getHumidityofsoilValue(date));
+					if(compare(value_that, value_this) == 0) {
+						return 0;
+					}
+				}
+			}
+		}
+		return compare(value_this, value_that);
+	}
+	
+	private int compare(double value_this, double value_that) {
+		double epsilon = 0.000001d;
 		if(Math.abs(value_this - value_that) < epsilon) {
 			return 0;
 		}
 		else if(value_this > value_that) {
-			return -1;
-		}
-		else {
 			return 1;
 		}
+		else {
+			return -1;
+		}		
 	}
+	
+	public Double calculateEntropy(List<Integer> values) {
+		  Map<Integer, Integer> map = new HashMap<Integer, Integer>();
+		  //Count occurrences of each value
+		  for (Integer item : values) {
+		    if (!map.containsKey(item)) {
+		      map.put(item, 0);
+		    }
+		    map.put(item, map.get(item) + 1);
+		  }
+		 
+		  //Entropy calculation
+		  Double result = 0.0;
+		  for (Integer item : map.keySet()) {
+		    Double frequency = (double) map.get(item) / values.size();
+		    result -= frequency * (Math.log(frequency) / Math.log(2));
+		  }
+		 
+		  return result;
+		}
 
 }

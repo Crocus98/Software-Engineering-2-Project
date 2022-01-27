@@ -1,6 +1,7 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -31,6 +32,12 @@ public class Farm implements Serializable {
 	
 	@OneToMany(mappedBy="farm")
 	private List<Production> productions;
+	
+	@OneToMany(mappedBy="farm")
+	private List<Waterconsumption> waterconsumptions;
+	
+	@OneToMany(mappedBy="farm")
+	private List<Humidityofsoil> humidityofsoil;
 
 	public Farm() {
 	}
@@ -75,9 +82,58 @@ public class Farm implements Serializable {
 		}
 		return temp;
 	}
-
+	
+	public Double getWaterconsumptionM2(Date fromDate) {
+		Double temp = 0.0;
+		if(this.getWaterconsumptions() != null) {
+			for (int i = 0; i < this.getProductions().size(); i++) {
+				if(fromDate == null || this.getWaterconsumptions().get(i).getDate().after(fromDate)) {
+					temp += this.getWaterconsumptions().get(i).getAmount();
+				}
+			}
+			temp /= (double)this.dimension;
+		}
+		return temp;
+	}
+	
+	public List<Integer> getHumidityofsoilValue(Date fromDate) {
+		List<Integer> humidityofsoilValues = new ArrayList<>();
+		if(this.getHumidityofsoil() != null) {
+			for (int i = 0; i < this.getHumidityofsoil().size(); i++) {
+				if(fromDate == null || this.getHumidityofsoil().get(i).getDate().after(fromDate)) {
+					humidityofsoilValues.add(this.getHumidityofsoil().get(i).getHumidity());
+				}
+			}
+		}
+		return humidityofsoilValues;
+	}
+	
 	public void setProductions(List<Production> productions) {
 		this.productions = productions;
+	}
+
+	public Area getArea() {
+		return area;
+	}
+
+	public void setArea(Area area) {
+		this.area = area;
+	}
+
+	public List<Waterconsumption> getWaterconsumptions() {
+		return waterconsumptions;
+	}
+
+	public void setWaterconsumptions(List<Waterconsumption> waterconsumptions) {
+		this.waterconsumptions = waterconsumptions;
+	}
+
+	public List<Humidityofsoil> getHumidityofsoil() {
+		return humidityofsoil;
+	}
+
+	public void setHumidityofsoil(List<Humidityofsoil> humidityofsoil) {
+		this.humidityofsoil = humidityofsoil;
 	}
 
 }

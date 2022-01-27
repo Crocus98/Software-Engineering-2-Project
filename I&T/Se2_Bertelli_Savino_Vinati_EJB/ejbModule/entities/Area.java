@@ -1,6 +1,10 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 import javax.persistence.*;
 
 
@@ -19,6 +23,9 @@ public class Area implements Serializable {
 	@OneToOne
 	@JoinColumn(name="idagronomist")
 	private User user;
+	
+	@OneToMany(mappedBy="area")
+	private List<Forecast> forecasts;
 
 	public Area() {
 		
@@ -46,6 +53,27 @@ public class Area implements Serializable {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public List<Forecast> getForecasts() {
+		return forecasts;
+	}
+	
+	public List<Integer> getForecastsValue(Date fromDate) {
+		List<Integer> forecastValues = new ArrayList<>();
+		if(this.getForecasts() != null) {
+			for (int i = 0; i < this.getForecasts().size(); i++) {
+				if(fromDate == null || this.getForecasts().get(i).getDate().after(fromDate)) {
+					forecastValues.add(this.getForecasts().get(i).getClassification().getValue());
+				}
+			}
+		}
+		return forecastValues;
+	}
+
+
+	public void setForecasts(List<Forecast> forecasts) {
+		this.forecasts = forecasts;
 	}
 
 }

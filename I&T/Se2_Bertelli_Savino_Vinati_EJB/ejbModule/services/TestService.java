@@ -5,6 +5,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import entities.Test;
+import entities.User;
 
 @Stateless
 public class TestService {
@@ -18,7 +19,10 @@ public class TestService {
 	
 	public void addToDb (String a) {
 		try {
-			dataminerService.getFarmersInLexicographicOrder(1, true, null, null);
+			;
+			for(User user : dataminerService.getFarmersInLexicographicOrder(0, true, null, null)) {
+				System.out.println(user.getMail());
+			}
 			Test test = new Test();
 			test.setTestvalue("TestSuccessful " + a);
 			em.persist(test);
