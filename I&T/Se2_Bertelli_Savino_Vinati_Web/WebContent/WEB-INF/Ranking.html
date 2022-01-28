@@ -11,7 +11,7 @@
 <link rel="canonical" href="https://codepen.io/ericmahoney/pen/oNLMOYw">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
-<title>Home Policy Maker</title>
+<title>Policy Maker - Ranking</title>
 </head>
 
 <body>
@@ -25,8 +25,8 @@
 			</div>
 			<div id="nav-content" tabindex="0">
 				<ul>
-					<li><a class="active" href="#0">Home</a></li>
-					<li><a th:href="@{/GoToRanking}">Ranking</a></li>
+					<li><a href="#0">Home</a></li>
+					<li><a class="active" th:href="@{/GoToRanking}">Ranking</a></li>
 					<li><a th:href="@{/Logout}">Logout</a></li>
 					<li class="small"><p
 							th:text="${'Nice to see you again ' + session.user.name + ' ' + session.user.surname}"></p></li>
