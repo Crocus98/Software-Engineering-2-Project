@@ -2,6 +2,7 @@ package entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.*;
 
@@ -25,6 +26,9 @@ public class Discussion implements Serializable {
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date datehour;
+	
+	@OneToMany(mappedBy="discussion", cascade = CascadeType.ALL)
+	private List<Post> posts;
 
 	public int getId() {
 		return id;
@@ -56,6 +60,14 @@ public class Discussion implements Serializable {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public List<Post> getPosts() {
+		return posts;
+	}
+
+	public void setPosts(List<Post> posts) {
+		this.posts = posts;
 	}
 
 	

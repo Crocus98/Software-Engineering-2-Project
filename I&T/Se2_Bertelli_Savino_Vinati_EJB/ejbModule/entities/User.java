@@ -33,7 +33,7 @@ public class User implements Serializable {
 
 	private Usertype usertype;
 
-	@OneToOne(mappedBy = "user")
+	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
 	private Farm farm;
 
 	public String getName() {

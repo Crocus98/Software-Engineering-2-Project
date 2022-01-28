@@ -8,7 +8,10 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "answer", schema="se2_bertelli_savino_vinati")
-@NamedQuery(name="Answer.findAll", query="SELECT a FROM Answer a")
+@NamedQueries({
+	@NamedQuery(name="Answer.findAll", query="SELECT a FROM Answer a"),
+	@NamedQuery(name="Answer.findByRequest", query="SELECT a FROM Answer a WHERE a.request.id = ?1")
+})
 public class Answer implements Serializable {
 	private static final long serialVersionUID = 1L;
 

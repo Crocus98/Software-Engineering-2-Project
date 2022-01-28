@@ -33,7 +33,7 @@ public class ForumService {
 		return discussions;
 	}
 	
-	public List<Post> findAllPostOfDiscussion (int idDiscussion) throws PostsRetrievalException {
+	public List<Post> findAllPostsOfDiscussion (int idDiscussion) throws PostsRetrievalException {
 		List<Post> posts = null;
 		try {
 			posts = em.createNamedQuery("Post.findByDiscussion", Post.class).setParameter(1, idDiscussion).getResultList();

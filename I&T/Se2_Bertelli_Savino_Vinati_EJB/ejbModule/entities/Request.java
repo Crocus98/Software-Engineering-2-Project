@@ -9,35 +9,37 @@ import javax.persistence.*;
 import enums.RequestState;
 import enums.RequestType;
 
-
 @Entity
-@Table(name = "request", schema="se2_bertelli_savino_vinati")
-@NamedQuery(name="Request.findAll", query="SELECT r FROM Request r")
+@Table(name = "request", schema = "se2_bertelli_savino_vinati")
+@NamedQueries({ 
+	@NamedQuery(name = "Request.findAll", query = "SELECT r FROM Request r"),
+	@NamedQuery(name = "Request.findAllPerArea", query = "SELECT r FROM Request r WHERE r.user.farm.area.id = ?1")
+	})
 public class Request implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
+
 	private String comment;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date datehour;
-	
+
 	private RequestState state;
-	
+
 	private RequestType type;
-	
+
 	@ManyToOne
-	@JoinColumn(name="idfarmer")
+	@JoinColumn(name = "idfarmer")
 	private User user;
 
-	@OneToMany(mappedBy="request")
+	@OneToMany(mappedBy = "request", cascade = CascadeType.ALL)
 	private List<Answer> answers;
-	
+
 	public Request() {
-		
+
 	}
 
 	public int getId() {
@@ -87,8 +89,5 @@ public class Request implements Serializable {
 	public void setType(RequestType type) {
 		this.type = type;
 	}
-
-
-
 
 }
