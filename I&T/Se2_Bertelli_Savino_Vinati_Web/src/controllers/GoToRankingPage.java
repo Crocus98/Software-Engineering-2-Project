@@ -9,43 +9,61 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import classes.TemplateManager;
 import services.DataminerService;
 import entities.User;
+import enums.Usertype;
 import exceptions.FarmersOrderingException;
 
 
-@WebServlet("/GoToRanking")
-public class GoToRanking extends HttpServlet {
+@WebServlet("/RankingPage")
+public class GoToRankingPage extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private TemplateManager templateManager;
 	@EJB(name = "services/DataminerService")
 	private DataminerService dataminerService;
 
-	public GoToRanking() {
+	public GoToRankingPage() {
 		super();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
+		templateManager = new TemplateManager(getServletContext(), request, response);
+		String path = getServletContext().getContextPath() + "/GoToLoginPage";
+		
+		HttpSession session = request.getSession();
+		User user = (User)session.getAttribute("user");
+		if(!templateManager.checkUsertype(user, Usertype.PolicyMaker)) {
+			templateManager.redirect(path);
+			return;
+		}
+		
+		
 		String message = null;
 		boolean isBadRequest = false;
-		List<User> rankedlist = null;
+		List<User> farmers = null;
+		
 		try {
-			rankedlist = dataminerService.getFarmersInLexicographicOrder(0, true, null, null);
+			farmers = dataminerService.getFarmersInLexicographicOrder(0, true, null, null);
 		}
 		catch(FarmersOrderingException e) {
-			message = "Unable to retrieve Lexographical order list of Farmers";
+			message = e.getMessage();
 			isBadRequest = true;
 		}
 		
-		
-		String path = "/WEB-INF/Ranking.html";
-		templateManager = new TemplateManager(getServletContext(), request, response);
-		templateManager.setVariable("farmers",rankedlist);
+		if(isBadRequest) {
+			templateManager.setVariable("errorMsg", message);
+		}
+		else {
+			path = "/WEB-INF/RankingPage.html";
+			templateManager.setVariable("farmers", farmers);
+		}
 		templateManager.redirect(path);
+		
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) 

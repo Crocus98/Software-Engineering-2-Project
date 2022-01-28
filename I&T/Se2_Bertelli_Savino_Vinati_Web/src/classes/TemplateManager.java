@@ -11,6 +11,9 @@ import org.thymeleaf.context.WebContext;
 import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 
+import entities.User;
+import enums.Usertype;
+
 public class TemplateManager {
 	private TemplateEngine templateEngine;
 	private HttpServletResponse response;
@@ -24,6 +27,13 @@ public class TemplateManager {
 		this.templateEngine.setTemplateResolver(templateResolver);
 		templateResolver.setSuffix(".html");
 		ctx = new WebContext(request, response, servletContext, request.getLocale());
+	}
+	
+	public boolean checkUsertype(User user, Usertype usertype) {
+		if (user.getUsertype() == usertype) {
+			return true;
+		}
+		return false;
 	}
 	
 	public void setVariable(String message, Object item) {

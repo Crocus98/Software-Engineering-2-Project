@@ -7,8 +7,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import classes.TemplateManager;
+import entities.User;
+import enums.Usertype;
 
 
 @WebServlet("/HomePolicyMaker")
@@ -22,8 +25,24 @@ public class GoToHomePolicyMaker extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		templateManager = new TemplateManager(getServletContext(), request, response);
+		String path = getServletContext().getContextPath() + "/GoToLoginPage";
 		
-		String path = "/WEB-INF/HomePolicyMaker.html";
+		HttpSession session = request.getSession();
+		User user = (User)session.getAttribute("user");
+		if(!templateManager.checkUsertype(user, Usertype.PolicyMaker)) {
+			templateManager.redirect(path);
+			return;
+		}
+		
+		try {
+			
+		}
+		catch(Exception e){
+			
+		}
+		
+		path = "/WEB-INF/HomePolicyMaker.html";
 		templateManager = new TemplateManager(getServletContext(), request, response);
 		templateManager.redirect(path);
 	}
