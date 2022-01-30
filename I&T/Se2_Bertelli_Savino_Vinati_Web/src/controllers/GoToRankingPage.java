@@ -1,6 +1,7 @@
 package controllers;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -45,26 +46,31 @@ public class GoToRankingPage extends HttpServlet {
 		}
 
 		String message = null;
-		boolean isBadRequest = false;
+		int limitNumber = 0;
+		int idArea = -1;
+		boolean desc = true;
+		Date fromDate = null;
+		try {
+			
+		} catch (Exception e) {
+			message = "[RankingPageController] ERROR: Incorrect filter parameters.";
+		}
+
 		List<RankingAggregateData> ranking = null;
 		List<Area> areas = null;
 
 		try {
-			ranking = dataminerService.getRankingAggregateData(0, true, null, null);
+			ranking = dataminerService.getRankingAggregateData(limitNumber, desc, idArea, fromDate);
 			areas = dataminerService.getAllAreas();
-			
-		} catch (RankingAggregateDataException | AreaRetrievalException e) {
+		} catch (RankingAggregateDataException | AreaRetrievalException  e) {
 			message = e.getMessage();
-			isBadRequest = true;
 		}
 
-		if (isBadRequest) {
-			templateManager.setVariable("errorMsg", message);
-		} else {
-			path = "/WEB-INF/RankingPage.html";
-			templateManager.setVariable("areas", areas);
-			templateManager.setVariable("ranking", ranking);
-		}
+		path = "/WEB-INF/RankingPage.html";
+		templateManager.setVariable("areas", areas);
+		templateManager.setVariable("errorMsg", message);
+		templateManager.setVariable("areas", areas);
+		templateManager.setVariable("ranking", ranking);
 		templateManager.redirect(path);
 	}
 

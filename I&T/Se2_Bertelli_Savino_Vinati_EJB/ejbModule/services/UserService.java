@@ -26,7 +26,7 @@ public class UserService {
 			users = em.createNamedQuery("User.checkCredentials", User.class).setParameter(1, mail).setParameter(2, pwd).getResultList();
 		} 
 		catch (PersistenceException e) {
-			throw new CredentialsException("ERROR: Could not verify credentials.");
+			throw new CredentialsException("[CredentialsException] ERROR: Could not verify credentials.");
 		}
 		if (users.isEmpty()) {
 			return null;
@@ -34,7 +34,7 @@ public class UserService {
 		else if (users.size() == 1) {
 			return users.get(0);
 		}
-		throw new NonUniqueResultException("ERROR: More than one user registered with the same credentials.");
+		throw new NonUniqueResultException("[NonUniqueResultException] ERROR: More than one user registered with the same credentials.");
 	}
 	
 	public User getUserById(int id) {

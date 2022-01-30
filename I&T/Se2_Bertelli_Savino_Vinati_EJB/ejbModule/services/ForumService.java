@@ -28,7 +28,7 @@ public class ForumService {
 			discussions = em.createNamedQuery("Discussion.findAll", Discussion.class).getResultList();
 		}
 		catch(PersistenceException e) {
-			throw new DiscussionsRetrievalException("ERROR: Could not retrieve discussions.");
+			throw new DiscussionsRetrievalException("[DiscussionsRetrievalException] ERROR: Could not retrieve discussions.");
 		}
 		return discussions;
 	}
@@ -39,7 +39,7 @@ public class ForumService {
 			posts = em.createNamedQuery("Post.findByDiscussion", Post.class).setParameter(1, idDiscussion).getResultList();
 		}
 		catch(PersistenceException e) {
-			throw new PostsRetrievalException("ERROR: Could not retrieve posts of discussion.");
+			throw new PostsRetrievalException("[PostsRetrievalException] ERROR: Could not retrieve posts of discussion.");
 		}
 		return posts;
 	}

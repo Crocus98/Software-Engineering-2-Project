@@ -28,7 +28,7 @@ public class RequestService {
 					.setParameter(1, user.getFarm().getArea().getId()).getResultList();
 		}
 		catch(PersistenceException e) {
-			throw new RequestsRetrievalException("ERROR: Could not retrieve requests of user area.");
+			throw new RequestsRetrievalException("[RequestsRetrievalException] ERROR: Could not retrieve requests of user area.");
 		}
 		return requests;
 	}
@@ -40,7 +40,7 @@ public class RequestService {
 					.setParameter(1, idAnswer).getResultList();
 		}
 		catch(PersistenceException e) {
-			throw new AnswersRetrievalException("ERROR: Could not retrieve answers of request");
+			throw new AnswersRetrievalException("[AnswersRetrievalException] ERROR: Could not retrieve answers of request");
 		}
 		return answers;
 	}

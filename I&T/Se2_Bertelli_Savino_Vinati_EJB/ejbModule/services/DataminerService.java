@@ -57,13 +57,24 @@ public class DataminerService {
 		}
 		return result.subList(0, limit_number);
 	}
+	
+	public Area getAreaFromId(int idArea) throws AreaRetrievalException {
+		Area area = null;
+		try {
+			area = em.find(Area.class, idArea);
+		} 
+		catch (PersistenceException e) {
+			throw new AreaRetrievalException("[AreaRetrievalException] ERROR: Could not find area.");
+		}
+		return area;
+	}
 
-	public List<RankingAggregateData> getRankingAggregateData(int limit_number, boolean desc, Area area, Date date)
+	public List<RankingAggregateData> getRankingAggregateData(int limit_number, boolean desc, int idArea, Date date)
 			throws RankingAggregateDataException {
 		List<User> farmers = null;
 		try {
-			farmers = getFarmersInLexicographicOrder(limit_number, desc, area, date);
-		} catch (FarmersOrderingException e) {
+			farmers = getFarmersInLexicographicOrder(limit_number, desc, getAreaFromId(idArea), date);
+		} catch (FarmersOrderingException | AreaRetrievalException e) {
 			throw new RankingAggregateDataException(
 					"[RankingAggregateDataException] " + e.getMessage());
 		}

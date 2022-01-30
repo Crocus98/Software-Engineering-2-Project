@@ -38,6 +38,7 @@
 				<div class="grid-wrapper">
 					<div class="grid-item featured-large">
 						<div class="container">
+						<p class="error_text" th:text=" ${errorMsg}"></p>
 							<div class="row">
 								<div class="col-12">
 									<form id="filter_form" action="#" th:action="@{/RankingPage}"
@@ -45,64 +46,64 @@
 									<table>
 										<thead>
 											<tr>
-												<th>From Date</th>
-												<th>Area</th>
-												<th>Order Mode</th>
-												<th>Limit Number</th>
-												<th></th>
+												<th class="center">From Date</th>
+												<th class="center">Area</th>
+												<th class="center">Order Mode</th>
+												<th class="center">Limit Number</th>
+												<th class="center"></th>
 											</tr>
 										</thead>
 										<tbody>
 											<tr>
-												<td><input type="date" name="start_date"
+												<td class="center"><input type="date" name="start_date"
 													form="filter_form"></td>
-												<td><select name="area" form="filter_form" required>
+												<td class="center"><select name="area" form="filter_form" required>
 														<option value="-1" selected>All areas</option>
 														<option th:each="a : ${areas}" th:value="${a.id}"
 															th:text="${a.name}">
 												</select></td>
-												<td><select name="order_mode" form="filter_form"
+												<td class="center"><select name="order_mode" form="filter_form"
 													required>
-														<option value="1" selected>Descending</option>
-														<option value="0">Ascending</option>
+														<option value="0" selected>Descending</option>
+														<option value="1">Ascending</option>
 												</select></td>
-												<td><input type="number" name="limit_number"
+												<td class="center"><input type="number" min="0" name="limit_number"
 													form="filter_form" value="0" required></td>
-												<td><button form="filter_form">Filter</button></td>
+												<td class="center"><button style="height:20px;width:60px"  form="filter_form">Filter</button></td>
 											</tr>
 										</tbody>
 									</table>
 									<table>
 										<thead>
 											<tr>
-												<th>Farmer</th>
-												<th>Mail</th>
-												<th>Area</th>
-												<th>Farm Dimension (m<sup>2</sup>)
+												<th class="center">Farmer</th>
+												<th class="center">Mail</th>
+												<th class="center">Area</th>
+												<th class="center">Farm Dimension (m<sup>2</sup>)
 												</th>
-												<th>Production (kg/m<sup>2</sup>)
+												<th class="center">Production (kg/m<sup>2</sup>)
 												</th>
-												<th>Forecast Score</th>
-												<th>Water Consumption (L)</th>
-												<th>Humidity Score</th>
+												<th class="center">Forecast Score</th>
+												<th class="center">Water Consumption (L)</th>
+												<th class="center">Humidity Score</th>
 											</tr>
 										</thead>
 										<tbody>
 											<tr th:each="r : ${ranking}">
-												<th th:text="${r.nameSurname}"></th>
-												<th th:text="${r.mail}"></th>
-												<td th:text="${r.area}"></td>
-												<td th:text="${r.farmDimension}"></td>
-												<td th:text="${r.productionM2}"></td>
-												<td th:text="${r.forecastEntropy}"></td>
-												<td th:text="${r.waterConsumptionM2}"></td>
-												<td th:text="${r.humidityEntropy}"></td>
+												<th class="center" th:text="${r.nameSurname}"></th>
+												<th class="center" th:text="${r.mail}"></th>
+												<td class="center" th:text="${r.area}"></td>
+												<td class="center" th:text="${r.farmDimension}"></td>
+												<td class="center" th:text="${r.productionM2}"></td>
+												<td class="center" th:text="${r.forecastEntropy}"></td>
+												<td class="center" th:text="${r.waterConsumptionM2}"></td>
+												<td class="center" th:text="${r.humidityEntropy}"></td>
 											</tr>
 										</tbody>
 									</table>
 								</div>
 							</div>
-							<p>*How to read 'Score' data: higher values means more harsh
+							<p>*How to read 'Score' data: higher values mean more harsh
 								conditions while value zero means that there are not enough
 								data.</p>
 						</div>
