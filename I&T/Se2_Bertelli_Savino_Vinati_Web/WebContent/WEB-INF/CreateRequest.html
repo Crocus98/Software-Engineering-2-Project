@@ -3,8 +3,8 @@
 <head>
 <meta charset="ISO-8859-1">
 <link rel="stylesheet" type="text/css" media="all"
-	href="../CSS/farmer.css" th:href="@{/css/farmer.css}" />
-<title>Home Farmer</title>
+	href="../CSS/farmer.css" th:href="@{/css/createrequest.css}" />
+<title>Create Request</title>
 </head>
 <body>
 	<div class="page">
@@ -17,10 +17,10 @@
 			</div>
 			<div id="nav-content" tabindex="0">
 				<ul>
-					<li><a class="active" href="#0">Home</a></li>
+					<li><a th:href="@{/HomeFarmer}">Home</a></li>
 					<li><a th:href="@{/Production}">Insert Production</a></li>
 					<li><a th:href="@{/RequestList}">Requests List</a></li>
-					<li><a th:href="@{/CreateRequest}">Create Request</a></li>
+					<li><a class="active">Create Request</a></li>
 					<li><a th:href="@{/Forum}">Forum</a></li>
 					<li><a th:href="@{/Logout}">Logout</a></li>
 					<li class="small"><p
