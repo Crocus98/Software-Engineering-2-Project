@@ -1,6 +1,7 @@
 package controllers;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -19,6 +20,7 @@ import entities.Area;
 import entities.User;
 import enums.Usertype;
 import exceptions.AreaRetrievalException;
+import exceptions.FilterParametersException;
 import exceptions.RankingAggregateDataException;
 
 @WebServlet("/RankingPage")
@@ -50,10 +52,32 @@ public class GoToRankingPage extends HttpServlet {
 		int idArea = -1;
 		boolean desc = true;
 		Date fromDate = null;
+		
 		try {
-			
+			limitNumber = Integer.parseInt(request.getParameter("limit_number"));
+			System.out.println("asd" +1);
+			desc = Boolean.parseBoolean(request.getParameter("order_mode"));
+			System.out.println("asd" +2);
+			idArea = Integer.parseInt(request.getParameter("idArea"));
+			System.out.println("asd" +3);
+			String fromDateString = request.getParameter("start_date");
+			System.out.println("asd" +4);
+			if(!fromDateString.isEmpty()){
+	 			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+	 			fromDate = dateFormat.parse(fromDateString);
+ 			}
+			System.out.println("asd" +5);
+ 			
+ 			if(limitNumber < 0 || idArea < 0 || (!fromDateString.isEmpty() && fromDate.after(new Date()))) {
+ 				throw new FilterParametersException("Invalid parameters");
+ 			}
+ 			
 		} catch (Exception e) {
 			message = "[RankingPageController] ERROR: Incorrect filter parameters.";
+			limitNumber = 0;
+			idArea = -1;
+			desc = true;
+			fromDate = null;
 		}
 
 		List<RankingAggregateData> ranking = null;

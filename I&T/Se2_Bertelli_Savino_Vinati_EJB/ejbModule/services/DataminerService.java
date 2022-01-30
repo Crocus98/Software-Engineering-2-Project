@@ -45,25 +45,25 @@ public class DataminerService {
 		} catch (PersistenceException e) {
 			throw new FarmersOrderingException("[FarmersOrderingException] ERROR: Could not create a farmer ordering.");
 		}
-
-		// Order the list of farmers
-		if (desc == true) { // DESC
-			Collections.sort(result, (a, b) -> b.compareTo(a, date));
-		} else { // ASC
-			Collections.sort(result, (a, b) -> a.compareTo(b, date));
+		if (result.size() > 0) {
+			// Order the list of farmers
+			if (desc == true) { // DESC
+				Collections.sort(result, (a, b) -> b.compareTo(a, date));
+			} else { // ASC
+				Collections.sort(result, (a, b) -> a.compareTo(b, date));
+			}
 		}
 		if (limit_number <= 0 || limit_number >= result.size()) {
 			return result;
 		}
 		return result.subList(0, limit_number);
 	}
-	
+
 	public Area getAreaFromId(int idArea) throws AreaRetrievalException {
 		Area area = null;
 		try {
 			area = em.find(Area.class, idArea);
-		} 
-		catch (PersistenceException e) {
+		} catch (PersistenceException e) {
 			throw new AreaRetrievalException("[AreaRetrievalException] ERROR: Could not find area.");
 		}
 		return area;
@@ -75,8 +75,7 @@ public class DataminerService {
 		try {
 			farmers = getFarmersInLexicographicOrder(limit_number, desc, getAreaFromId(idArea), date);
 		} catch (FarmersOrderingException | AreaRetrievalException e) {
-			throw new RankingAggregateDataException(
-					"[RankingAggregateDataException] " + e.getMessage());
+			throw new RankingAggregateDataException("[RankingAggregateDataException] " + e.getMessage());
 		}
 		if (farmers == null || farmers.isEmpty()) {
 			return null;
@@ -93,21 +92,23 @@ public class DataminerService {
 		try {
 			user = getFarmersInLexicographicOrder(1, desc, area, date);
 		} catch (FarmersOrderingException e) {
-			throw new FindBestOrWorstFarmerException("[FindBestOrWorstFarmerException] ERROR: Could not find the best farmer.");
+			throw new FindBestOrWorstFarmerException(
+					"[FindBestOrWorstFarmerException] ERROR: Could not find the best farmer.");
 		}
 		if (user.isEmpty()) {
 			return null;
 		} else if (user.size() == 1) {
 			return user.get(0);
 		}
-		throw new NonUniqueResultException("[NonUniqueResultException] WARNING: More than one user is in first position, check manually.");
+		throw new NonUniqueResultException(
+				"[NonUniqueResultException] WARNING: More than one user is in first position, check manually.");
 	}
-	
-	public List <Area> getAllAreas() throws AreaRetrievalException{
+
+	public List<Area> getAllAreas() throws AreaRetrievalException {
 		List<Area> areas = null;
 		try {
 			areas = em.createNamedQuery("Area.findAll", Area.class).getResultList();
-		}catch(PersistenceException e){
+		} catch (PersistenceException e) {
 			throw new AreaRetrievalException("[AreaRetrievalException] ERROR: Could not retrieve areas.");
 		}
 		return areas;

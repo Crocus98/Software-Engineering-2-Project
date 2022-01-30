@@ -57,15 +57,15 @@
 											<tr>
 												<td class="center"><input type="date" name="start_date"
 													form="filter_form"></td>
-												<td class="center"><select name="area" form="filter_form" required>
-														<option value="-1" selected>All areas</option>
+												<td class="center"><select name="idArea" form="filter_form" required>
+														<option value="0" selected>All areas</option>
 														<option th:each="a : ${areas}" th:value="${a.id}"
 															th:text="${a.name}">
 												</select></td>
 												<td class="center"><select name="order_mode" form="filter_form"
 													required>
-														<option value="0" selected>Descending</option>
-														<option value="1">Ascending</option>
+														<option value="true" selected>Descending</option>
+														<option value="false">Ascending</option>
 												</select></td>
 												<td class="center"><input type="number" min="0" name="limit_number"
 													form="filter_form" value="0" required></td>
