@@ -3,7 +3,9 @@ package services;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -12,7 +14,10 @@ import javax.persistence.NonUniqueResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
 
+import org.apache.commons.lang3.time.DateUtils;
+
 import classes.RankingAggregateData;
+import classes.SummaryAggregateData;
 import entities.Area;
 import entities.User;
 import exceptions.AreaRetrievalException;
@@ -103,7 +108,7 @@ public class DataminerService {
 		throw new NonUniqueResultException(
 				"[NonUniqueResultException] WARNING: More than one user is in first position, check manually.");
 	}
-	
+
 	public Area getBestArea(boolean desc, Date date) throws AreaRetrievalException {
 		List<Area> areas = null;
 		areas = this.getAllAreas();
@@ -125,5 +130,22 @@ public class DataminerService {
 			throw new AreaRetrievalException("[AreaRetrievalException] ERROR: Could not retrieve areas.");
 		}
 		return areas;
+	}
+
+	@SuppressWarnings("deprecation")
+	public List<SummaryAggregateData> getLastYearMonthlyProductionSummary() throws AreaRetrievalException {
+		List<SummaryAggregateData> result = new ArrayList<>();
+		List<Area> areas = getAllAreas();
+		for (Area area : areas) {
+			Map<String, Integer> data = new HashMap<String, Integer>();
+			int month = DateUtils.addYears(new Date(), -1).getMonth();
+			for(int i = 0; i<=12; i++){
+				for(User user : farmer)
+				data.put(SummaryAggregateData.convertMonthToString(i), 0);
+			}
+			SummaryAggregateData temp = new SummaryAggregateData(area.getName(), data);
+			result.add(temp);
+		}
+		return result;
 	}
 }

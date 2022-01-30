@@ -38,9 +38,9 @@
 				<p class="error_text" th:text=" ${errorMsg}"></p>
 				<div class="grid-wrapper">
 					<div class="grid-item featured-large-cc center"
-						th:text="${'Best Farmer:\n' + bestFarmer}"></div>
+						th:utext="${#strings.replace('Best Farmer:\n' + bestFarmer, '\n', '<br />')}"></div>
 					<div class="grid-item featured-large-down center"
-						th:text="${'Worst Farmer:\n' + worstFarmer}"></div>
+						th:utext="${#strings.replace('Worst Farmer:\n' + worstFarmer, '\n', '<br />')}"></div>
 
 					<div class="grid-item featured-top">
 						<h2>Production summary (12 months)</h2>
@@ -49,11 +49,10 @@
 						</div>
 					</div>
 					<div class="grid-item featured-large-a center"
-						th:text="${'Best Farmer:\n' + bestFarmer}">Worst Overall
-						Area</div>
+						th:utext="${#strings.replace('Best Area:\n' + bestArea, '\n', '<br />')}"></div>
+						
 					<div class="grid-item featured-large-b center"
-						th:text="${'Worst Farmer:\n' + worstFarmer}">Best Overall
-						Area</div>
+						th:utext="${#strings.replace('Worst Area:\n' + worstArea, '\n', '<br />')}"></div>
 				</div>
 				<p></p>
 			</div>

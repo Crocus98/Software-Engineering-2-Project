@@ -54,10 +54,10 @@ public class GoToHomePolicyMaker extends HttpServlet {
 		try {
 			Date last_year = DateUtils.addYears(new Date(), -1);
 			User temp = dataminerService.getBestFarmer(true, null, last_year);
-			bestFarmer = temp.getName() + " " + temp.getSurname() + "\r\n" + temp.getMail() + "\r\n"
+			bestFarmer = temp.getName() + " " + temp.getSurname() + "\n" + temp.getMail() + "\n"
 					+ temp.getFarm().getArea().getName();
 			temp = dataminerService.getBestFarmer(false, null, last_year);
-			worstFarmer = temp.getName() + " " + temp.getSurname() + "\r\n" + temp.getMail() + "\r\n"
+			worstFarmer = temp.getName() + " " + temp.getSurname() + "\n" + temp.getMail() + "\n"
 					+ temp.getFarm().getArea().getName();
 			Area temp2 = dataminerService.getBestArea(true, last_year);
 			bestArea = temp2.getName();
