@@ -37,17 +37,23 @@
 			<div class="content">
 				<p class="error_text" th:text=" ${errorMsg}"></p>
 				<div class="grid-wrapper">
-					<div class="grid-item featured-large-cc center" th:text="${'Best Farmer:\n' + bestFarmer}"></div>
-					<div class="grid-item featured-large-down center" th:text="${'Worst Farmer:\n' + worstFarmer}"></div>
+					<div class="grid-item featured-large-cc center"
+						th:text="${'Best Farmer:\n' + bestFarmer}"></div>
+					<div class="grid-item featured-large-down center"
+						th:text="${'Worst Farmer:\n' + worstFarmer}"></div>
 
 					<div class="grid-item featured-top">
-						<h2>Farmer production summary</h2>
+						<h2>Production summary (12 months)</h2>
 						<div>
 							<canvas id="canvas"></canvas>
 						</div>
 					</div>
-					<div class="grid-item featured-large-a center" th:text="${'Best Farmer:\n' + bestFarmer}">Worst Overall Area</div>
-					<div class="grid-item featured-large-b center" th:text="${'Worst Farmer:\n' + worstFarmer}">Best Overall Area</div>
+					<div class="grid-item featured-large-a center"
+						th:text="${'Best Farmer:\n' + bestFarmer}">Worst Overall
+						Area</div>
+					<div class="grid-item featured-large-b center"
+						th:text="${'Worst Farmer:\n' + worstFarmer}">Best Overall
+						Area</div>
 				</div>
 				<p></p>
 			</div>

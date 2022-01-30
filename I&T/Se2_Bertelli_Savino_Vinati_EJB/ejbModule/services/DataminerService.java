@@ -104,12 +104,15 @@ public class DataminerService {
 				"[NonUniqueResultException] WARNING: More than one user is in first position, check manually.");
 	}
 	
-	public Area getBestArea(boolean desc, Date date) {
+	public Area getBestArea(boolean desc, Date date) throws AreaRetrievalException {
 		List<Area> areas = null;
-		try {
-			
-		}catch(Exception e) {
-			
+		areas = this.getAllAreas();
+		if (areas.size() > 0) {
+			if (desc == true) { // DESC
+				Collections.sort(areas, (a, b) -> b.compareTo(a, date));
+			} else { // ASC
+				Collections.sort(areas, (a, b) -> a.compareTo(b, date));
+			}
 		}
 		return areas.get(0);
 	}

@@ -13,10 +13,12 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang3.time.DateUtils;
 import classes.TemplateManager;
+import entities.Area;
 import entities.User;
 import enums.Usertype;
+import exceptions.AreaRetrievalException;
+import exceptions.FindBestOrWorstFarmerException;
 import services.DataminerService;
-
 
 @WebServlet("/HomePolicyMaker")
 public class GoToHomePolicyMaker extends HttpServlet {
@@ -33,42 +35,53 @@ public class GoToHomePolicyMaker extends HttpServlet {
 			throws ServletException, IOException {
 		templateManager = new TemplateManager(getServletContext(), request, response);
 		String path = getServletContext().getContextPath() + "/GoToLoginPage";
-		
+
 		HttpSession session = request.getSession();
-		User user = (User)session.getAttribute("user");
-		if(user == null || !templateManager.checkUsertype(user, Usertype.PolicyMaker)) {
+		User user = (User) session.getAttribute("user");
+		if (user == null || !templateManager.checkUsertype(user, Usertype.PolicyMaker)) {
 			templateManager.redirect(path);
 			return;
 		}
-		
+
 		String message = null;
-		boolean isBadRequest = true;
-		
+		boolean isBadRequest = false;
+
 		String bestFarmer = null;
 		String worstFarmer = null;
 		String bestArea = null;
 		String worstArea = null;
-		
+
 		try {
 			Date last_year = DateUtils.addYears(new Date(), -1);
 			User temp = dataminerService.getBestFarmer(true, null, last_year);
-			bestFarmer = temp.getName() + " " + temp.getSurname() +"\n"+ temp.getMail() + "\n"+ temp.getFarm().getArea().getName();
+			bestFarmer = temp.getName() + " " + temp.getSurname() + "\r\n" + temp.getMail() + "\r\n"
+					+ temp.getFarm().getArea().getName();
 			temp = dataminerService.getBestFarmer(false, null, last_year);
-			worstFarmer = temp.getName() + " " + temp.getSurname() +"\n"+ temp.getMail() + "\n"+ temp.getFarm().getArea().getName();
-		}
-		catch(Exception e){
+			worstFarmer = temp.getName() + " " + temp.getSurname() + "\r\n" + temp.getMail() + "\r\n"
+					+ temp.getFarm().getArea().getName();
+			Area temp2 = dataminerService.getBestArea(true, last_year);
+			bestArea = temp2.getName();
+			temp2 = dataminerService.getBestArea(false, last_year);
+			worstArea = temp2.getName();
+		} catch (AreaRetrievalException | FindBestOrWorstFarmerException e) {
 			isBadRequest = true;
-			message = "Could not retrieve data";
+			message = e.getMessage();
 		}
-		
+
 		path = "/WEB-INF/HomePolicyMaker.html";
 		templateManager = new TemplateManager(getServletContext(), request, response);
-		templateManager.setVariable("bestFarmer", bestFarmer);
-		templateManager.setVariable("worstFarmer", worstFarmer);
+		if (isBadRequest) {
+			templateManager.setVariable("errorMsg", message);
+		} else {
+			templateManager.setVariable("bestFarmer", bestFarmer);
+			templateManager.setVariable("worstFarmer", worstFarmer);
+			templateManager.setVariable("bestArea", bestArea);
+			templateManager.setVariable("worstArea", worstArea);
+		}
 		templateManager.redirect(path);
 	}
-	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		doGet(request, response);
 	}
