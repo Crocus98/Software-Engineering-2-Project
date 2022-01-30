@@ -19,6 +19,8 @@ import org.apache.commons.lang3.time.DateUtils;
 import classes.RankingAggregateData;
 import classes.SummaryAggregateData;
 import entities.Area;
+import entities.Farm;
+import entities.Production;
 import entities.User;
 import exceptions.AreaRetrievalException;
 import exceptions.FarmersOrderingException;
@@ -137,11 +139,17 @@ public class DataminerService {
 		List<SummaryAggregateData> result = new ArrayList<>();
 		List<Area> areas = getAllAreas();
 		for (Area area : areas) {
-			Map<String, Integer> data = new HashMap<String, Integer>();
 			int month = DateUtils.addYears(new Date(), -1).getMonth();
-			for(int i = 0; i<=12; i++){
-				for(User user : farmer)
-				data.put(SummaryAggregateData.convertMonthToString(i), 0);
+			Map<String, Integer> data = new HashMap<String, Integer>();
+			for (int i = 0; i < 12; i++) {
+				data.put(SummaryAggregateData.convertMonthToString(month), 0);
+				month = (month + 1) % 13;
+			}
+			for (Farm farm : area.getFarms()) {
+				for (Production production : farm.getProductions()) {
+					String key = SummaryAggregateData.convertMonthToString(production.getDate().getMonth());
+					data.put(key, data.get(key) + production.getAmount());
+				}
 			}
 			SummaryAggregateData temp = new SummaryAggregateData(area.getName(), data);
 			result.add(temp);
