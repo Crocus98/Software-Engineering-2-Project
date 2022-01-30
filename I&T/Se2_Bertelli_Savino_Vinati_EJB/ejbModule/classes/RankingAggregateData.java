@@ -8,6 +8,7 @@ public class RankingAggregateData {
 
 	private String nameSurname;
 	private String mail;
+	private String area;
 	private int farmDimension;
 	private double productionM2;
 	private double forecastEntropy;
@@ -18,6 +19,7 @@ public class RankingAggregateData {
 		this.setNameSurname(farmer.getName() + " " + farmer.getSurname());
 		this.setMail(farmer.getMail());
 		this.setFarmDimension(farmer.getFarm().getDimension());
+		this.setArea(farmer.getFarm().getArea().getName());
 		this.setProductionM2(farmer.getFarm().getProductionAmountM2(date));
 		this.setForecastEntropy(farmer.calculateEntropy(farmer.getFarm().getArea().getForecastsValue(date)));
 		this.setWaterConsumptionM2(farmer.getFarm().getWaterconsumptionM2(date));
@@ -78,5 +80,13 @@ public class RankingAggregateData {
 
 	public void setHumidityEntropy(double humidityEntropy) {
 		this.humidityEntropy = humidityEntropy;
+	}
+
+	public String getArea() {
+		return area;
+	}
+
+	public void setArea(String area) {
+		this.area = area;
 	}
 }
