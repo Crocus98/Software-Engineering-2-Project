@@ -11,12 +11,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import classes.RankingAggregateData;
 import classes.TemplateManager;
 import services.DataminerService;
 import entities.User;
 import enums.Usertype;
-import exceptions.FarmersOrderingException;
-
+import exceptions.RankingAggregateDataException;
 
 @WebServlet("/RankingPage")
 public class GoToRankingPage extends HttpServlet {
@@ -31,42 +31,38 @@ public class GoToRankingPage extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		templateManager = new TemplateManager(getServletContext(), request, response);
 		String path = getServletContext().getContextPath() + "/GoToLoginPage";
-		
+
 		HttpSession session = request.getSession();
-		User user = (User)session.getAttribute("user");
-		if(!templateManager.checkUsertype(user, Usertype.PolicyMaker)) {
+		User user = (User) session.getAttribute("user");
+		if (!templateManager.checkUsertype(user, Usertype.PolicyMaker)) {
 			templateManager.redirect(path);
 			return;
 		}
-		
-		
+
 		String message = null;
 		boolean isBadRequest = false;
-		List<User> farmers = null;
-		
+		List<RankingAggregateData> ranking = null;
+
 		try {
-			farmers = dataminerService.getFarmersInLexicographicOrder(0, true, null, null);
-		}
-		catch(FarmersOrderingException e) {
+			ranking = dataminerService.getRankingAggregateData(0, true, null, null);
+		} catch (RankingAggregateDataException e) {
 			message = e.getMessage();
 			isBadRequest = true;
 		}
-		
-		if(isBadRequest) {
+
+		if (isBadRequest) {
 			templateManager.setVariable("errorMsg", message);
-		}
-		else {
+		} else {
 			path = "/WEB-INF/RankingPage.html";
-			templateManager.setVariable("farmers", farmers);
+			templateManager.setVariable("ranking", ranking);
 		}
 		templateManager.redirect(path);
-		
 	}
-	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		doGet(request, response);
 	}
