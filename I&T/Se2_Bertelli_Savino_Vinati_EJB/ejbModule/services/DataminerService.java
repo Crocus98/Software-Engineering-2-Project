@@ -111,7 +111,7 @@ public class DataminerService {
 		}catch(Exception e) {
 			
 		}
-		return area;
+		return areas.get(0);
 	}
 
 	public List<Area> getAllAreas() throws AreaRetrievalException {
