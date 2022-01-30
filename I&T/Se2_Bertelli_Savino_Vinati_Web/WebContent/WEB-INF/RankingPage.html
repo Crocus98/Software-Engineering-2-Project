@@ -20,13 +20,12 @@
 		<div id="nav-container">
 			<div class="bg"></div>
 			<div class="button" tabindex="0">
-				<span class="icon-bar"></span> <span class="icon-bar"></span> <span
-					class="icon-bar"></span>
+				<span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
 			</div>
 			<div id="nav-content" tabindex="0">
 				<ul>
 					<li><a th:href="@{/HomePolicyMaker}">Home</a></li>
-					<li><a class="active" th:href="@{/RankingPage}">Ranking</a></li>
+					<li><a class="active">Ranking</a></li>
 					<li><a th:href="@{/Logout}">Logout</a></li>
 					<li class="small"><p th:text="${'Nice to see you again ' + session.user.name + ' ' + session.user.surname}"></p></li>
 				</ul>
@@ -35,21 +34,79 @@
 		<main>
 			<div class="content">
 				<div class="grid-wrapper">
-					<div class="grid-item featured-large">Best Farmer</div>
-					<div class="grid-item featured-large-down">Regular Content B</div>
+					<div class="grid-item featured-large">
 
-					<div class="grid-item featured-top">
-						<h2>Farmer production summary</h2>
-						<div>
-							<canvas id="canvas"></canvas>
+						<div class="container">
+							<div class="row">
+								<div class="col-12">
+									<table>
+										<thead>
+											<tr>
+												<th>Date</th>
+												<th>Area</th>
+												<th>Order</th>
+												<th>Limit Number</th>
+												<th></th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td><input type="date" name="startdate" required>
+												</td>
+												<td><input type="text" name="area" list="area">
+													<datalist id="area">
+														<option value="1">
+														</option><option value="2">
+													</option></datalist></td>
+												<td><input type="text" name="order" list="order" required>
+													<datalist id="order">
+														<option value="Ascent">
+														</option><option value="Descent">
+													</option></datalist></td>
+												<td><input type="number" name="limitnumber" required>
+												</td>
+												<td><input type="submit" value="Confirm">
+												<p></p>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+									<table>
+										<thead>
+											<tr>
+												<th>Farmer</th>
+												<th>Area</th>
+												<th>Production (kg/m2)</th>
+												<th>Farm Dimension (m2)</th>
+												<th>Forecast Score</th>
+												<th>Water Consumption (L)</th>
+												<th>Humidity Score</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr th:each="r : ${ranking}">
+												<th th:text="${r.nameSurname}"></th>
+												<td th:text="${r.productionM2}"></td>
+												<td th:text="${r.productionM2}"></td>
+												<td th:text="${r.farmDimension}"></td>
+												<td th:text="${r.forecastEntropy}"></td>
+												<td th:text="${r.waterConsumptionM2}"></td>
+												<td th:text="${r.humidityEntropy}"></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
 						</div>
 					</div>
-					<div class="grid-item featured-large-a">Worst Overall Area</div>
-					<div class="grid-item featured-large-b">Best Overall Area</div>
 				</div>
 				<p></p>
 			</div>
 		</main>
 	</div>
+	<script src="https://static.filestackapi.com/filestack-js/3.x.x/filestack.min.js"></script>
+
+
+
 </body>
 </html>
