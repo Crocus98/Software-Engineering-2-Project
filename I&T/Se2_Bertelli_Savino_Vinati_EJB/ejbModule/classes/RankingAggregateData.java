@@ -1,5 +1,7 @@
 package classes;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Date;
 
 import entities.User;
@@ -20,10 +22,10 @@ public class RankingAggregateData {
 		this.setMail(farmer.getMail());
 		this.setFarmDimension(farmer.getFarm().getDimension());
 		this.setArea(farmer.getFarm().getArea().getName());
-		this.setProductionM2(farmer.getFarm().getProductionAmountM2(date));
-		this.setForecastEntropy(farmer.calculateEntropy(farmer.getFarm().getArea().getForecastsValue(date)));
-		this.setWaterConsumptionM2(farmer.getFarm().getWaterconsumptionM2(date));
-		this.setHumidityEntropy(farmer.calculateEntropy(farmer.getFarm().getHumidityofsoilValue(date)));
+		this.setProductionM2(this.round(farmer.getFarm().getProductionAmountM2(date)));
+		this.setForecastEntropy(this.round(farmer.calculateEntropy(farmer.getFarm().getArea().getForecastsValue(date))));
+		this.setWaterConsumptionM2(this.round(farmer.getFarm().getWaterconsumptionM2(date)));
+		this.setHumidityEntropy(this.round(farmer.calculateEntropy(farmer.getFarm().getHumidityofsoilValue(date))));
 	}
 
 	public String getNameSurname() {
@@ -54,7 +56,7 @@ public class RankingAggregateData {
 		return productionM2;
 	}
 
-	public void setProductionM2(double productionM2) {
+	public void setProductionM2(Double productionM2) {
 		this.productionM2 = productionM2;
 	}
 
@@ -88,5 +90,10 @@ public class RankingAggregateData {
 
 	public void setArea(String area) {
 		this.area = area;
+	}
+	
+	public double round (double numberToRound) {
+		BigDecimal temp = new BigDecimal(numberToRound);
+		return Double.parseDouble(temp.setScale(2, RoundingMode.HALF_UP).toString());
 	}
 }
