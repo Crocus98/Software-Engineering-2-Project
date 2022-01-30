@@ -20,14 +20,16 @@
 		<div id="nav-container">
 			<div class="bg"></div>
 			<div class="button" tabindex="0">
-				<span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+				<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+					class="icon-bar"></span>
 			</div>
 			<div id="nav-content" tabindex="0">
 				<ul>
 					<li><a th:href="@{/HomePolicyMaker}">Home</a></li>
 					<li><a class="active">Ranking</a></li>
 					<li><a th:href="@{/Logout}">Logout</a></li>
-					<li class="small"><p th:text="${'Nice to see you again ' + session.user.name + ' ' + session.user.surname}"></p></li>
+					<li class="small"><p
+							th:text="${'Nice to see you again ' + session.user.name + ' ' + session.user.surname}"></p></li>
 				</ul>
 			</div>
 		</div>
@@ -35,39 +37,38 @@
 			<div class="content">
 				<div class="grid-wrapper">
 					<div class="grid-item featured-large">
-
 						<div class="container">
 							<div class="row">
 								<div class="col-12">
+									<form id="filter_form" action="#" th:action="@{/RankingPage}"
+										method="POST"></form>
 									<table>
 										<thead>
 											<tr>
-												<th>Date</th>
+												<th>From Date</th>
 												<th>Area</th>
-												<th>Order</th>
+												<th>Order Mode</th>
 												<th>Limit Number</th>
 												<th></th>
 											</tr>
 										</thead>
 										<tbody>
 											<tr>
-												<td><input type="date" name="startdate" required>
-												</td>
-												<td><input type="text" name="area" list="area">
-													<datalist id="area">
-														<option value="1">
-														</option><option value="2">
-													</option></datalist></td>
-												<td><input type="text" name="order" list="order" required>
-													<datalist id="order">
-														<option value="Ascent">
-														</option><option value="Descent">
-													</option></datalist></td>
-												<td><input type="number" name="limitnumber" required>
-												</td>
-												<td><input type="submit" value="Confirm">
-												<p></p>
-												</td>
+												<td><input type="date" name="start_date"
+													form="filter_form"></td>
+												<td><select name="area" form="filter_form" required>
+														<option value="-1" selected>All areas</option>
+														<option th:each="a : ${areas}" th:value="${a.id}"
+															th:text="${a.name}">
+												</select></td>
+												<td><select name="order_mode" form="filter_form"
+													required>
+														<option value="1" selected>Descending</option>
+														<option value="0">Ascending</option>
+												</select></td>
+												<td><input type="number" name="limit_number"
+													form="filter_form" value="0" required></td>
+												<td><button form="filter_form">Filter</button></td>
 											</tr>
 										</tbody>
 									</table>
@@ -75,9 +76,12 @@
 										<thead>
 											<tr>
 												<th>Farmer</th>
+												<th>Mail</th>
 												<th>Area</th>
-												<th>Production (kg/m<sup>2</sup>)</th>
-												<th>Farm Dimension (m<sup>2</sup>)</th>
+												<th>Farm Dimension (m<sup>2</sup>)
+												</th>
+												<th>Production (kg/m<sup>2</sup>)
+												</th>
 												<th>Forecast Score</th>
 												<th>Water Consumption (L)</th>
 												<th>Humidity Score</th>
@@ -86,9 +90,10 @@
 										<tbody>
 											<tr th:each="r : ${ranking}">
 												<th th:text="${r.nameSurname}"></th>
-												<td th:text="${r.productionM2}"></td>
-												<td th:text="${r.productionM2}"></td>
+												<th th:text="${r.mail}"></th>
+												<td th:text="${r.area}"></td>
 												<td th:text="${r.farmDimension}"></td>
+												<td th:text="${r.productionM2}"></td>
 												<td th:text="${r.forecastEntropy}"></td>
 												<td th:text="${r.waterConsumptionM2}"></td>
 												<td th:text="${r.humidityEntropy}"></td>
@@ -97,16 +102,16 @@
 									</table>
 								</div>
 							</div>
+							<p>*How to read 'Score' data: higher values means more harsh
+								conditions while value zero means that there are not enough
+								data.</p>
 						</div>
 					</div>
 				</div>
-				<p></p>
 			</div>
 		</main>
 	</div>
-	<script src="https://static.filestackapi.com/filestack-js/3.x.x/filestack.min.js"></script>
-
-
-
+	<script
+		src="https://static.filestackapi.com/filestack-js/3.x.x/filestack.min.js"></script>
 </body>
 </html>

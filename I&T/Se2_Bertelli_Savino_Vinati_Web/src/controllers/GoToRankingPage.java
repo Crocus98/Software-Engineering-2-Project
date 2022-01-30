@@ -14,8 +14,10 @@ import javax.servlet.http.HttpSession;
 import classes.RankingAggregateData;
 import classes.TemplateManager;
 import services.DataminerService;
+import entities.Area;
 import entities.User;
 import enums.Usertype;
+import exceptions.AreaRetrievalException;
 import exceptions.RankingAggregateDataException;
 
 @WebServlet("/RankingPage")
@@ -45,10 +47,13 @@ public class GoToRankingPage extends HttpServlet {
 		String message = null;
 		boolean isBadRequest = false;
 		List<RankingAggregateData> ranking = null;
+		List<Area> areas = null;
 
 		try {
 			ranking = dataminerService.getRankingAggregateData(0, true, null, null);
-		} catch (RankingAggregateDataException e) {
+			areas = dataminerService.getAllAreas();
+			
+		} catch (RankingAggregateDataException | AreaRetrievalException e) {
 			message = e.getMessage();
 			isBadRequest = true;
 		}
@@ -57,6 +62,7 @@ public class GoToRankingPage extends HttpServlet {
 			templateManager.setVariable("errorMsg", message);
 		} else {
 			path = "/WEB-INF/RankingPage.html";
+			templateManager.setVariable("areas", areas);
 			templateManager.setVariable("ranking", ranking);
 		}
 		templateManager.redirect(path);

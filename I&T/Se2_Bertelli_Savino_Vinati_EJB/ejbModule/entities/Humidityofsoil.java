@@ -2,6 +2,9 @@ package entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import enums.ClassificationH;
+
 import java.util.Date;
 
 
@@ -18,7 +21,7 @@ public class Humidityofsoil implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date date;
 
-	private int humidity;
+	private ClassificationH classification;
 
 	@ManyToOne
 	@JoinColumn(name="idfarm")
@@ -43,20 +46,20 @@ public class Humidityofsoil implements Serializable {
 		this.date = date;
 	}
 
-	public int getHumidity() {
-		return this.humidity;
-	}
-
-	public void setHumidity(int humidity) {
-		this.humidity = humidity;
-	}
-
 	public Farm getFarm() {
 		return farm;
 	}
 
 	public void setFarm(Farm farm) {
 		this.farm = farm;
+	}
+
+	public ClassificationH getClassification() {
+		return classification;
+	}
+
+	public void setClassification(ClassificationH classification) {
+		this.classification = classification;
 	}
 
 }

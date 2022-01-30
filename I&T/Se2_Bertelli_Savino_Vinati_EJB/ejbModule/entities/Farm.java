@@ -101,7 +101,7 @@ public class Farm implements Serializable {
 		if(this.getHumidityofsoil() != null) {
 			for (int i = 0; i < this.getHumidityofsoil().size(); i++) {
 				if(fromDate == null || this.getHumidityofsoil().get(i).getDate().after(fromDate)) {
-					humidityofsoilValues.add(this.getHumidityofsoil().get(i).getHumidity());
+					humidityofsoilValues.add(this.getHumidityofsoil().get(i).getClassification().getValue());
 				}
 			}
 		}

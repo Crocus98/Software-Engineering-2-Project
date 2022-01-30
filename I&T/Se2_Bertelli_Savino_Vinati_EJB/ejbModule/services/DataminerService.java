@@ -15,6 +15,7 @@ import javax.persistence.PersistenceException;
 import classes.RankingAggregateData;
 import entities.Area;
 import entities.User;
+import exceptions.AreaRetrievalException;
 import exceptions.FarmersOrderingException;
 import exceptions.FindBestOrWorstFarmerException;
 import exceptions.RankingAggregateDataException;
@@ -42,7 +43,7 @@ public class DataminerService {
 						.getResultList();
 			}
 		} catch (PersistenceException e) {
-			throw new FarmersOrderingException("ERROR: Could not create a farmer ordering.");
+			throw new FarmersOrderingException("[FarmersOrderingException] ERROR: Could not create a farmer ordering.");
 		}
 
 		// Order the list of farmers
@@ -64,7 +65,7 @@ public class DataminerService {
 			farmers = getFarmersInLexicographicOrder(limit_number, desc, area, date);
 		} catch (FarmersOrderingException e) {
 			throw new RankingAggregateDataException(
-					"[From getRankingAggregateData]: [getFarmersInLexicographicOrder]" + e.getMessage());
+					"[RankingAggregateDataException] " + e.getMessage());
 		}
 		if (farmers == null || farmers.isEmpty()) {
 			return null;
@@ -81,13 +82,23 @@ public class DataminerService {
 		try {
 			user = getFarmersInLexicographicOrder(1, desc, area, date);
 		} catch (FarmersOrderingException e) {
-			throw new FindBestOrWorstFarmerException("ERROR: Could not find the best farmer.");
+			throw new FindBestOrWorstFarmerException("[FindBestOrWorstFarmerException] ERROR: Could not find the best farmer.");
 		}
 		if (user.isEmpty()) {
 			return null;
 		} else if (user.size() == 1) {
 			return user.get(0);
 		}
-		throw new NonUniqueResultException("WARNING: More than one user is in first position, check manually.");
+		throw new NonUniqueResultException("[NonUniqueResultException] WARNING: More than one user is in first position, check manually.");
+	}
+	
+	public List <Area> getAllAreas() throws AreaRetrievalException{
+		List<Area> areas = null;
+		try {
+			areas = em.createNamedQuery("Area.findAll", Area.class).getResultList();
+		}catch(PersistenceException e){
+			throw new AreaRetrievalException("[AreaRetrievalException] ERROR: Could not retrieve areas.");
+		}
+		return areas;
 	}
 }

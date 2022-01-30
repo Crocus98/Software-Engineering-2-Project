@@ -3,7 +3,7 @@ package entities;
 import java.io.Serializable;
 import javax.persistence.*;
 
-import enums.Classification;
+import enums.ClassificationF;
 
 import java.util.Date;
 
@@ -18,7 +18,7 @@ public class Forecast implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	private Classification classification;
+	private ClassificationF classification;
 
 	@Temporal(TemporalType.DATE)
 	private Date creationdate;
@@ -76,12 +76,13 @@ public class Forecast implements Serializable {
 		this.area = area;
 	}
 
-	public Classification getClassification() {
+	public ClassificationF getClassification() {
 		return classification;
 	}
 
-	public void setClassification(Classification classification) {
+	public void setClassification(ClassificationF classification) {
 		this.classification = classification;
 	}
+
 
 }
