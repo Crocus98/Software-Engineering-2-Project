@@ -103,6 +103,16 @@ public class DataminerService {
 		throw new NonUniqueResultException(
 				"[NonUniqueResultException] WARNING: More than one user is in first position, check manually.");
 	}
+	
+	public Area getBestArea(boolean desc, Date date) {
+		List<Area> areas = null;
+		try {
+			
+		}catch(Exception e) {
+			
+		}
+		return area;
+	}
 
 	public List<Area> getAllAreas() throws AreaRetrievalException {
 		List<Area> areas = null;

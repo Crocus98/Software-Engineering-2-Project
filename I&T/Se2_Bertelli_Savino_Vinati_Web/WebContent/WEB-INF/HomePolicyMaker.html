@@ -35,9 +35,10 @@
 		</div>
 		<main>
 			<div class="content">
+				<p class="error_text" th:text=" ${errorMsg}"></p>
 				<div class="grid-wrapper">
-					<div class="grid-item featured-large-cc">Best Farmer</div>
-					<div class="grid-item featured-large-down">Regular Content B</div>
+					<div class="grid-item featured-large-cc center" th:text="${'Best Farmer:\n' + bestFarmer}"></div>
+					<div class="grid-item featured-large-down center" th:text="${'Best Farmer:\n' + bestFarmer}">Regular Content B</div>
 
 					<div class="grid-item featured-top">
 						<h2>Farmer production summary</h2>
@@ -45,8 +46,8 @@
 							<canvas id="canvas"></canvas>
 						</div>
 					</div>
-					<div class="grid-item featured-large-a">Worst Overall Area</div>
-					<div class="grid-item featured-large-b">Best Overall Area</div>
+					<div class="grid-item featured-large-a center" th:text="${'Best Farmer:\n' + bestFarmer}">Worst Overall Area</div>
+					<div class="grid-item featured-large-b center" th:text="${'Best Farmer:\n' + bestFarmer}">Best Overall Area</div>
 				</div>
 				<p></p>
 			</div>
