@@ -159,7 +159,7 @@ public class DataminerService {
 						int month = production.getDate().getMonth();
 						int amount = production.getAmount();
 						
-						if (data.get(month) == null) {
+						if (!data.containsKey(month)) {
 							data.put(month, 0);
 						}
 						

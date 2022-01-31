@@ -40,7 +40,7 @@ public class SummaryAggregateData {
 	public static List<Integer> getDataFromMap(Map<Integer, Integer> values, int startingMonth) {
 		List<Integer> data = new ArrayList<>();
 		for (int i = 0; i < 12; i++) {
-			if(values.get(startingMonth) == null) {
+			if(!values.containsKey(startingMonth)) {
 				values.put(startingMonth, 0);
 			}
 			data.add(values.get(startingMonth));

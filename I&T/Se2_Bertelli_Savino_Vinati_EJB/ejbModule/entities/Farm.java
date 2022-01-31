@@ -7,8 +7,6 @@ import java.util.List;
 
 import javax.persistence.*;
 
-import com.mysql.cj.x.protobuf.MysqlxCrud.Collection;
-
 
 @Entity
 @Table(name = "farm", schema="se2_bertelli_savino_vinati")
