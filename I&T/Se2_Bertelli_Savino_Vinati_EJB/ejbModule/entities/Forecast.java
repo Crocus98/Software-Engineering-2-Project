@@ -10,7 +10,10 @@ import java.util.Date;
 
 @Entity
 @Table(name = "forecast", schema="se2_bertelli_savino_vinati")
-@NamedQuery(name="Forecast.findAll", query="SELECT f FROM Forecast f")
+@NamedQueries({
+	@NamedQuery(name="Forecast.findByDate", query="SELECT f FROM Forecast f WHERE f.date = ?1"),
+	@NamedQuery(name="Forecast.findAll", query="SELECT f FROM Forecast f")
+})
 public class Forecast implements Serializable {
 	private static final long serialVersionUID = 1L;
 

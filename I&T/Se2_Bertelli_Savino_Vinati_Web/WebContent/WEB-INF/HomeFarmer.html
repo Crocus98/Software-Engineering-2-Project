@@ -17,14 +17,12 @@
 			</div>
 			<div id="nav-content" tabindex="0">
 				<ul>
-					<li><a class="active" href="#0">Home</a></li>
+					<li><a class="active" th:href="@{/HomeFarmer}">Home</a></li>
 					<li><a th:href="@{/Production}">Insert Production</a></li>
-					<li><a th:href="@{/RequestList}">Requests List</a></li>
-					<li><a th:href="@{/CreateRequest}">Create Request</a></li>
+					<li><a th:href="@{/Request}">Requests</a></li>
 					<li><a th:href="@{/Forum}">Forum</a></li>
 					<li><a th:href="@{/Logout}">Logout</a></li>
-					<li class="small"><p
-							th:text="${'Nice to see you again ' + session.user.name + ' ' + session.user.surname}"></p></li>
+					<li class="small"><p th:text="${'Nice to see you again ' + session.user.name + ' ' + session.user.surname}"></p></li>
 				</ul>
 			</div>
 		</div>
@@ -80,5 +78,6 @@
 	});
 
 	</script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
 </body>
 </html>

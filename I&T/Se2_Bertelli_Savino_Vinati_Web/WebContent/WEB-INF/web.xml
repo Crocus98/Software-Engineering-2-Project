@@ -11,8 +11,8 @@ id="WebApp_ID" version="4.0">
 <filter-mapping> 
     <filter-name>LoginChecker</filter-name>
     <url-pattern>/HomePolicyMaker</url-pattern>
-    <url-pattern>/GoToHomeAgronomist</url-pattern>
-    <url-pattern>/GoToHomeFarmer</url-pattern>
+    <url-pattern>/HomeAgronomist</url-pattern>
+    <url-pattern>/HomeFarmer</url-pattern>
     <url-pattern>/RankingPage</url-pattern>
     <url-pattern>/Logout</url-pattern>
 </filter-mapping>

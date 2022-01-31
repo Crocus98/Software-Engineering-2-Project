@@ -15,14 +15,14 @@ import entities.User;
 import enums.Usertype;
 import services.RequestService;
 
-@WebServlet("/RequestList")
-public class GoToRequestListPage extends HttpServlet {
+@WebServlet("/Request")
+public class GoToRequestPage extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private TemplateManager templateManager;
 	@EJB(name = "services/RequestService")
 	private RequestService requestService;
 
-	public GoToRequestListPage() {
+	public GoToRequestPage() {
 		super();
 	}
 

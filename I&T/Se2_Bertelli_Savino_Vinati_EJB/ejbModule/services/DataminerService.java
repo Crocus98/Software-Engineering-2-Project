@@ -139,7 +139,6 @@ public class DataminerService {
 		List<SummaryAggregateData> result = new ArrayList<>();
 		List<Area> areas = getAllAreas();
 		
-		
 		Date lastYear = DateUtils.addYears(new Date(), -1);
 		int startingMonth = lastYear.getMonth();
 		lastYear = DateUtils.setDays(lastYear, 1);
