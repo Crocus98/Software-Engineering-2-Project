@@ -80,12 +80,11 @@
 		Chart.defaults.global.animationEasing = "easeOutBounce";
 		Chart.defaults.global.responsive = true;
 		Chart.defaults.global.scaleLineColor = "white";
-		Chart.defaults.global.scaleFontSize = 16;
-		Chart.defaults.global.scaleFontSize = 16;
+		Chart.defaults.global.scaleFontSize = 15;
 
 		var ctx = document.getElementById("canvas").getContext("2d");
 		var LineChartDemo = new Chart(ctx).Line(lineChartData, {
-			pointDotRadius : 10,
+			pointDotRadius : 6,
 			bezierCurve : false,
 			scaleShowVerticalLines : false,
 			scaleGridLineColor : "white",
@@ -105,7 +104,8 @@
 					fillColor : "rgba(202,60,60,0)",
 					strokeColor : "rgba(220,180,0,1)",
 					pointColor : "rgba(220,180,0,1)",
-					data : Areas[areaN]
+					data : Areas[areaN],
+					label : areaN
 				}
 				dataSets.push(dataset)
 			}

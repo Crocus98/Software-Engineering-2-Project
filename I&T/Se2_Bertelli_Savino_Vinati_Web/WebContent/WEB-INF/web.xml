@@ -10,10 +10,10 @@ id="WebApp_ID" version="4.0">
 </filter>
 <filter-mapping> 
     <filter-name>LoginChecker</filter-name>
-    <url-pattern>/GoToHomePolicyMaker</url-pattern>
+    <url-pattern>/HomePolicyMaker</url-pattern>
     <url-pattern>/GoToHomeAgronomist</url-pattern>
     <url-pattern>/GoToHomeFarmer</url-pattern>
-    <url-pattern>/GoToRankingPage</url-pattern>
+    <url-pattern>/RankingPage</url-pattern>
     <url-pattern>/Logout</url-pattern>
 </filter-mapping>
   <welcome-file-list>
