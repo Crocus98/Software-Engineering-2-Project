@@ -170,7 +170,6 @@ public class DataminerService {
 			thisArea.setValues(SummaryAggregateData.getDataFromMap(data, startingMonth));
 			result.add(thisArea);
 		}
-		
 		return result;
 	}
 }

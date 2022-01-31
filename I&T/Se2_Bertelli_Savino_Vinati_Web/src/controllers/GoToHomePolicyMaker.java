@@ -74,6 +74,10 @@ public class GoToHomePolicyMaker extends HttpServlet {
 			isBadRequest = true;
 			message = e.getMessage();
 		}
+		catch(Exception e) {
+			isBadRequest = true;
+			message = "ERROR: Server erorr retrieving summary";
+		}
 		
 		path = "/WEB-INF/HomePolicyMaker.html";
 		templateManager = new TemplateManager(getServletContext(), request, response);

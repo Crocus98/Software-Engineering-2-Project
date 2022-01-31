@@ -86,7 +86,7 @@ public class Farm implements Serializable {
 	public Double getWaterconsumptionM2(Date fromDate) {
 		Double temp = 0.0;
 		if(this.getWaterconsumptions() != null) {
-			for (int i = 0; i < this.getProductions().size(); i++) {
+			for (int i = 0; i < this.getWaterconsumptions().size(); i++) {
 				if(fromDate == null || this.getWaterconsumptions().get(i).getDate().after(fromDate)) {
 					temp += this.getWaterconsumptions().get(i).getAmount();
 				}
