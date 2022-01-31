@@ -139,15 +139,18 @@ public class DataminerService {
 		List<SummaryAggregateData> result = new ArrayList<>();
 		List<Area> areas = getAllAreas();
 		for (Area area : areas) {
-			int month = DateUtils.addYears(new Date(), -1).getMonth();
+			int month = (DateUtils.addYears(new Date(), -1).getMonth()) + 1;
 			Map<String, Integer> data = new HashMap<String, Integer>();
 			for (int i = 0; i < 12; i++) {
 				data.put(SummaryAggregateData.convertMonthToString(month), 0);
-				month = (month + 1) % 13;
+				month = month + 1;
+				if(month == 13) {
+					month = 1;
+				}
 			}
 			for (Farm farm : area.getFarms()) {
 				for (Production production : farm.getProductions()) {
-					String key = SummaryAggregateData.convertMonthToString(production.getDate().getMonth());
+					String key = SummaryAggregateData.convertMonthToString((production.getDate().getMonth())+1);
 					data.put(key, data.get(key) + production.getAmount());
 				}
 			}

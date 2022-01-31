@@ -75,6 +75,10 @@ public class GoToHomePolicyMaker extends HttpServlet {
 			message = e.getMessage();
 		}
 
+		for(String a: months) {
+			System.out.println(a);
+		}
+		
 		path = "/WEB-INF/HomePolicyMaker.html";
 		templateManager = new TemplateManager(getServletContext(), request, response);
 		if (isBadRequest) {

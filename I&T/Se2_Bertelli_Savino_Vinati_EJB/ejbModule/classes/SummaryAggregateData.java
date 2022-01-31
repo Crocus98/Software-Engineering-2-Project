@@ -21,10 +21,13 @@ public class SummaryAggregateData {
 	@SuppressWarnings("deprecation")
 	public static List<String> getMonths(Date lastDate){
 		List<String> months = new ArrayList<>();
-		int month = lastDate.getMonth();
+		int month = lastDate.getMonth() + 1;
 		for(int i = 0; i< 12; i++) {
 			months.add(SummaryAggregateData.convertMonthToString(month));
-			month = (month+1)%13;
+			month = month+1;
+			if(month == 13) {
+				month = 1;
+			}
 		}
 		return months;
 	}
