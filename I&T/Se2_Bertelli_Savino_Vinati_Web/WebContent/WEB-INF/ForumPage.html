@@ -19,9 +19,8 @@
 				<ul>
 					<li><a th:href="@{/HomeFarmer}">Home</a></li>
 					<li><a th:href="@{/Production}">Insert Production</a></li>
-					<li><a th:href="@{/RequestList}">Requests List</a></li>
-					<li><a th:href="@{/CreateRequest}">Create Request</a></li>
-					<li><a class="active">Forum</a></li>
+					<li><a th:href="@{/Request}">Requests</a></li>
+					<li><a class="active" th:href="@{/Forum}">Forum</a></li>
 					<li><a th:href="@{/Logout}">Logout</a></li>
 					<li class="small"><p
 							th:text="${'Nice to see you again ' + session.user.name + ' ' + session.user.surname}"></p></li>
