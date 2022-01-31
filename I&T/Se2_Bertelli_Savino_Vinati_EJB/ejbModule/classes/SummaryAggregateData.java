@@ -1,5 +1,8 @@
 package classes;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 public class SummaryAggregateData {
@@ -13,6 +16,17 @@ public class SummaryAggregateData {
 
 	public String getAreaName() {
 		return areaName;
+	}
+	
+	@SuppressWarnings("deprecation")
+	public static List<String> getMonths(Date lastDate){
+		List<String> months = new ArrayList<>();
+		int month = lastDate.getMonth();
+		for(int i = 0; i< 12; i++) {
+			months.add(SummaryAggregateData.convertMonthToString(month));
+			month = (month+1)%13;
+		}
+		return months;
 	}
 
 	public static String convertMonthToString(int month) {

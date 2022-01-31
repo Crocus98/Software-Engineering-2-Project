@@ -54,6 +54,7 @@ public class GoToHomePolicyMaker extends HttpServlet {
 		String bestArea = null;
 		String worstArea = null;
 		List<SummaryAggregateData> summary = null;
+		List<String> months = null;
 
 		try {
 			Date last_year = DateUtils.addYears(new Date(), -1);
@@ -68,6 +69,7 @@ public class GoToHomePolicyMaker extends HttpServlet {
 			temp2 = dataminerService.getBestArea(false, last_year);
 			worstArea = temp2.getName();
 			summary = dataminerService.getLastYearMonthlyProductionSummary();
+			months = SummaryAggregateData.getMonths(last_year);
 		} catch (AreaRetrievalException | FindBestOrWorstFarmerException e) {
 			isBadRequest = true;
 			message = e.getMessage();
@@ -83,6 +85,7 @@ public class GoToHomePolicyMaker extends HttpServlet {
 			templateManager.setVariable("bestArea", bestArea);
 			templateManager.setVariable("worstArea", worstArea);
 			templateManager.setVariable("summary", summary);
+			templateManager.setVariable("months", months);
 		}
 		templateManager.redirect(path);
 	}
