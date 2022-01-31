@@ -44,7 +44,7 @@ public class GoToForumPage extends HttpServlet {
 		
 		// tutto il codice per prendere i dati di forum
 		
-		path = "/WEB-INF/Forum.html";
+		path = "/WEB-INF/ForumPage.html";
 		templateManager = new TemplateManager(getServletContext(), request, response);
 		// ctx da mandare
 		templateManager.redirect(path);

@@ -47,7 +47,7 @@ public class GoToHomeFarmer extends HttpServlet {
 		Forecast forecast = null;
 		
 		try {
-			forecast = userService.getForecast();
+			forecast = userService.getForecast(user);
 		}catch(ForecastRetrievalException e) {
 			isBadRequest = true;
 			message = e.getMessage();

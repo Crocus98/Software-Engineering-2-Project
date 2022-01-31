@@ -11,7 +11,7 @@ import java.util.Date;
 @Entity
 @Table(name = "forecast", schema="se2_bertelli_savino_vinati")
 @NamedQueries({
-	@NamedQuery(name="Forecast.findByDate", query="SELECT f FROM Forecast f WHERE f.date = ?1"),
+	@NamedQuery(name="Forecast.findByDate", query="SELECT f FROM Forecast f WHERE f.date = ?1 and f.area.id = ?2"),
 	@NamedQuery(name="Forecast.findAll", query="SELECT f FROM Forecast f")
 })
 public class Forecast implements Serializable {

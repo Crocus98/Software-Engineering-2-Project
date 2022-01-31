@@ -40,11 +40,11 @@ public class UserService {
 				"[NonUniqueResultException] ERROR: More than one user registered with the same credentials.");
 	}
 
-	public Forecast getForecast() throws ForecastRetrievalException {
+	public Forecast getForecast(User user) throws ForecastRetrievalException {
 		List<Forecast> forecasts = null;
 		try {
-			forecasts = em.createNamedQuery("Forecast.findByDate", Forecast.class).setParameter(1, new Date())
-					.getResultList();
+			forecasts = em.createNamedQuery("Forecast.findByDate", Forecast.class)
+					.setParameter(1, new Date()).setParameter(2, user.getFarm().getArea()).getResultList();
 		} catch (PersistenceException e) {
 			throw new ForecastRetrievalException("[ForecastRetrievalException] ERORR: Count not get today forecasts");
 		}
@@ -56,6 +56,8 @@ public class UserService {
 		Collections.sort(forecasts, (a,b) -> b.getCreationdate().compareTo(a.getCreationdate()));
 		return forecasts.get(0);
 	}
+	
+
 
 	public User getUserById(int id) {
 		return em.find(User.class, id);

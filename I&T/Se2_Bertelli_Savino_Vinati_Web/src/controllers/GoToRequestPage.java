@@ -40,7 +40,7 @@ public class GoToRequestPage extends HttpServlet {
 
 		// tutto il codice per prendere i dati di request
 
-		path = "/WEB-INF/RequestList.html";
+		path = "/WEB-INF/RequestPage.html";
 		templateManager = new TemplateManager(getServletContext(), request, response);
 		// ctx da mandare
 		templateManager.redirect(path);
