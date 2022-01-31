@@ -7,9 +7,14 @@ import java.util.Map;
 
 public class SummaryAggregateData {
 	private String areaName;
-	private Map<String, Integer> values;
+	private List<Integer> values;
 
-	public SummaryAggregateData(String areaName, Map<String, Integer> values) {
+	public SummaryAggregateData(String areaName) {
+		this.setAreaName(areaName);
+		this.values = new ArrayList<Integer>();
+	}
+
+	public SummaryAggregateData(String areaName, List<Integer> values) {
 		this.setAreaName(areaName);
 		this.setValues(values);
 	}
@@ -17,19 +22,34 @@ public class SummaryAggregateData {
 	public String getAreaName() {
 		return areaName;
 	}
-	
+
 	@SuppressWarnings("deprecation")
-	public static List<String> getMonths(Date lastDate){
+	public static List<String> getMonths(Date lastDate) {
 		List<String> months = new ArrayList<>();
 		int month = lastDate.getMonth() + 1;
-		for(int i = 0; i< 12; i++) {
+		for (int i = 0; i < 12; i++) {
 			months.add(SummaryAggregateData.convertMonthToString(month));
-			month = month+1;
-			if(month == 13) {
+			month = month + 1;
+			if (month == 13) {
 				month = 1;
 			}
 		}
 		return months;
+	}
+
+	public static List<Integer> getDataFromMap(Map<Integer, Integer> values, int startingMonth) {
+		List<Integer> data = new ArrayList<>();
+		for (int i = 0; i < 12; i++) {
+			if(values.get(startingMonth) == null) {
+				values.put(startingMonth, 0);
+			}
+			data.add(values.get(startingMonth));
+			startingMonth += 1;
+			if(startingMonth == 12) {
+				startingMonth = 0;
+			}
+		}
+		return data;
 	}
 
 	public static String convertMonthToString(int month) {
@@ -41,7 +61,7 @@ public class SummaryAggregateData {
 		case 3:
 			return "March";
 		case 4:
-			return "Apri";
+			return "April";
 		case 5:
 			return "May";
 		case 6:
@@ -67,11 +87,11 @@ public class SummaryAggregateData {
 		this.areaName = areaName;
 	}
 
-	public Map<String, Integer> getValues() {
+	public List<Integer> getValues() {
 		return values;
 	}
 
-	public void setValues(Map<String, Integer> values) {
+	public void setValues(List<Integer> values) {
 		this.values = values;
 	}
 

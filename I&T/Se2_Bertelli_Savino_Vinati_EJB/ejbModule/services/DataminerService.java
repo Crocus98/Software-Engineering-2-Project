@@ -138,25 +138,39 @@ public class DataminerService {
 	public List<SummaryAggregateData> getLastYearMonthlyProductionSummary() throws AreaRetrievalException {
 		List<SummaryAggregateData> result = new ArrayList<>();
 		List<Area> areas = getAllAreas();
+		
+		
+		Date lastYear = DateUtils.addYears(new Date(), -1);
+		int startingMonth = lastYear.getMonth();
+		lastYear = DateUtils.setDays(lastYear, 1);
+		lastYear = DateUtils.addDays(lastYear, -1);
+		Date firstDayOfMonth = DateUtils.setDays(new Date(), 1);
+		
 		for (Area area : areas) {
-			int month = (DateUtils.addYears(new Date(), -1).getMonth()) + 1;
-			Map<String, Integer> data = new HashMap<String, Integer>();
-			for (int i = 0; i < 12; i++) {
-				data.put(SummaryAggregateData.convertMonthToString(month), 0);
-				month = month + 1;
-				if(month == 13) {
-					month = 1;
-				}
-			}
+			SummaryAggregateData thisArea = new SummaryAggregateData(area.getName());
+			Map<Integer, Integer> data = new HashMap<>();
+			
 			for (Farm farm : area.getFarms()) {
-				for (Production production : farm.getProductions()) {
-					String key = SummaryAggregateData.convertMonthToString((production.getDate().getMonth())+1);
-					data.put(key, data.get(key) + production.getAmount());
+				List<Production> productions = new ArrayList<>(farm.getProductions());
+				
+				for (Production production : productions) {
+					
+					if (production.getDate().after(lastYear) && production.getDate().before(firstDayOfMonth)) {
+						int month = production.getDate().getMonth();
+						int amount = production.getAmount();
+						
+						if (data.get(month) == null) {
+							data.put(month, 0);
+						}
+						
+						data.put(month, data.get(month) + amount);
+					}
 				}
 			}
-			SummaryAggregateData temp = new SummaryAggregateData(area.getName(), data);
-			result.add(temp);
+			thisArea.setValues(SummaryAggregateData.getDataFromMap(data, startingMonth));
+			result.add(thisArea);
 		}
+		
 		return result;
 	}
 }

@@ -19,13 +19,13 @@ import services.UserService;
 
 
 @WebServlet("/Production")
-public class GoToInsertProductionPage extends HttpServlet {
+public class GoToProductionPage extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private TemplateManager templateManager;
 	@EJB(name = "services/UserService")
 	private UserService userService;
 
-	public GoToInsertProductionPage() {
+	public GoToProductionPage() {
 		super();
 	}
 
@@ -43,7 +43,7 @@ public class GoToInsertProductionPage extends HttpServlet {
 		
 		// tutto il codice per prendere i dati di produzione
 		
-		path = "/WEB-INF/Production.html";
+		path = "/WEB-INF/ProductionPage.html";
 		templateManager = new TemplateManager(getServletContext(), request, response);
 		// ctx da mandare
 		templateManager.redirect(path);

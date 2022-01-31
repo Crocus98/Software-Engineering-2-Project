@@ -61,18 +61,17 @@
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
 	<script th:inline="javascript">
+	
+	
 		var dataM = /*[[${months}]]*/"";
 		var dataV = /*[[${summary}]]*/"";
+		const datasets = generateDataset(dataV);
+		console.log(datasets)
 		var lineChartData = {
 			labels : dataM,
-			datasets : [ {
-				fillColor : "rgba(202,60,60,0)",
-				strokeColor : "rgba(220,180,0,1)",
-				pointColor : "rgba(220,180,0,1)",
-				data : [ 20, 30, 80, 20, 40, 10, 60, 0, 0, 0, 0, 0 ]
-			},  ],
+			datasets : datasets,
 		}
-
+		
 		Chart.defaults.global.animationSteps = 50;
 		Chart.defaults.global.tooltipYPadding = 16;
 		Chart.defaults.global.tooltipCornerRadius = 0;
@@ -91,7 +90,27 @@
 			scaleShowVerticalLines : false,
 			scaleGridLineColor : "white",
 
-		});	
+		});
+		
+		function generateDataset(dataV) {
+			var Areas = []
+			var dataSets = []
+			for(let area of dataV){
+				const areaName = area.areaName
+				const values = area.values
+				Areas[areaName] = values
+			}
+			for(let areaN in Areas){
+				const dataset = {
+					fillColor : "rgba(202,60,60,0)",
+					strokeColor : "rgba(220,180,0,1)",
+					pointColor : "rgba(220,180,0,1)",
+					data : Areas[areaN]
+				}
+				dataSets.push(dataset)
+			}
+			return dataSets
+		}
 	</script>
 
 </body>
