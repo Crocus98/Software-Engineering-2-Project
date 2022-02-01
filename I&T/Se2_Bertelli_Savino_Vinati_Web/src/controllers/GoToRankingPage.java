@@ -82,7 +82,8 @@ public class GoToRankingPage extends HttpServlet {
 		} catch (RankingAggregateDataException | AreaRetrievalException  e) {
 			message = e.getMessage();
 		}
-
+		
+		templateManager = new TemplateManager(getServletContext(), request, response);
 		path = "/WEB-INF/RankingPage.html";
 		templateManager.setVariable("areas", areas);
 		templateManager.setVariable("errorMsg", message);
