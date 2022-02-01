@@ -39,16 +39,15 @@ public class ForumService {
 		return discussions;
 	}
 
-	public List<Post> getAllPostsOfDiscussion(int idDiscussion) throws PostsRetrievalException {
-		List<Post> posts = null;
+	public Discussion getAllPostsOfDiscussion(int idDiscussion) throws PostsRetrievalException {
+		Discussion discussion = null;
 		try {
-			posts = em.createNamedQuery("Post.findByDiscussion", Post.class).setParameter(1, idDiscussion)
-					.getResultList();
+			discussion = getDiscussionById(idDiscussion);
 		} catch (PersistenceException e) {
 			throw new PostsRetrievalException(
-					"[PostsRetrievalException] ERROR: Could not retrieve posts of discussion.");
+					"[PostsRetrievalException] ERROR: Could not retrieve discussion with posts.");
 		}
-		return posts;
+		return discussion;
 	}
 
 	public User createDiscussion(User user, String title, String postComment) throws DiscussionCreationException {
@@ -74,6 +73,7 @@ public class ForumService {
 	}
 
 	public User insertPost(User user, String comment, int idDiscussion) throws InsertPostException {
+		user = userService.getUserById(user.getId());
 		Discussion discussion = getDiscussionById(idDiscussion);
 		Post post = new Post(user, comment);
 		if(discussion == null) {
@@ -86,7 +86,6 @@ public class ForumService {
 		} catch (PersistenceException e) {
 			throw new InsertPostException("[InsertPostException] Could not insert new post.");
 		}
-		user = userService.getUserById(user.getId());
 		em.refresh(user);
 		return user;
 	}
