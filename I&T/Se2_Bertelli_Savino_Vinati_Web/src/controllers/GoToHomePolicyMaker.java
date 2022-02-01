@@ -16,6 +16,7 @@ import org.apache.commons.lang3.time.DateUtils;
 
 import classes.SummaryAggregateData;
 import classes.TemplateManager;
+import classes.Utility;
 import entities.Area;
 import entities.User;
 import enums.Usertype;
@@ -69,7 +70,7 @@ public class GoToHomePolicyMaker extends HttpServlet {
 			temp2 = dataminerService.getBestArea(false, last_year);
 			worstArea = temp2.getName();
 			summary = dataminerService.getLastYearMonthlyProductionSummary();
-			months = SummaryAggregateData.getMonths(last_year);
+			months = Utility.getMonths(last_year);
 		} catch (AreaRetrievalException | FindBestOrWorstFarmerException e) {
 			isBadRequest = true;
 			message = e.getMessage();

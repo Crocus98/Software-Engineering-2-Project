@@ -18,6 +18,7 @@ import org.apache.commons.lang3.time.DateUtils;
 
 import classes.RankingAggregateData;
 import classes.SummaryAggregateData;
+import classes.Utility;
 import entities.Area;
 import entities.Farm;
 import entities.Production;
@@ -166,7 +167,7 @@ public class DataminerService {
 					}
 				}
 			}
-			thisArea.setValues(SummaryAggregateData.getDataFromMap(data, startingMonth));
+			thisArea.setValues(Utility.getDataFromMap(data, startingMonth));
 			result.add(thisArea);
 		}
 		return result;

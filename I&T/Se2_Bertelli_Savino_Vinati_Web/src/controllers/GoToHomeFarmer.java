@@ -2,6 +2,7 @@ package controllers;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 
 import javax.ejb.EJB;
 import javax.persistence.NonUniqueResultException;
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.lang3.time.DateUtils;
 
 import classes.TemplateManager;
+import classes.Utility;
 import entities.Forecast;
 import entities.Humidityofsoil;
 import entities.User;
@@ -52,12 +54,14 @@ public class GoToHomeFarmer extends HttpServlet {
 		Forecast forecast = null;
 		Double waterConsumption = null;
 		Humidityofsoil humidity = null;
+		List<String> months = null;
 
 		try {
 			forecast = userService.getForecast(user);
 			Date lastYear = DateUtils.addYears(new Date(), -1);
 			waterConsumption = user.getFarm().getWaterconsumptionM2(lastYear);
 			humidity = userService.getHumidity(user);
+			months = Utility.getMonths(lastYear);
 		} catch (ForecastRetrievalException | HumidityRetrievalException | NonUniqueResultException e) {
 			isBadRequest = true;
 			message = e.getMessage();
@@ -71,6 +75,7 @@ public class GoToHomeFarmer extends HttpServlet {
 			templateManager.setVariable("aterConsumption", waterConsumption);
 			templateManager.setVariable("forecast", forecast);
 			templateManager.setVariable("humidity", humidity);
+			templateManager.setVariable("months", months);
 		}
 		templateManager.redirect(path);
 	}
