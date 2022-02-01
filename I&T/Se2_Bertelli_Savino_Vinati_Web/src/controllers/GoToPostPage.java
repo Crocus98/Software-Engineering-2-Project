@@ -1,7 +1,6 @@
 package controllers;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -15,12 +14,8 @@ import org.apache.commons.lang.StringEscapeUtils;
 
 import classes.TemplateManager;
 import entities.Discussion;
-import entities.Post;
 import entities.User;
 import enums.Usertype;
-import exceptions.DiscussionCreationException;
-import exceptions.DiscussionParametersException;
-import exceptions.DiscussionsRetrievalException;
 import exceptions.InsertPostException;
 import exceptions.PostParametersException;
 import exceptions.PostsRetrievalException;

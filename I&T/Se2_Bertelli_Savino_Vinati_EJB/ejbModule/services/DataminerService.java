@@ -140,30 +140,29 @@ public class DataminerService {
 	public List<SummaryAggregateData> getLastYearMonthlyProductionSummary() throws AreaRetrievalException {
 		List<SummaryAggregateData> result = new ArrayList<>();
 		List<Area> areas = getAllAreas();
-		
+
 		Date lastYear = DateUtils.addYears(new Date(), -1);
 		int startingMonth = lastYear.getMonth();
 		lastYear = DateUtils.setDays(lastYear, 1);
 		lastYear = DateUtils.addDays(lastYear, -1);
 		Date firstDayOfMonth = DateUtils.setDays(new Date(), 1);
-		
+
 		for (Area area : areas) {
 			SummaryAggregateData thisArea = new SummaryAggregateData(area.getName());
 			Map<Integer, Integer> data = new HashMap<>();
-			
+
 			for (Farm farm : area.getFarms()) {
 				List<Production> productions = new ArrayList<>(farm.getProductions());
-				
+
 				for (Production production : productions) {
-					
 					if (production.getDate().after(lastYear) && production.getDate().before(firstDayOfMonth)) {
 						int month = production.getDate().getMonth();
 						int amount = production.getAmount();
-						
+
 						if (!data.containsKey(month)) {
 							data.put(month, 0);
 						}
-						
+
 						data.put(month, data.get(month) + amount);
 					}
 				}
@@ -173,24 +172,29 @@ public class DataminerService {
 		}
 		return result;
 	}
-	
+
 	@SuppressWarnings("deprecation")
-	public ProductionAggregateData getFarmerLastYearProductionSummary(User user){
-		ProductionAggregateData rainData = null;
+	public ProductionAggregateData getFarmerLastYearProductionSummary(User user) {
+		ProductionAggregateData productionData = null;
 		Map<Integer, Integer> data = new HashMap<>();
-		
+
 		Date lastYear = DateUtils.addYears(new Date(), -1);
 		int startingMonth = lastYear.getMonth();
-		
-		for(Production production : user.getFarm().getProductions()) {
-			int month = production.getDate().getMonth();
-			int amount = production.getAmount();
-			if (!data.containsKey(month)) {
-				data.put(month, 0);
+		lastYear = DateUtils.setDays(lastYear, 1);
+		lastYear = DateUtils.addDays(lastYear, -1);
+		Date firstDayOfMonth = DateUtils.setDays(new Date(), 1);
+
+		for (Production production : user.getFarm().getProductions()) {
+			if (production.getDate().after(lastYear) && production.getDate().before(firstDayOfMonth)) {
+				int month = production.getDate().getMonth();
+				int amount = production.getAmount();
+				if (!data.containsKey(month)) {
+					data.put(month, 0);
+				}
+				data.put(month, data.get(month) + amount);
 			}
-			data.put(month, data.get(month) + amount);
 		}
-		rainData = new ProductionAggregateData(Utility.getDataFromMap(data, startingMonth));
-		return rainData;
+		productionData = new ProductionAggregateData(Utility.getDataFromMap(data, startingMonth));
+		return productionData;
 	}
 }
