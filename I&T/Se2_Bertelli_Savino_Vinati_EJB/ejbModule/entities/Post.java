@@ -29,9 +29,18 @@ public class Post implements Serializable {
 	
 	String comment;
 	
+	@Column(name="datehour", insertable = false, updatable = false)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date datehour;
 	
+	public Post() {
+		
+	}
+	
+	public Post (User user, String comment) {
+		this.setComment(comment);
+		this.setUser(user);
+	}
 	
 	public int getId() {
 		return id;

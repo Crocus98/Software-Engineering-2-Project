@@ -1,6 +1,7 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -20,15 +21,27 @@ public class Discussion implements Serializable {
 	
 	private String title;
 
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name="idfarmer")
 	private User user;
 	
+	@Column(name="datehour", insertable = false, updatable = false)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date datehour;
 	
 	@OneToMany(mappedBy="discussion", cascade = CascadeType.ALL)
 	private List<Post> posts;
+	
+	public Discussion() {
+		
+	}
+	
+	public Discussion (String title, User user, Post post) {
+		this.setTitle(title);
+		this.setUser(user);
+		this.setPosts(new ArrayList<>());
+		this.addPost(post);
+	}
 
 	public int getId() {
 		return id;
@@ -61,6 +74,11 @@ public class Discussion implements Serializable {
 	public void setUser(User user) {
 		this.user = user;
 	}
+	
+	public void addPost(Post post) {
+		post.setDiscussion(this);
+		this.getPosts().add(post);
+	}
 
 	public List<Post> getPosts() {
 		return posts;
@@ -69,10 +87,4 @@ public class Discussion implements Serializable {
 	public void setPosts(List<Post> posts) {
 		this.posts = posts;
 	}
-
-	
-
-	
-	
-
 }

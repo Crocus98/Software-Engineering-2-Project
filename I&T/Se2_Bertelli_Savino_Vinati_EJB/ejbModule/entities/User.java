@@ -2,6 +2,7 @@ package entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.*;
 
@@ -33,6 +34,9 @@ public class User implements Serializable {
 
 	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
 	private Farm farm;
+	
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+	private List<Discussion> discussions;
 
 	public String getName() {
 		return name;
@@ -109,4 +113,15 @@ public class User implements Serializable {
 		return Utility.compare(value_this, value_that);
 	}
 
+	public List<Discussion> getDiscussions() {
+		return discussions;
+	}
+
+	public void setDiscussions(List<Discussion> discussions) {
+		this.discussions = discussions;
+	}
+
+	public void addDiscussion (Discussion discussion) {
+		this.getDiscussions().add(discussion);
+	}
 }
