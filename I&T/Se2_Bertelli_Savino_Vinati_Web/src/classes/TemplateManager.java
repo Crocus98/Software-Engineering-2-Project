@@ -29,7 +29,7 @@ public class TemplateManager {
 		ctx = new WebContext(request, response, servletContext, request.getLocale());
 	}
 	
-	public boolean checkUsertype(User user, Usertype usertype) {
+	public static boolean checkUsertype(User user, Usertype usertype) {
 		if (user.getUsertype() == usertype) {
 			return true;
 		}

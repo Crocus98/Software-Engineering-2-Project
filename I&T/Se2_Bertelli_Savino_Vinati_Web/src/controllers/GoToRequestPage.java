@@ -28,21 +28,18 @@ public class GoToRequestPage extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		templateManager = new TemplateManager(getServletContext(), request, response);
 		String path = getServletContext().getContextPath() + "/GoToLoginPage";
 
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("user");
-		if (user == null || !templateManager.checkUsertype(user, Usertype.Farmer)) {
-			templateManager.redirect(path);
+		if (user == null || !TemplateManager.checkUsertype(user, Usertype.Farmer)) {
+			response.sendRedirect(path);
 			return;
 		}
 
-		// tutto il codice per prendere i dati di request
 
 		path = "/WEB-INF/RequestPage.html";
 		templateManager = new TemplateManager(getServletContext(), request, response);
-		// ctx da mandare
 		templateManager.redirect(path);
 	}
 

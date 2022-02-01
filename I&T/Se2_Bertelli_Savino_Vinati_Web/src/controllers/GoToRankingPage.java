@@ -37,13 +37,12 @@ public class GoToRankingPage extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		templateManager = new TemplateManager(getServletContext(), request, response);
 		String path = getServletContext().getContextPath() + "/GoToLoginPage";
 
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("user");
-		if (!templateManager.checkUsertype(user, Usertype.PolicyMaker)) {
-			templateManager.redirect(path);
+		if (user == null || !TemplateManager.checkUsertype(user, Usertype.PolicyMaker)) {
+			response.sendRedirect(path);
 			return;
 		}
 
