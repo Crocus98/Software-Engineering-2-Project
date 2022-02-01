@@ -3,7 +3,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <link rel="stylesheet" type="text/css" media="all"
-	href="../CSS/farmer.css" th:href="@{/css/production.css}" />
+	href="../CSS/policymaker.css" th:href="@{/css/policymaker.css}" />
 <link rel="shortcut icon" type="image/x-icon"
 	href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico">
 <link rel="mask-icon"
@@ -11,7 +11,7 @@
 <link rel="canonical" href="https://codepen.io/ericmahoney/pen/oNLMOYw">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
-<title>Production</title>
+<title>Farmer - Production</title>
 </head>
 <body>
 	<div class="page">
@@ -39,43 +39,63 @@
 				<div class="grid-wrapper">
 					<div class="grid-item featured-large">
 						<div class="container">
+							<h1 class="center">Production</h1>
 							<p class="error_text" th:text=" ${errorMsg}"></p>
 							<div class="row">
 								<div class="col-12">
-									<form id="filter_form" action="#" th:action="@{/RankingPage}"
+									<form id="filter_form" action="#" th:action="@{/Production}"
 										method="POST"></form>
 									<table>
 										<thead>
 											<tr>
-												<td class="center"><button
-														style="height: 20px; width: 60px" form="filter_form">Upload</button></td>
-											</tr>
-										</thead>
-
-									</table>
-									<table>
-										<thead>
-											<tr>
-												<th class="center">Production</th>
+												<th class="center">Type of Product</th>
 												<th class="center">Date</th>
-												<th class="center">Quantity</th>
-												<th class="center">Problem Faced</th>
+												<th class="center">Amount (kg)</th>
+												<th class="center">Problems Faced</th>
+												<th class="center"></th>
 											</tr>
 										</thead>
 										<tbody>
-											<tr th:each="r : ${ranking}">
-												<th class="center" th:text="${r.nameSurname}"></th>
-												<th class="center" th:text="${r.mail}"></th>
-												<td class="center" th:text="${r.area}"></td>
-												<td class="center" th:text="${r.farmDimension}"></td>
+											<tr>
+												<td class="center"><select name="type"
+													form="filter_form" required>
+														<option value="0" selected>All products</option>
+														<option th:each="t : ${types}" th:value="${t.value}"
+															th:text="${t.toString()}">
+												</select></td>
+												<td class="center"><input type="date" name="date"
+													form="filter_form"></td>
+												<td class="center"><input type="number" min="1"
+													name="amount" form="filter_form" value="0" required></td>
+												<td class="center"><input type="text" name="problem"
+													form="filter_form" value="Everything OK!" required></td>
+												<td class="center"><button
+														style="height: 20px; width: 60px" form="filter_form">Insert Production</button></td>
+											</tr>
+										</tbody>
+									</table>
+									<br>
+									<table>
+										<thead>
+											<tr>
+												<th class="center">Type of Product</th>
+												<th class="center">Date</th>
+												<th class="center">Amount (kg)</th>
+												<th class="center">Problems Faced</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr th:each="p : ${productions}">
+												<th class="center" th:text="${p.typeofproduct}"></th>
+												<th class="center"
+													th:text="${#dates.format(p.date, 'dd-MMM-yyyy')}"></th>
+												<td class="center" th:text="${p.amount}"></td>
+												<td class="center" th:text="${p.comment}"></td>
 											</tr>
 										</tbody>
 									</table>
 								</div>
 							</div>
-							<p>*How to read 'Score' data: higher values mean more harsh
-								conditions while value zero means that there are not enough
-								data.</p>
 						</div>
 					</div>
 				</div>
