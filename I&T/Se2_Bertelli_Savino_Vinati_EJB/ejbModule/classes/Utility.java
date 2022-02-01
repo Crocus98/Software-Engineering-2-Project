@@ -1,5 +1,7 @@
 package classes;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,5 +36,10 @@ public class Utility {
 		} else {
 			return -1;
 		}
+	}
+	
+	public static double round (double numberToRound) {
+		BigDecimal temp = new BigDecimal(numberToRound);
+		return Double.parseDouble(temp.setScale(2, RoundingMode.HALF_UP).toString());
 	}
 }

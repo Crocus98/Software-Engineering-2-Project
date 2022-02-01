@@ -44,7 +44,7 @@ public class UserService {
 		List<Forecast> forecasts = null;
 		try {
 			forecasts = em.createNamedQuery("Forecast.findByDate", Forecast.class)
-					.setParameter(1, new Date()).setParameter(2, user.getFarm().getArea()).getResultList();
+					.setParameter(1, new Date()).setParameter(2, user.getFarm().getArea().getId()).getResultList();
 		} catch (PersistenceException e) {
 			throw new ForecastRetrievalException("[ForecastRetrievalException] ERORR: Count not get today forecasts");
 		}
@@ -57,7 +57,11 @@ public class UserService {
 		return forecasts.get(0);
 	}
 	
-
+	public Double getWaterconsumption(User user, Date fromDate) {
+		Double value = user.getFarm().getWaterconsumptionM2(fromDate);
+		return value;
+	}
+	
 
 	public User getUserById(int id) {
 		return em.find(User.class, id);

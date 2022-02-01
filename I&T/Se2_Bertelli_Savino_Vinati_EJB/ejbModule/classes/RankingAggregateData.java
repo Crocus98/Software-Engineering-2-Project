@@ -1,7 +1,5 @@
 package classes;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.Date;
 
 import entities.User;
@@ -22,10 +20,10 @@ public class RankingAggregateData {
 		this.setMail(farmer.getMail());
 		this.setFarmDimension(farmer.getFarm().getDimension());
 		this.setArea(farmer.getFarm().getArea().getName());
-		this.setProductionM2(this.round(farmer.getFarm().getProductionAmountM2(date)));
-		this.setForecastEntropy(this.round(Utility.calculateEntropy(farmer.getFarm().getArea().getForecastsValue(date))));
-		this.setWaterConsumptionM2(this.round(farmer.getFarm().getWaterconsumptionM2(date)));
-		this.setHumidityEntropy(this.round(Utility.calculateEntropy(farmer.getFarm().getHumidityofsoilValue(date))));
+		this.setProductionM2(Utility.round(farmer.getFarm().getProductionAmountM2(date)));
+		this.setForecastEntropy(Utility.round(Utility.calculateEntropy(farmer.getFarm().getArea().getForecastsValue(date))));
+		this.setWaterConsumptionM2(Utility.round(farmer.getFarm().getWaterconsumptionM2(date)));
+		this.setHumidityEntropy(Utility.round(Utility.calculateEntropy(farmer.getFarm().getHumidityofsoilValue(date))));
 	}
 
 	public String getNameSurname() {
@@ -90,10 +88,5 @@ public class RankingAggregateData {
 
 	public void setArea(String area) {
 		this.area = area;
-	}
-	
-	public double round (double numberToRound) {
-		BigDecimal temp = new BigDecimal(numberToRound);
-		return Double.parseDouble(temp.setScale(2, RoundingMode.HALF_UP).toString());
 	}
 }
