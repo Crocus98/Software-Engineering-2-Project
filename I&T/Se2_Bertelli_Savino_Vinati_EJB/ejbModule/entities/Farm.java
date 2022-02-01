@@ -30,7 +30,7 @@ public class Farm implements Serializable {
 	@JoinColumn(name="idarea")
 	private Area area;
 	
-	@OneToMany(mappedBy="farm")
+	@OneToMany(mappedBy="farm", cascade = CascadeType.ALL)
 	private List<Production> productions;
 	
 	@OneToMany(mappedBy="farm")
@@ -68,6 +68,10 @@ public class Farm implements Serializable {
 
 	public List<Production> getProductions() {
 		return productions;
+	}
+	
+	public void addProduction(Production production) {
+		this.getProductions().add(production);
 	}
 	
 	public Double getProductionAmountM2(Date fromDate) {

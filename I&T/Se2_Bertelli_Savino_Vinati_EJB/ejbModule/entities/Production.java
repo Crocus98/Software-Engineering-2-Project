@@ -33,6 +33,14 @@ public class Production implements Serializable {
 
 	public Production() {
 	}
+	
+	public Production(TypeOfProduct typeOfProduct, Date date, int amount, String comment, Farm farm) {
+		this.setTypeofproduct(typeOfProduct);
+		this.setDate(date);
+		this.setAmount(amount);
+		this.setComment(comment);
+		this.setFarm(farm);
+	}
 
 	public int getId() {
 		return this.id;

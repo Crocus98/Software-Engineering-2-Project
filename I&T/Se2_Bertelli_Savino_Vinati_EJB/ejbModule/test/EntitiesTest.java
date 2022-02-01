@@ -5,8 +5,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.ArrayList;
 import java.util.Date;
 
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import entities.*;
@@ -75,7 +73,7 @@ class EntitiesTest {
 		Forecast f2 = new Forecast();
 		f2.setArea(area);
 		
-		ArrayList<Forecast> forecastList = new ArrayList();
+		ArrayList<Forecast> forecastList = new ArrayList<>();
 		forecastList.add(f1);
 		forecastList.add(f2);
 		
@@ -89,7 +87,7 @@ class EntitiesTest {
 		Farm f1 = new Farm();
 		Farm f2 = new Farm();
 		
-		ArrayList<Farm> farmList = new ArrayList();
+		ArrayList<Farm> farmList = new ArrayList<>();
 		farmList.add(f1);
 		farmList.add(f2);
 		

@@ -59,7 +59,6 @@
 											<tr>
 												<td class="center"><select name="type"
 													form="filter_form" required>
-														<option value="0" selected>All products</option>
 														<option th:each="t : ${types}" th:value="${t.value}"
 															th:text="${t.toString()}">
 												</select></td>
@@ -96,6 +95,7 @@
 									</table>
 								</div>
 							</div>
+							<p>*You can leave date empty to insert today production.</p>
 						</div>
 					</div>
 				</div>
