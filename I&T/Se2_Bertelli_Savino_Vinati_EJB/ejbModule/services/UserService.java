@@ -11,9 +11,11 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
 
 import entities.Forecast;
+import entities.Humidityofsoil;
 import entities.User;
 import exceptions.CredentialsException;
 import exceptions.ForecastRetrievalException;
+import exceptions.HumidityRetrievalException;
 
 @Stateless
 public class UserService {
@@ -60,6 +62,25 @@ public class UserService {
 
 	public User getUserById(int id) {
 		return em.find(User.class, id);
+	}
+
+	public Humidityofsoil getHumidity(User user) throws HumidityRetrievalException, NonUniqueResultException {
+		List<Humidityofsoil> humidity = null;
+		try {
+			humidity = em.createNamedQuery("Humidityofsoil.findByData", Humidityofsoil.class)
+					.setParameter(1,new Date()).setParameter(2, user.getFarm().getId()).getResultList();
+		}
+		catch(PersistenceException e) {
+			throw new HumidityRetrievalException("[HumidityRetrievalException] ERROR: Could not get today humidity.");
+		}
+		if(humidity.isEmpty()) {
+			return null;
+		}
+		else if(humidity.size() == 1) {
+			humidity.get(0);
+		}
+		throw new NonUniqueResultException(
+				"[NonUniqueResultException] ERROR: More than one humidity datum for today.");
 	}
 
 }

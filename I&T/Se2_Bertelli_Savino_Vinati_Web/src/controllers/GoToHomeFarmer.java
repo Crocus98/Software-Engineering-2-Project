@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Date;
 
 import javax.ejb.EJB;
+import javax.persistence.NonUniqueResultException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,11 +16,12 @@ import org.apache.commons.lang3.time.DateUtils;
 
 import classes.TemplateManager;
 import entities.Forecast;
+import entities.Humidityofsoil;
 import entities.User;
 import enums.Usertype;
 import exceptions.ForecastRetrievalException;
+import exceptions.HumidityRetrievalException;
 import services.UserService;
-
 
 @WebServlet("/HomeFarmer")
 public class GoToHomeFarmer extends HttpServlet {
@@ -43,34 +45,37 @@ public class GoToHomeFarmer extends HttpServlet {
 			templateManager.redirect(path);
 			return;
 		}
-		
+
 		String message = null;
 		boolean isBadRequest = false;
-		
+
 		Forecast forecast = null;
 		Double waterConsumption = null;
-		
+		Humidityofsoil humidity = null;
+
 		try {
 			forecast = userService.getForecast(user);
 			Date lastYear = DateUtils.addYears(new Date(), -1);
 			waterConsumption = user.getFarm().getWaterconsumptionM2(lastYear);
-		}catch(ForecastRetrievalException e) {
+			humidity = userService.getHumidity(user);
+		} catch (ForecastRetrievalException | HumidityRetrievalException | NonUniqueResultException e) {
 			isBadRequest = true;
 			message = e.getMessage();
 		}
-		
+
 		path = "/WEB-INF/HomeFarmer.html";
 		templateManager = new TemplateManager(getServletContext(), request, response);
-		if(isBadRequest) {
+		if (isBadRequest) {
 			templateManager.setVariable("errorMsg", message);
-		}else {
-			templateManager.setVariable("waterConsumption", waterConsumption);
+		} else {
+			templateManager.setVariable("aterConsumption", waterConsumption);
 			templateManager.setVariable("forecast", forecast);
+			templateManager.setVariable("humidity", humidity);
 		}
 		templateManager.redirect(path);
 	}
-	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		doGet(request, response);
 	}

@@ -10,7 +10,10 @@ import java.util.Date;
 
 @Entity
 @Table(name = "humidityofsoil", schema="se2_bertelli_savino_vinati")
-@NamedQuery(name="Humidityofsoil.findAll", query="SELECT h FROM Humidityofsoil h")
+@NamedQueries({
+	@NamedQuery(name="Humidityofsoil.findAll", query="SELECT h FROM Humidityofsoil h"),
+	@NamedQuery(name="Humidityofsoil.findByData", query="SELECT h FROM Humidityofsoil h WHERE h.date = ?1 and h.farm.id = ?2")
+})
 public class Humidityofsoil implements Serializable {
 	private static final long serialVersionUID = 1L;
 
