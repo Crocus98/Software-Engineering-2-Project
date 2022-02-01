@@ -61,6 +61,7 @@ public class GoToForumPage extends HttpServlet {
 		} else {
 			templateManager.setVariable("discussions", discussions);
 		}
+		templateManager.setVariable("forum", "true");
 		templateManager.redirect(path);
 	}
 
@@ -108,6 +109,7 @@ public class GoToForumPage extends HttpServlet {
 		templateManager = new TemplateManager(getServletContext(), request, response);
 		templateManager.setVariable("errorMsg", message);
 		templateManager.setVariable("discussions", discussions);
+		templateManager.setVariable("forum", "true");
 		templateManager.redirect(path);
 	}
 }

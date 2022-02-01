@@ -78,6 +78,7 @@ public class GoToPostPage extends HttpServlet {
 		} else {
 			templateManager.setVariable("discussion", discussion);
 		}
+		templateManager.setVariable("forum", "false");
 		templateManager.redirect(path);
 	}
 
@@ -109,22 +110,25 @@ public class GoToPostPage extends HttpServlet {
 			message = "ERROR: Incorrect parameters for creating discussion.";
 		}
 
-		try {
-			if (!isBadRequest) {
+		if (!isBadRequest) {
+			try {
 				user = forumService.insertPost(user, comment, idDiscussion);
 				session.setAttribute("user", user);
 				message = "Discussion created successfully.";
+				discussion = forumService.getAllPostsOfDiscussion(idDiscussion);
+			} catch (PostsRetrievalException | InsertPostException e) {
+				isBadRequest = true;
+				message = e.getMessage();
 			}
-			discussion = forumService.getAllPostsOfDiscussion(idDiscussion);
-		} catch (PostsRetrievalException | InsertPostException e) {
-			isBadRequest = true;
-			message = e.getMessage();
 		}
 
 		path = "/WEB-INF/ForumPage.html";
 		templateManager = new TemplateManager(getServletContext(), request, response);
 		templateManager.setVariable("errorMsg", message);
-		templateManager.setVariable("discussion", discussion);
+		if (!isBadRequest) {
+			templateManager.setVariable("discussion", discussion);
+		}
+		templateManager.setVariable("forum", "false");
 		templateManager.redirect(path);
 	}
 }
