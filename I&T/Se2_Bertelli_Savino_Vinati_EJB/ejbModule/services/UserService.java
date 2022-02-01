@@ -42,11 +42,11 @@ public class UserService {
 				"[NonUniqueResultException] ERROR: More than one user registered with the same credentials.");
 	}
 
-	public Forecast getForecast(User user) throws ForecastRetrievalException {
+	public Forecast getForecast(User user, Date date) throws ForecastRetrievalException {
 		List<Forecast> forecasts = null;
 		try {
 			forecasts = em.createNamedQuery("Forecast.findByDate", Forecast.class)
-					.setParameter(1, new Date()).setParameter(2, user.getFarm().getArea().getId()).getResultList();
+					.setParameter(1, date).setParameter(2, user.getFarm().getArea().getId()).getResultList();
 		} catch (PersistenceException e) {
 			throw new ForecastRetrievalException("[ForecastRetrievalException] ERORR: Count not get today forecasts");
 		}
@@ -69,6 +69,9 @@ public class UserService {
 		try {
 			humidity = em.createNamedQuery("Humidityofsoil.findByData", Humidityofsoil.class)
 					.setParameter(1,new Date()).setParameter(2, user.getFarm().getId()).getResultList();
+			for(Humidityofsoil a : humidity) {
+				System.out.println(a.getClassification());
+			}
 		}
 		catch(PersistenceException e) {
 			throw new HumidityRetrievalException("[HumidityRetrievalException] ERROR: Could not get today humidity.");
@@ -77,7 +80,7 @@ public class UserService {
 			return null;
 		}
 		else if(humidity.size() == 1) {
-			humidity.get(0);
+			return humidity.get(0);
 		}
 		throw new NonUniqueResultException(
 				"[NonUniqueResultException] ERROR: More than one humidity datum for today.");

@@ -297,3 +297,7 @@ img {
 	grid-row: 3/span 2;
 	background: #A4A4A4;
 }
+
+.center {
+	text-align: center
+}

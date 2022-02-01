@@ -16,6 +16,7 @@ import javax.persistence.PersistenceException;
 
 import org.apache.commons.lang3.time.DateUtils;
 
+import classes.ProductionAggregateData;
 import classes.RankingAggregateData;
 import classes.SummaryAggregateData;
 import classes.Utility;
@@ -171,5 +172,25 @@ public class DataminerService {
 			result.add(thisArea);
 		}
 		return result;
+	}
+	
+	@SuppressWarnings("deprecation")
+	public ProductionAggregateData getFarmerLastYearProductionSummary(User user){
+		ProductionAggregateData rainData = null;
+		Map<Integer, Integer> data = new HashMap<>();
+		
+		Date lastYear = DateUtils.addYears(new Date(), -1);
+		int startingMonth = lastYear.getMonth();
+		
+		for(Production production : user.getFarm().getProductions()) {
+			int month = production.getDate().getMonth();
+			int amount = production.getAmount();
+			if (!data.containsKey(month)) {
+				data.put(month, 0);
+			}
+			data.put(month, data.get(month) + amount);
+		}
+		rainData = new ProductionAggregateData(Utility.getDataFromMap(data, startingMonth));
+		return rainData;
 	}
 }
