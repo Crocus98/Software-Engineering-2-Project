@@ -57,11 +57,6 @@ public class UserService {
 		return forecasts.get(0);
 	}
 	
-	public Double getWaterconsumption(User user, Date fromDate) {
-		Double value = user.getFarm().getWaterconsumptionM2(fromDate);
-		return value;
-	}
-	
 
 	public User getUserById(int id) {
 		return em.find(User.class, id);

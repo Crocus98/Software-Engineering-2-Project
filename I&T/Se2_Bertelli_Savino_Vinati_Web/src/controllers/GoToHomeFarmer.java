@@ -1,6 +1,7 @@
 package controllers;
 
 import java.io.IOException;
+import java.util.Date;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -9,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import org.apache.commons.lang3.time.DateUtils;
 
 import classes.TemplateManager;
 import entities.Forecast;
@@ -45,9 +48,12 @@ public class GoToHomeFarmer extends HttpServlet {
 		boolean isBadRequest = false;
 		
 		Forecast forecast = null;
+		Double waterConsumption = null;
 		
 		try {
 			forecast = userService.getForecast(user);
+			Date lastYear = DateUtils.addYears(new Date(), -1);
+			waterConsumption = user.getFarm().getWaterconsumptionM2(lastYear);
 		}catch(ForecastRetrievalException e) {
 			isBadRequest = true;
 			message = e.getMessage();
@@ -58,6 +64,7 @@ public class GoToHomeFarmer extends HttpServlet {
 		if(isBadRequest) {
 			templateManager.setVariable("errorMsg", message);
 		}else {
+			templateManager.setVariable("waterConsumption", waterConsumption);
 			templateManager.setVariable("forecast", forecast);
 		}
 		templateManager.redirect(path);
