@@ -83,7 +83,7 @@ public class Farm implements Serializable {
 		return temp;
 	}
 	
-	public Double getWaterconsumptionM2(Date fromDate) {
+	public Double getWaterconsumptionM2(Date fromDate, boolean normalizeForDimension) {
 		Double temp = 0.0;
 		if(this.getWaterconsumptions() != null) {
 			for (int i = 0; i < this.getWaterconsumptions().size(); i++) {
@@ -91,7 +91,9 @@ public class Farm implements Serializable {
 					temp += this.getWaterconsumptions().get(i).getAmount();
 				}
 			}
-			temp /= (double)this.dimension;
+			if(normalizeForDimension == true) {
+				temp /= (double)this.dimension;
+			}
 		}
 		return temp;
 	}

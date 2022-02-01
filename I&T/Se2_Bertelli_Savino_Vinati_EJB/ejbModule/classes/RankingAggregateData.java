@@ -22,7 +22,7 @@ public class RankingAggregateData {
 		this.setArea(farmer.getFarm().getArea().getName());
 		this.setProductionM2(Utility.round(farmer.getFarm().getProductionAmountM2(date)));
 		this.setForecastEntropy(Utility.round(Utility.calculateEntropy(farmer.getFarm().getArea().getForecastsValue(date))));
-		this.setWaterConsumptionM2(Utility.round(farmer.getFarm().getWaterconsumptionM2(date)));
+		this.setWaterConsumptionM2(Utility.round(farmer.getFarm().getWaterconsumptionM2(date, true)));
 		this.setHumidityEntropy(Utility.round(Utility.calculateEntropy(farmer.getFarm().getHumidityofsoilValue(date))));
 	}
 

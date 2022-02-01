@@ -64,7 +64,7 @@ public class GoToHomeFarmer extends HttpServlet {
 		try {
 			forecast = userService.getForecast(user, new Date());
 			Date lastYear = DateUtils.addYears(new Date(), -1);
-			waterConsumption = user.getFarm().getWaterconsumptionM2(lastYear);
+			waterConsumption = user.getFarm().getWaterconsumptionM2(lastYear, false);
 			humidity = userService.getHumidity(user);
 			months = Utility.getMonths(lastYear);
 			summary = dataminerService.getFarmerLastYearProductionSummary(user);

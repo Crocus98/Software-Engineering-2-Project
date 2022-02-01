@@ -71,7 +71,6 @@
 		    data: {
 		        labels: dataM,
 		        datasets: datasets,
-		   
 		    },
 		    options: {
 		        scales: {
@@ -79,17 +78,9 @@
 		                beginAtZero: true
 		            }
 		        },          
-		        	pointRadius: 7,
-		        	pointHoverRadius:12,
-		        	pointBorderWidth: 5,
-		        	borderWidth: 4,
-		        
 		    },
 		    
 		});
-		
-	
-		
 		
 		function generateDataset(dataV) {
 			var Areas = []
@@ -98,10 +89,6 @@
 				const areaName = area.areaName
 				const values = area.values
 				Areas[areaName] = values
-				console.log("areassaiyuiyuyiuyiusa" + values);
-				console.log("areassasa" + areaName);
-				console.log("arn" + area.areaName);
-				console.log("dfs" + Areas[areaName]);
 			}
 			for(let areaN in Areas){
 				const randomcolor = '#'+(0x1000000+(Math.random())*0xffffff).toString(16).substr(1,6);

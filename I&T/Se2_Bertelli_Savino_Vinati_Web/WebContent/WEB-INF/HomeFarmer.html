@@ -29,17 +29,31 @@
 
 		<main>
 			<div class="content">
+			<p class="error_text" th:text=" ${errorMsg}"></p>
 				<div class="grid-wrapper">
-					<div class="grid-item featured-large center" th:utext="${'Today weather forecast:<br />' + forecast.classification}"></div>
+				
+					<th:block th:if="${forecast != null}">
+					<div class="grid-item featured-large center" th:utext="${#strings.replace('Today weather forecast:<br />' + forecast.classification + '<br />Value(mm): ' + forecast.value, '_', ' ')}"></div>
+					</th:block>
+					<th:block th:if="${forecast == null}">
+					<div class="grid-item featured-large center">Today weather forecast:<br />Not available data</div>
+					</th:block>
+					
 					<div class="grid-item featured-large-aa">
 						<h2>Yearly Production Summary</h2>
 						<div >
 							<canvas id="canvas"></canvas>
 						</div>
 					</div>
-
-					<div class="grid-item bb center" th:utext="${'Today humidity of soil:<br />' + humidity.classification}"></div>
-					<div class="grid-item cc center" th:utext="${'This year water consumption:<br />'+ waterConsumption}"></div>
+					
+					<th:block th:if="${humidity != null}">
+		        		<div class="grid-item bb center" th:utext="${#strings.replace('Today humidity of soil:<br />' + humidity.classification, '_', ' ')}"></div>
+		        	</th:block>
+		        	<th:block th:if="${humidity == null}">
+		        		<div class="grid-item bb center">Today humidity of soil:<br />Not available data</div>
+		        	</th:block>
+					
+					<div class="grid-item cc center" th:utext="'This year water consumption:<br />Value(L): '+ ${#numbers.formatDecimal(waterConsumption, 0, 0)}"></div>
 
 				</div>
 			</div>

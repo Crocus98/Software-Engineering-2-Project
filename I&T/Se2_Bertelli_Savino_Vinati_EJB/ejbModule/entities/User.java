@@ -98,8 +98,8 @@ public class User implements Serializable {
 			value_this = Utility.calculateEntropy(this.getFarm().getArea().getForecastsValue(date));
 			value_that = Utility.calculateEntropy(user.getFarm().getArea().getForecastsValue(date));
 			if (Utility.compare(value_that, value_this) == 0) {
-				value_this = this.getFarm().getWaterconsumptionM2(date);
-				value_that = user.getFarm().getWaterconsumptionM2(date);
+				value_this = this.getFarm().getWaterconsumptionM2(date, true);
+				value_that = user.getFarm().getWaterconsumptionM2(date, true);
 				if (Utility.compare(value_that, value_this) == 0) {
 					value_this = Utility.calculateEntropy(this.getFarm().getHumidityofsoilValue(date));
 					value_that = Utility.calculateEntropy(user.getFarm().getHumidityofsoilValue(date));
