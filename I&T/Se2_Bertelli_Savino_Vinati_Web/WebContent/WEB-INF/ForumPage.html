@@ -4,6 +4,17 @@
 <meta charset="ISO-8859-1">
 <link rel="stylesheet" type="text/css" media="all"
 	href="../CSS/farmer.css" th:href="@{/css/forum.css}" />
+<link rel="stylesheet" type="text/css" media="all"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" media="all"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css"
+	integrity="sha256-3sPp8BkKUE7QyPSl6VfBByBroQbKxKG7tsusY2mhbVY="
+	crossorigin="anonymous">
+
 <title>Forum</title>
 </head>
 <body>
@@ -31,63 +42,165 @@
 		<main>
 			<div class="content">
 				<div class="grid-wrapper">
-					<div class="grid-item featured-large">Weather Today</div>
-					<div class="grid-item aa">
-						<h2>Precipitation Forecast</h2>
-						<section class="bar-chart">
-							<div class="skill">
-								<div class="graph" style="height: 85%;">
-									<div class="percentage">85%</div>
+					<div class="grid-item featured-large">
+						<div class="container">
+							<h1 class="center">Forum</h1>
+							<p>*Please share your thoughts with our farmers!.</p>
+							<p class="error_text" th:text=" ${errorMsg}"></p>
+							<div class="row">
+								<div class="col-12">
+
+									<th:block th:if="${forum.equals('true')}">
+										<div class="container">
+											<div class="row">
+												<div class="col-lg-10 mx-auto">
+													<div class="career-search mb-60">
+
+														<form th:action="@{/Forum}" method="POST"
+															class="career-form mb-60">
+
+															<div class="row2">
+																<div class="col-md-6 col-lg-3 my-3">
+																	<div class="input-group position-relative">
+																		<input type="text" name="title" class="form-control"
+																			placeholder="Enter Your Ttile" id="keywords" required>
+																	</div>
+																</div>
+																<div class="col-md-6 col-lg-3 my-3">
+																	<div class="input-group position-relative">
+																		<input type="text" name="comment" class="form-control"
+																			placeholder="Enter Your Description" id="keywords"
+																			required>
+																	</div>
+																</div>
+
+																<div class="col-md-6 col-lg-3 my-3">
+																	<button type="submit" value="Create Discussion"
+																		class="btn btn-lg btn-block btn-light btn-custom"
+																		style="font-size: 14px" id="contact-submit">Create
+																		Discussion</button>
+																</div>
+
+
+															</div>
+
+
+														</form>
+														<th:block th:if="${discussions != null}">
+															<div class="filter-result">
+																<p class="mb-30"></p>
+																<div th:each="d : ${discussions}">
+																	<div
+																		class="job-box d-md-flex align-items-center justify-content-between mb-30">
+																		<div
+																			class="job-left my-4 d-md-flex align-items-center flex-wrap">
+
+																			<div class="t">
+																				<h5 class="text-center text-md-left"
+																					th:text="${d.title}">Front End Developer</h5>
+
+																			</div>
+																		</div>
+																		<div class="job-right my-4 flex-shrink-0">
+																			<a th:href="@{/Post(discussion=${d.id})}"
+																				class="btn d-block w-100 d-sm-inline-block btn-light">View</a>
+																		</div>
+																	</div>
+																</div>
+
+															</div>
+														</th:block>
+													</div>
+
+													<!-- START Pagination -->
+
+													<!-- END Pagination -->
+												</div>
+											</div>
+
+										</div>
+									</th:block>
+
+
+									<th:block th:if="${forum.equals('false')}">
+										<div class="container mt-5 mb-5">
+											<div class="d-flex justify-content-center row">
+												<div class="d-flex flex-column col-md-8">
+													<div
+														class="d-flex flex-row align-items-center text-left comment-top p-2 bg-white border-bottom px-4">
+														<div class="profile-image"></div>
+														<br />
+														<div class="d-flex flex-column ml-3">
+															<div class="d-flex flex-row post-title">
+																<h4 th:text="${discussion.title}"></h4>
+																<span
+																	th:text="${'Author: ' + discussion.user.name + ' ' + discussion.user.surname}"
+																	class="ml-2"></span>
+																
+															</div>
+
+														</div>
+													</div>
+
+
+												
+
+
+
+													<div class="coment-bottom bg-white p-2 px-4">
+														<div class="d-flex flex-row add-comment-section mt-4 mb-4">
+															<form th:action="@{/Post}" method="POST"
+																class="career-form2 mb-60">
+
+																<input type="text" name="comment"
+																	class="form-control mr-3" placeholder="Add comment">
+																<button type="submit" value="Comment"
+																	class="btn btn-primary">Comment</button>
+																<input type="hidden" name="discussion"
+																	th:value="${discussion.id}">
+
+															</form>
+															
+														</div>
+														<th:block th:if="${discussion.posts != null}">
+															<div th:each="p : ${discussion.posts}">
+																<div class="commented-section mt-2">
+																	<div
+																		class="d-flex flex-row align-items-center commented-user">
+																		<h5 th:text="${p.user.name + ' ' + p.user.surname}"
+																			class="mr-2">Samoya Johns</h5>
+																		<span class="dot mb-1"></span><span
+																			th:text="${#dates.format(p.datehour, 'dd-MMM-yyyy HH:mm')}"
+																			class="mb-1 ml-2">5 hours ago</span>
+																	</div>
+																	<div th:text="${p.comment}" class="comment-text-sm">
+																		<span>Lorem ipsum dolor sit amet, consectetur
+																			adipiscing elit, sed do eiusmod tempor incididunt ut
+																			labore et dolore magna aliqua..</span>
+																	</div>
+
+																</div>
+																<br /> <br />
+															</div>
+														</th:block>
+													</div>
+												</div>
+											</div>
+
+										</div>
+									</th:block>
 								</div>
-								<div class="name">Monday</div>
 							</div>
-							<div class="skill">
-								<div class="graph" style="height: 92%;">
-									<div class="percentage">92%</div>
-								</div>
-								<div class="name">Tuesday</div>
-							</div>
-							<div class="skill">
-								<div class="graph" style="height: 80%;">
-									<div class="percentage">80%</div>
-								</div>
-								<div class="name">Wednesday</div>
-							</div>
-							<div class="skill">
-								<div class="graph" style="height: 75%;">
-									<div class="percentage">75%</div>
-								</div>
-								<div class="name">Thursday</div>
-							</div>
-							<div class="skill">
-								<div class="graph" style="height: 80%;">
-									<div class="percentage">50%</div>
-								</div>
-								<div class="name">Friday</div>
-							</div>
-							<div class="skill">
-								<div class="graph" style="height: 80%;">
-									<div class="percentage">50%</div>
-								</div>
-								<div class="name">Saturday</div>
-							</div>
-							<div class="skill">
-								<div class="graph" style="height: 80%;">
-									<div class="percentage">50%</div>
-								</div>
-								<div class="name">Sunday</div>
-							</div>
-						</section>
+
+						</div>
 					</div>
-
-					<div class="grid-item bb">Humidity of Soil</div>
-					<div class="grid-item cc">Water Consumption</div>
-
-
 				</div>
 			</div>
 		</main>
 	</div>
-
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </body>
 </html>

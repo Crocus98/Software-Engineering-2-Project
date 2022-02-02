@@ -22,7 +22,8 @@
 					<li><a th:href="@{/HomeFarmer}">Requests</a></li>
 					<li><a th:href="@{/Forum}">Forum</a></li>
 					<li><a th:href="@{/Logout}">Logout</a></li>
-					<li class="small"><p th:text="${'Nice to see you again ' + session.user.name + ' ' + session.user.surname}"></p></li>
+					<li class="small"><p
+							th:text="${'Nice to see you again ' + session.user.name + ' ' + session.user.surname}"></p></li>
 				</ul>
 			</div>
 		</div>
@@ -59,7 +60,8 @@
 			</div>
 		</main>
 	</div>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
 	<script th:inline="javascript">
 	var dataM = /*[[${months}]]*/"";
 	var dataV = /*[[${summary}]]*/"";
