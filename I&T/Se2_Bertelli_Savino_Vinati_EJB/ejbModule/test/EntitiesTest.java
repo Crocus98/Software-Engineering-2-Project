@@ -10,6 +10,9 @@ import org.junit.jupiter.api.Test;
 import entities.*;
 import enums.*;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 class EntitiesTest {
 
 	//TEST FOR Answer
@@ -326,6 +329,185 @@ class EntitiesTest {
 		list.add(p3);
 		assertEquals(list,discussion.getPosts());
 	}
+	
+	//Test for Farm
+	
+	@Test
+	void farmAreaTest() {
+		Farm farm = new Farm();
+		Area area = new Area();
+		farm.setArea(area);
+		assertEquals(area,farm.getArea());
+	}
+	
+	@Test
+	void farmAddressTest() {
+		Farm farm = new Farm();
+		farm.setAddress("address");
+		assertEquals("address",farm.getAddress());
+	}
+	
+	@Test
+	void farmDimensionTest() {
+		Farm farm = new Farm();
+		farm.setDimension(100);
+		assertEquals(100,farm.getDimension());
+	}
+	
+	@Test
+	void farmHumidityTest() {
+		Farm farm = new Farm();
+		Humidityofsoil h1 = new Humidityofsoil();
+		Humidityofsoil h2 = new Humidityofsoil(); 
+		ArrayList<Humidityofsoil> list = new ArrayList();
+		list.add(h1);
+		list.add(h2);
+		farm.setHumidityofsoil(list);
+		assertEquals(list,farm.getHumidityofsoil());
+	}
+	
+	@Test
+	void farmIDTest() {
+		Farm farm = new Farm();
+		farm.setId(0);
+		assertEquals(0,farm.getId());
+	}
+	
+	@Test
+	void farmProductionTest() {
+		Farm farm = new Farm();
+		Production p1 = new Production();
+		Production p2 = new Production();
+		ArrayList<Production>list = new ArrayList();
+		list.add(p1);
+		list.add(p2);
+		farm.setProductions(list);
+		assertEquals(list,farm.getProductions());
+	}
+	
+	@Test
+	void farmProductionAmountM2Test() throws ParseException {
+		Farm farm = new Farm();
+		
+		Production p1 = new Production();
+		p1.setAmount(100);
+		p1.setId(1);
+		p1.setFarm(farm);
+		String sData1="2022-02-01"; 
+		Date data1 = new SimpleDateFormat("yyyy-MM-dd").parse(sData1);
+		p1.setDate(data1);
+		
+		Production p2 = new Production();
+		p2.setAmount(500);
+		p2.setId(2);
+		p2.setFarm(farm);
+		String sData2="2022-02-09"; 
+		Date data2 = new SimpleDateFormat("yyyy-MM-dd").parse(sData2);
+		p1.setDate(data2);
+		
+		String sData3="2022-01-01"; 
+		Date data3 = new SimpleDateFormat("yyyy-MM-dd").parse(sData3);
+		System.out.println(p1.getDate());
+		ArrayList<Production>list = new ArrayList();
+		list.add(p2);
+		list.add(p1);
+		farm.setProductions(list);
+		assertEquals(600,farm.getProductionAmountM2(data3));
+	}
+	
+	@Test
+	void farmWaterComsunptionTest() {
+		Farm farm = new Farm();
+		Waterconsumption p1 = new Waterconsumption();
+		Waterconsumption p2 = new Waterconsumption();
+		ArrayList<Waterconsumption>list = new ArrayList();
+		list.add(p1);
+		list.add(p2);
+		farm.setWaterconsumptions(list);
+		assertEquals(list,farm.getWaterconsumptions());
+	}
+	
+	@Test
+	void farmWaterConsumptionM2Test() throws ParseException {
+		Farm farm = new Farm();
+		farm.setDimension(100);
+		
+		Waterconsumption p1 = new Waterconsumption();
+		p1.setAmount(100);
+		p1.setId(1);
+		p1.setFarm(farm);
+		String sData1="2022-02-01"; 
+		Date data1 = new SimpleDateFormat("yyyy-MM-dd").parse(sData1);
+		p1.setDate(data1);
+		
+		Waterconsumption p2 = new Waterconsumption();
+		p2.setAmount(500);
+		p2.setId(2);
+		p2.setFarm(farm);
+		String sData2="2022-02-09"; 
+		Date data2 = new SimpleDateFormat("yyyy-MM-dd").parse(sData2);
+		p1.setDate(data2);
+		
+		String sData3="2022-01-01"; 
+		Date data3 = new SimpleDateFormat("yyyy-MM-dd").parse(sData3);
+		System.out.println(p1.getDate());
+		ArrayList<Waterconsumption>list = new ArrayList();
+		list.add(p2);
+		list.add(p1);
+		farm.setWaterconsumptions(list);
+		assertEquals(600,farm.getWaterconsumptionM2(data3, false));
+	}
+	
+	@Test
+	void farmWaterConsumptionM2NormTest() throws ParseException {
+		Farm farm = new Farm();
+		farm.setDimension(100);
+		
+		Waterconsumption p1 = new Waterconsumption();
+		p1.setAmount(100);
+		p1.setId(1);
+		p1.setFarm(farm);
+		String sData1="2022-02-01"; 
+		Date data1 = new SimpleDateFormat("yyyy-MM-dd").parse(sData1);
+		p1.setDate(data1);
+		
+		Waterconsumption p2 = new Waterconsumption();
+		p2.setAmount(500);
+		p2.setId(2);
+		p2.setFarm(farm);
+		String sData2="2022-02-09"; 
+		Date data2 = new SimpleDateFormat("yyyy-MM-dd").parse(sData2);
+		p1.setDate(data2);
+		
+		String sData3="2022-01-01"; 
+		Date data3 = new SimpleDateFormat("yyyy-MM-dd").parse(sData3);
+		System.out.println(p1.getDate());
+		ArrayList<Waterconsumption>list = new ArrayList();
+		list.add(p2);
+		list.add(p1);
+		farm.setWaterconsumptions(list);
+		assertEquals(6,farm.getWaterconsumptionM2(data3, true));
+	}
+	
+	
+	
+	
+	//Test for Production
+	
+	@Test
+	void productionDateTest() {
+		Production production = new Production();
+		production.setAmount(100);
+		@SuppressWarnings("deprecation")
+		Date data1 = new Date(2022,01,12);
+		production.setDate(data1);
+		assertEquals(data1,production.getDate());
+		
+	}
+	
+	
+	
+	
 	
 	
 	
