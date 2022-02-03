@@ -625,6 +625,57 @@ class EntitiesTest {
 		
 	}
 	
+	//Test for Forecast
+	
+	@Test
+	void forecastAreaTest() {
+		Forecast forecast = new Forecast();
+		Area area = new Area();
+		forecast.setArea(area);
+		assertEquals(area, forecast.getArea());
+		
+	}
+	
+	@Test
+	void forecastIdTest() {
+		Forecast forecast = new Forecast();
+		forecast.setId(2);
+		assertEquals(2, forecast.getId());
+	}
+	
+	@Test
+	void forecastValueTest() {
+		Forecast forecast = new Forecast();
+		forecast.setValue(0);
+		assertEquals(0, forecast.getValue());
+	}
+	
+	@Test
+	void forecastCreationDateTest() {
+		Forecast forecast = new Forecast();
+		@SuppressWarnings("deprecation")
+		Date data1 = new Date(2022,01,12);
+		forecast.setCreationdate(data1);
+		assertEquals(data1, forecast.getCreationdate());
+	}
+	
+	@Test
+	void forecastDateTest() {
+		Forecast forecast = new Forecast();
+		@SuppressWarnings("deprecation")
+		Date data1 = new Date(2022,01,12);
+		forecast.setDate(data1);
+		assertEquals(data1, forecast.getDate());
+	}
+	
+	@Test
+	void forecastClassificationTest() {
+		Forecast forecast = new Forecast();
+		forecast.setClassification(ClassificationF.Heavy_Rainfall);
+		assertEquals(2, forecast.getClassification());
+	}
+	
+
 	
 	
 	
