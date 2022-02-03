@@ -268,6 +268,70 @@ class EntitiesTest {
 		//assertEquals(1, user1.compareTo(user2, dataD));
 	}
 	
+	//Test for discussion
+	
+	@Test
+	void discussionIdTest() {
+		Discussion discussion = new Discussion();
+		discussion.setId(0);
+		assertEquals(0,discussion.getId());
+	}
+	
+	@Test
+	void discussionDatehourTest() {
+		Discussion discussion = new Discussion();
+		@SuppressWarnings("deprecation")
+		Date data = new Date(2022,01,23);
+		discussion.setDatehour(data);
+		assertEquals(data,discussion.getDatehour());
+	}
+	
+	@Test
+	void discussionTitleTest() {
+		Discussion discussion = new Discussion();
+		discussion.setTitle("Title");
+		assertEquals("Title",discussion.getTitle());
+	}
+	
+	@Test
+	void discussionPostTest() {
+		Discussion discussion = new Discussion();
+		Post p1 = new Post();
+		Post p2 = new Post();
+		ArrayList<Post> list = new ArrayList();
+		list.add(p1);
+		list.add(p2);
+		discussion.setPosts(list);
+		assertEquals(list,discussion.getPosts());
+	}
+	
+	@Test
+	void discussionUserTest() {
+		Discussion discussion = new Discussion();
+		User user = new User();
+		discussion.setUser(user);
+		assertEquals(user,discussion.getUser());
+	}
+	
+	void discussionAddPostTest() {
+		Discussion discussion = new Discussion();
+		Post p1 = new Post();
+		Post p2 = new Post();
+		Post p3 = new Post();
+		ArrayList<Post> list = new ArrayList();
+		list.add(p1);
+		list.add(p2);
+		discussion.setPosts(list);
+		discussion.addPost(p3);
+		list.add(p3);
+		assertEquals(list,discussion.getPosts());
+	}
+	
+	
+	
+	
+	
+	
 	
 
 }
