@@ -301,7 +301,7 @@ class EntitiesTest {
 		Discussion discussion = new Discussion();
 		Post p1 = new Post();
 		Post p2 = new Post();
-		ArrayList<Post> list = new ArrayList();
+		ArrayList<Post> list = new ArrayList<>();
 		list.add(p1);
 		list.add(p2);
 		discussion.setPosts(list);
@@ -321,7 +321,7 @@ class EntitiesTest {
 		Post p1 = new Post();
 		Post p2 = new Post();
 		Post p3 = new Post();
-		ArrayList<Post> list = new ArrayList();
+		ArrayList<Post> list = new ArrayList<>();
 		list.add(p1);
 		list.add(p2);
 		discussion.setPosts(list);
@@ -366,7 +366,7 @@ class EntitiesTest {
 		Farm farm = new Farm();
 		Humidityofsoil h1 = new Humidityofsoil();
 		Humidityofsoil h2 = new Humidityofsoil(); 
-		ArrayList<Humidityofsoil> list = new ArrayList();
+		ArrayList<Humidityofsoil> list = new ArrayList<>();
 		list.add(h1);
 		list.add(h2);
 		farm.setHumidityofsoil(list);
@@ -385,7 +385,7 @@ class EntitiesTest {
 		Farm farm = new Farm();
 		Production p1 = new Production();
 		Production p2 = new Production();
-		ArrayList<Production>list = new ArrayList();
+		ArrayList<Production>list = new ArrayList<>();
 		list.add(p1);
 		list.add(p2);
 		farm.setProductions(list);
@@ -415,7 +415,7 @@ class EntitiesTest {
 		
 		String sData3="2022/01/01"; 
 		Date data3 = new SimpleDateFormat("yyyy/MM/dd").parse(sData3);
-		ArrayList<Production>list = new ArrayList();
+		ArrayList<Production>list = new ArrayList<>();
 		list.add(p2);
 		list.add(p1);
 		farm.setProductions(list);
@@ -427,7 +427,7 @@ class EntitiesTest {
 		Farm farm = new Farm();
 		Waterconsumption p1 = new Waterconsumption();
 		Waterconsumption p2 = new Waterconsumption();
-		ArrayList<Waterconsumption>list = new ArrayList();
+		ArrayList<Waterconsumption>list = new ArrayList<>();
 		list.add(p1);
 		list.add(p2);
 		farm.setWaterconsumptions(list);
@@ -457,7 +457,7 @@ class EntitiesTest {
 		
 		String sData3="2022-01-01"; 
 		Date data3 = new SimpleDateFormat("yyyy-MM-dd").parse(sData3);
-		ArrayList<Waterconsumption>list = new ArrayList();
+		ArrayList<Waterconsumption>list = new ArrayList<>();
 		list.add(p2);
 		list.add(p1);
 		farm.setWaterconsumptions(list);
@@ -487,7 +487,7 @@ class EntitiesTest {
 		
 		String sData3="2022-01-01"; 
 		Date data3 = new SimpleDateFormat("yyyy-MM-dd").parse(sData3);
-		ArrayList<Waterconsumption>list = new ArrayList();
+		ArrayList<Waterconsumption>list = new ArrayList<>();
 		list.add(p2);
 		list.add(p1);
 		farm.setWaterconsumptions(list);
@@ -517,7 +517,7 @@ class EntitiesTest {
 		
 		String sData3="2022-01-01"; 
 		Date data3 = new SimpleDateFormat("yyyy-MM-dd").parse(sData3);
-		ArrayList<Waterconsumption>list = new ArrayList();
+		ArrayList<Waterconsumption>list = new ArrayList<>();
 		list.add(p2);
 		list.add(p1);
 		farm.setWaterconsumptions(list);
