@@ -2,6 +2,7 @@ package classes;
 
 import java.util.List;
 
+//Class used for digesting data for users
 public class ProductionAggregateData {
 	private final String name = "Production (kg)";
 	

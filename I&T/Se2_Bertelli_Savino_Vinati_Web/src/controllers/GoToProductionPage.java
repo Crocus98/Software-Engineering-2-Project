@@ -48,6 +48,7 @@ public class GoToProductionPage extends HttpServlet {
 		List<TypeOfProduct> types = TypeOfProduct.getAllTypesOfProduct();
 		List<Production> productions = user.getFarm().getProductions();
 
+		//Preparing response
 		path = "/WEB-INF/ProductionPage.html";
 		templateManager = new TemplateManager(getServletContext(), request, response);
 		templateManager.setVariable("types", types);
@@ -73,6 +74,7 @@ public class GoToProductionPage extends HttpServlet {
 		int amount = 0;
 		String problemsFaced = null;
 
+		//Retrieve parameters and check them
 		try {
 			typeOfProduct = TypeOfProduct.getTypeOfProductFromInt(Integer.parseInt(request.getParameter("type")));
 			problemsFaced = StringEscapeUtils.escapeJava(request.getParameter("problem"));
@@ -97,6 +99,7 @@ public class GoToProductionPage extends HttpServlet {
 			message = "ERROR: Incorrect parameters for creating production.";
 		}
 
+		//Interacting with application server (EJB)
 		if (!isBadRequest) {
 			try {
 				user = userService.insertProduction(user, typeOfProduct, problemsFaced, amount, date);
@@ -111,6 +114,7 @@ public class GoToProductionPage extends HttpServlet {
 		List<TypeOfProduct> types = TypeOfProduct.getAllTypesOfProduct();
 		List<Production> productions = user.getFarm().getProductions();
 
+		//Preparing response
 		path = "/WEB-INF/ProductionPage.html";
 		templateManager = new TemplateManager(getServletContext(), request, response);
 		templateManager.setVariable("errorMsg", message);

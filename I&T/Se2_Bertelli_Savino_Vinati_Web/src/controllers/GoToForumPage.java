@@ -47,6 +47,8 @@ public class GoToForumPage extends HttpServlet {
 		String message = null;
 		boolean isBadRequest = false;
 		List<Discussion> discussions = null;
+		
+		//Interacting with application server (EJB)
 		try {
 			discussions = forumService.getAllDiscussions();
 		} catch (DiscussionsRetrievalException e) {
@@ -54,6 +56,7 @@ public class GoToForumPage extends HttpServlet {
 			message = e.getMessage();
 		}
 
+		//Preparing response
 		path = "/WEB-INF/ForumPage.html";
 		templateManager = new TemplateManager(getServletContext(), request, response);
 		if (isBadRequest) {
@@ -82,6 +85,7 @@ public class GoToForumPage extends HttpServlet {
 		String comment = null;
 		List<Discussion> discussions = null;
 		
+		//Retrieve parameters and check them
 		try {
 			title = StringEscapeUtils.escapeJava(request.getParameter("title"));
 			comment = StringEscapeUtils.escapeJava(request.getParameter("comment"));
@@ -94,6 +98,7 @@ public class GoToForumPage extends HttpServlet {
 			message = "ERROR: Incorrect parameters for creating discussion.";
 		}
 		
+		//Interacting with application server (EJB)
 		try {
 			if(!isBadRequest) {
 				user = forumService.createDiscussion(user, title, comment);
@@ -105,6 +110,7 @@ public class GoToForumPage extends HttpServlet {
 			message = e.getMessage();
 		}
 		
+		//Preparing response
 		path = "/WEB-INF/ForumPage.html";
 		templateManager = new TemplateManager(getServletContext(), request, response);
 		templateManager.setVariable("errorMsg", message);

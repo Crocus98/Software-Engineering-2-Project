@@ -3,6 +3,7 @@ package classes;
 import java.util.ArrayList;
 import java.util.List;
 
+//Class used for digesting data for users
 public class SummaryAggregateData {
 	private String areaName;
 	private List<Integer> values;

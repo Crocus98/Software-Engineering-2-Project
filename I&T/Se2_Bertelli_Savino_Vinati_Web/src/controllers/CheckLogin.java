@@ -39,6 +39,7 @@ public class CheckLogin extends HttpServlet {
 		boolean isBadRequest = false;
 		User user = null;
 		
+		//Retrieve parameters and check them
 		mail = StringEscapeUtils.escapeJava(request.getParameter("mail"));
 		pwd = StringEscapeUtils.escapeJava(request.getParameter("pwd"));
 		if (mail == null || pwd == null || mail.isEmpty() || pwd.isEmpty()) {
@@ -46,6 +47,7 @@ public class CheckLogin extends HttpServlet {
 			isBadRequest = true;
 		}
 		
+		//Interacting with application server (EJB)
 		if(!isBadRequest) {
 			try {
 				user = userService.checkCredentials(mail, pwd);
@@ -59,6 +61,7 @@ public class CheckLogin extends HttpServlet {
 			}
 		}
 
+		//Preparing response
 		String path;
 		if (isBadRequest) {
 			templateManager = new TemplateManager(getServletContext(), request, response);

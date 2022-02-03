@@ -52,6 +52,7 @@ public class GoToRankingPage extends HttpServlet {
 		boolean desc = true;
 		Date fromDate = null;
 		
+		//Retrieve parameters and check them
 		try {
 			limitNumber = Integer.parseInt(request.getParameter("limit_number"));
 			desc = Boolean.parseBoolean(request.getParameter("order_mode"));
@@ -76,6 +77,7 @@ public class GoToRankingPage extends HttpServlet {
 		List<RankingAggregateData> ranking = null;
 		List<Area> areas = null;
 
+		//Interacting with application server (EJB)
 		try {
 			ranking = dataminerService.getRankingAggregateData(limitNumber, desc, idArea, fromDate);
 			areas = dataminerService.getAllAreas();
@@ -83,6 +85,7 @@ public class GoToRankingPage extends HttpServlet {
 			message = e.getMessage();
 		}
 		
+		//Preparing response
 		templateManager = new TemplateManager(getServletContext(), request, response);
 		path = "/WEB-INF/RankingPage.html";
 		templateManager.setVariable("areas", areas);

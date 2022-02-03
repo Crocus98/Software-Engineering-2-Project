@@ -56,6 +56,7 @@ public class GoToHomePolicyMaker extends HttpServlet {
 		List<SummaryAggregateData> summary = null;
 		List<String> months = null;
 
+		//Interacting with application server (EJB)
 		try {
 			Date last_year = DateUtils.addYears(new Date(), -1);
 			User temp = dataminerService.getBestFarmer(true, null, last_year);
@@ -79,6 +80,7 @@ public class GoToHomePolicyMaker extends HttpServlet {
 			message = "ERROR: Server erorr retrieving summary";
 		}
 		
+		//Preparing response
 		path = "/WEB-INF/HomePolicyMaker.html";
 		templateManager = new TemplateManager(getServletContext(), request, response);
 		if (isBadRequest) {

@@ -23,6 +23,7 @@ public class GoToLoginPage extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
+		//Preparing response
 		String path = "/index.html";
 		templateManager = new TemplateManager(getServletContext(), request, response);
 		templateManager.redirect(path);

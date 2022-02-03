@@ -25,8 +25,8 @@ public class LoggedIn implements Filter {
 	public void destroy() {
 		
 	}
-
-
+	
+	//Filter: checks that the user is logged in. (Controllers check that the user match the user type of the page.)
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 
 		HttpServletRequest req = (HttpServletRequest) request;

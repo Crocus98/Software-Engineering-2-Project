@@ -47,6 +47,8 @@ public class GoToPostPage extends HttpServlet {
 		boolean isBadRequest = false;
 		Discussion discussion = null;
 		int idDiscussion = 0;
+		
+		//Retrieve parameters and check them
 		try {
 			idDiscussion = Integer.parseInt(request.getParameter("discussion"));
 		} catch (Exception e) {
@@ -54,6 +56,7 @@ public class GoToPostPage extends HttpServlet {
 			message = "ERROR: Incorrect discussion id selected.";
 		}
 
+		//Interacting with application server (EJB)
 		if (!isBadRequest) {
 			try {
 				discussion = forumService.getAllPostsOfDiscussion(idDiscussion);
@@ -66,6 +69,7 @@ public class GoToPostPage extends HttpServlet {
 			}
 		}
 
+		//Preparing response
 		path = "/WEB-INF/ForumPage.html";
 		templateManager = new TemplateManager(getServletContext(), request, response);
 		if (isBadRequest) {
@@ -94,6 +98,7 @@ public class GoToPostPage extends HttpServlet {
 		int idDiscussion = 0;
 		Discussion discussion = null;
 
+		//Retrieve parameters and check them
 		try {
 			idDiscussion = Integer.parseInt(request.getParameter("discussion"));
 			comment = StringEscapeUtils.escapeJava(request.getParameter("comment"));
@@ -105,6 +110,7 @@ public class GoToPostPage extends HttpServlet {
 			message = "ERROR: Incorrect parameters for creating discussion.";
 		}
 
+		//Interacting with application server (EJB)
 		if (!isBadRequest) {
 			try {
 				user = forumService.insertPost(user, comment, idDiscussion);
@@ -117,6 +123,7 @@ public class GoToPostPage extends HttpServlet {
 			}
 		}
 
+		//Preparing response
 		path = "/WEB-INF/ForumPage.html";
 		templateManager = new TemplateManager(getServletContext(), request, response);
 		templateManager.setVariable("errorMsg", message);

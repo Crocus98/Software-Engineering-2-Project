@@ -60,6 +60,7 @@ public class GoToHomeFarmer extends HttpServlet {
 		ProductionAggregateData summary = null;
 		List<String> months = null;
 
+		//Interacting with application server (EJB)
 		try {
 			forecast = userService.getForecast(user, new Date());
 			Date lastYear = DateUtils.addYears(new Date(), -1);
@@ -75,6 +76,7 @@ public class GoToHomeFarmer extends HttpServlet {
 			message = "ERROR: Server error retrieving summary data.";
 		}
 
+		//Preparing response
 		path = "/WEB-INF/HomeFarmer.html";
 		templateManager = new TemplateManager(getServletContext(), request, response);
 		if (isBadRequest) {

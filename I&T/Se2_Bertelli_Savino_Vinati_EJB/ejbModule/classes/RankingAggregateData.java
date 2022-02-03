@@ -4,6 +4,7 @@ import java.util.Date;
 
 import entities.User;
 
+//Class used for digesting data for users
 public class RankingAggregateData {
 
 	private String nameSurname;

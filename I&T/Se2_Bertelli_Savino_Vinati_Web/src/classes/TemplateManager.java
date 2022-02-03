@@ -19,6 +19,7 @@ public class TemplateManager {
 	private HttpServletResponse response;
 	private final WebContext ctx;
 	
+	//Setup for thymeleaf
 	public TemplateManager(ServletContext servletContext, HttpServletRequest request, HttpServletResponse response) {
 		this.response = response;
 		ServletContextTemplateResolver templateResolver = new ServletContextTemplateResolver(servletContext);
@@ -36,10 +37,12 @@ public class TemplateManager {
 		return false;
 	}
 	
+	//Set variable for thymeleaf
 	public void setVariable(String message, Object item) {
 		ctx.setVariable(message, item);
 	}
 	
+	//Redirect by using thymeleaf
 	public void redirect(String path) throws IOException {
 		templateEngine.process(path, ctx, response.getWriter());
 	}
