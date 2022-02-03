@@ -672,12 +672,44 @@ class EntitiesTest {
 	void forecastClassificationTest() {
 		Forecast forecast = new Forecast();
 		forecast.setClassification(ClassificationF.Heavy_Rainfall);
-		assertEquals(2, forecast.getClassification());
+		assertEquals(ClassificationF.Heavy_Rainfall, forecast.getClassification());
 	}
 	
-
+	//Test for WaterConsumption
 	
+	@Test
+	void WaterconsumptionIdTest() {
+		Waterconsumption waterconsumption = new Waterconsumption();
+		waterconsumption.setId(2);
+		assertEquals(2 ,waterconsumption.getId());
+		
+	}
 	
+	@Test
+	void WaterconsumptionAmountTest() {
+		Waterconsumption waterconsumption = new Waterconsumption();
+		waterconsumption.setAmount(9);
+		assertEquals(9,waterconsumption.getAmount());
+		
+	}
+	
+	@Test
+	void WaterconsumptionDateTest() {
+		Waterconsumption waterconsumption = new Waterconsumption();
+		@SuppressWarnings("deprecation")
+		Date data1 = new Date(2022,01,12);
+		waterconsumption.setDate(data1);
+		assertEquals(data1, waterconsumption.getDate());
+	}
+	
+	@Test
+	void WaterconsumptionFarmTest() {
+		Waterconsumption waterconsumption = new Waterconsumption();
+		Farm farm = new Farm();
+		waterconsumption.setFarm(farm);
+		assertEquals(farm,waterconsumption.getFarm());
+		
+	}
 	
 	
 	
