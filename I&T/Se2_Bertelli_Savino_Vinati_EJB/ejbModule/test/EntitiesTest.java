@@ -528,6 +528,47 @@ class EntitiesTest {
 	//Test for Production
 	
 	@Test
+	void productionAmountTest() {
+		Production production = new Production();
+		production.setAmount(9);
+		assertEquals(9,production.getAmount());
+		
+	}
+	
+	@Test
+	void productionCommentTest() {
+		Production production = new Production();
+		production.setComment("aa");
+		assertEquals("aa", production.getComment());
+		
+	}
+	
+	@Test
+	void productionFarmTest() {
+		Production production = new Production();
+		Farm farm = new Farm();
+		production.setFarm(farm);
+		assertEquals(farm,production.getFarm());
+		
+	}
+	
+	@Test
+	void productionIdTest() {
+		Production production = new Production();
+		production.setId(2);
+		assertEquals(2,production.getId());
+		
+	}
+	
+	@Test
+	void productionTypeOfProductTest() {
+		Production production = new Production();
+		production.setTypeofproduct(TypeOfProduct.Rice);
+		assertEquals(0 ,production.getId());
+		
+	}
+	
+	@Test
 	void productionDateTest() {
 		Production production = new Production();
 		production.setAmount(100);
@@ -538,8 +579,51 @@ class EntitiesTest {
 		
 	}
 	
+	//Test for Post
 	
+	@Test
+	void postIdTest() {
+		Post post = new Post();
+		post.setId(2);
+		assertEquals(2 ,post.getId());
+		
+	}
 	
+	@Test
+	void postCommentTest() {
+		Post post = new Post();
+		post.setComment("bb");
+		assertEquals("bb" ,post.getComment());
+		
+	}
+	
+	@Test
+	void postDiscussionTest() {
+		Post post = new Post();
+		Discussion discussion = new Discussion();
+		post.setDiscussion(discussion);
+		assertEquals(discussion, post.getDiscussion());
+		
+	}
+	
+	@Test
+	void postUserTest() {
+		Post post = new Post();
+		User user = new User();
+		post.setUser(user);
+		assertEquals(user, post.getUser());
+		
+	}
+	
+	@Test
+	void postDatehourTest() {
+		Post post = new Post();
+		@SuppressWarnings("deprecation")
+		Date data1 = new Date(2022,01,12);
+		post.setDatehour(data1);
+		assertEquals(data1, post.getDatehour());
+		
+	}
 	
 	
 	
