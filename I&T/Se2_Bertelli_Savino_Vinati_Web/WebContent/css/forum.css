@@ -167,11 +167,11 @@ main small {
 }
 
 #nav-content li a:hover {
-	color: #8D6DC8;
+	color: #4C489D !important;
 }
 
 #nav-content li a.active {
-	color: #8D6DC8 !important;
+	color: #4C489D !important;
 }
 
 #nav-content li:not(.small)+.small {
@@ -365,18 +365,18 @@ tr:nth-child(even) {
 }
 
 .btn-primary {
-	background-color: #cbb3d9 !important;
-	border-color: #cbb3d9 !important;
+	background-color: rgba(125, 123, 185, 0.5) !important;
+	border-color: rgba(125, 123, 185, 0.5) !important;
 }
 
 .btn-primary:hover {
-	background-color: #9d72b8 !important;
-	border-color: #9d72b8 !important;
+	background-color: #867BD3 !important;
+	border-color: #867BD3 !important;
 }
 
 .btn-primary:active {
-	background-color: #cbb3d9 !important;
-	border-color: #cbb3d9 !important;
+	background-color: rgba(125, 123, 185, 0.5) !important;
+	border-color: rgba(125, 123, 185, 0.5) !important;
 }
 
 .btn-primary:visited {
@@ -404,7 +404,7 @@ tr:nth-child(even) {
 
 /* ===== Career ===== */
 .career-form {
-	background-color: rgba(188, 136, 255, 0.8) !important;
+	background-color:rgba(134, 123, 211, 0.8) !important;
 	border-radius: 5px !important;
 	padding: 0 185px !important;
 	-webkit-box-shadow: 0 0 35px 0 rgba(130, 130, 130, 0.4) !important;
@@ -511,8 +511,8 @@ tr:nth-child(even) {
  
 .job-box
 :hover {
-	background-color: rgba(188, 136, 255, 0.8) !important;
-	border-color: rgba(188, 136, 255, 0.8) !important;
+	background-color:rgba(134, 123, 211, 0.8) !important;
+	border-color:rgba(134, 123, 211, 0.8) !important;
 }
 
 ul {
@@ -704,8 +704,8 @@ li {
 }
 
 .filter-result .job-box:hover {
-	background-color: rgba(188, 136, 255, 0.6) !important;
-	border-color: rgba(188, 136, 255, 0.6) !important;
+	background-color:rgba(125, 123, 185, 0.5) !important;
+	border-color: rgba(125, 123, 185, 0.5) !important;
 }
 
 ul {
