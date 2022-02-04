@@ -74,6 +74,7 @@ public class Farm implements Serializable {
 		this.getProductions().add(production);
 	}
 	
+	//Method that return the whole production of the farm from the fromDate normalized for field dimension.
 	public Double getProductionAmountM2(Date fromDate) {
 		Double temp = 0.0;
 		if(this.getProductions() != null) {
@@ -87,6 +88,7 @@ public class Farm implements Serializable {
 		return temp;
 	}
 	
+	//Method that return the whole water consumption of the farm from the fromDate normalized for field dimension.
 	public Double getWaterconsumptionM2(Date fromDate, boolean normalizeForDimension) {
 		Double temp = 0.0;
 		if(this.getWaterconsumptions() != null) {
@@ -102,6 +104,7 @@ public class Farm implements Serializable {
 		return temp;
 	}
 	
+	//Method that return the list of humidity of soil values of the farm from the fromDate.
 	public List<Integer> getHumidityofsoilValue(Date fromDate) {
 		List<Integer> humidityofsoilValues = new ArrayList<>();
 		if(this.getHumidityofsoil() != null) {

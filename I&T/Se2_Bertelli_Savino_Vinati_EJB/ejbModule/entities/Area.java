@@ -63,6 +63,7 @@ public class Area implements Serializable {
 		return forecasts;
 	}
 
+	//Method that return the list of forecasts values of the farm from the fromDate.
 	public List<Integer> getForecastsValue(Date fromDate) {
 		List<Integer> forecastValues = new ArrayList<>();
 		if (this.getForecasts() != null) {
@@ -79,6 +80,7 @@ public class Area implements Serializable {
 		this.forecasts = forecasts;
 	}
 
+	//Method compareTo useful to compare areas (e.g. for sort function).
 	public int compareTo(Area area, Date date) {
 		Double value_this = 0.0;
 		Double value_that = 0.0;

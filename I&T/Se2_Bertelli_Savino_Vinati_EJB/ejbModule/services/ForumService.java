@@ -28,6 +28,7 @@ public class ForumService {
 
 	}
 
+	//Method to retrieve all discussions.
 	public List<Discussion> getAllDiscussions() throws DiscussionsRetrievalException {
 		List<Discussion> discussions = null;
 		try {
@@ -39,6 +40,7 @@ public class ForumService {
 		return discussions;
 	}
 
+	//Method to retrieve all posts of a discussion.
 	public Discussion getAllPostsOfDiscussion(int idDiscussion) throws PostsRetrievalException {
 		Discussion discussion = null;
 		try {
@@ -50,6 +52,7 @@ public class ForumService {
 		return discussion;
 	}
 
+	//Method to create a new discussion.
 	public User createDiscussion(User user, String title, String postComment) throws DiscussionCreationException {
 		user = userService.getUserById(user.getId());
 		Post post = new Post(user, postComment);
@@ -72,6 +75,7 @@ public class ForumService {
 		return em.find(Discussion.class, id);
 	}
 
+	//Method to insert a new post in a given discussion.
 	public User insertPost(User user, String comment, int idDiscussion) throws InsertPostException {
 		user = userService.getUserById(user.getId());
 		Discussion discussion = getDiscussionById(idDiscussion);

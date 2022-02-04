@@ -94,6 +94,7 @@ public class User implements Serializable {
 		this.farm = farm;
 	}
 
+	//Method compareTo useful to compare users (e.g. for sort function).
 	public int compareTo(User user, Date date) {
 		double value_this = this.getFarm().getProductionAmountM2(date);
 		double value_that = user.getFarm().getProductionAmountM2(date);

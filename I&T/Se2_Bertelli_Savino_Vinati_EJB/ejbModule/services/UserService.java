@@ -29,6 +29,8 @@ public class UserService {
 	public UserService() {
 	}
 
+	//Method that return the user from his mail and password. 
+	//If credentials are wrong the method either return null (user not found) or throw an exception (database error, 2 users with the same credentials).
 	public User checkCredentials(String mail, String pwd) throws CredentialsException, NonUniqueResultException {
 		List<User> users = null;
 		try {
@@ -46,6 +48,7 @@ public class UserService {
 				"[NonUniqueResultException] ERROR: More than one user registered with the same credentials.");
 	}
 
+	//Method that return the most recent forecasts for the farm of a user in given day. 
 	public Forecast getForecast(User user, Date date) throws ForecastRetrievalException {
 		List<Forecast> forecasts = null;
 		try {
@@ -67,6 +70,7 @@ public class UserService {
 		return em.find(User.class, id);
 	}
 
+	//Method that return the most recent humidity of soil for the farm of a user in given day. 
 	public Humidityofsoil getHumidity(User user) throws HumidityRetrievalException, NonUniqueResultException {
 		List<Humidityofsoil> humidity = null;
 		try {
@@ -86,6 +90,7 @@ public class UserService {
 		throw new NonUniqueResultException("[NonUniqueResultException] ERROR: More than one humidity datum for today.");
 	}
 
+	//Method that allow the insertion of a new production.
 	public User insertProduction(User user, TypeOfProduct typeOfProduct, String problemsFaced, int amount, Date date)
 			throws InsertProductionException {
 		user = getUserById(user.getId());

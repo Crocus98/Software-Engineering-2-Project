@@ -40,6 +40,7 @@ public class DataminerService {
 
 	}
 
+	//Method to retrieve farmers in lexicographic order with possibility to express ordering preference.
 	public List<User> getFarmersInLexicographicOrder(int limit_number, boolean desc, Area area, Date date)
 			throws FarmersOrderingException { // Leave area and date null if you want data for all dates and areas.
 												// Limit number = n of objects wanted (0 for all)
@@ -78,8 +79,10 @@ public class DataminerService {
 		return area;
 	}
 
+	//Method to retrieve ranking data for policy makers
 	public List<RankingAggregateData> getRankingAggregateData(int limit_number, boolean desc, int idArea, Date date)
-			throws RankingAggregateDataException {
+			throws RankingAggregateDataException { // Leave area and date null if you want data for all dates and areas.
+												// Limit number = n of objects wanted (0 for all)
 		List<User> farmers = null;
 		try {
 			farmers = getFarmersInLexicographicOrder(limit_number, desc, getAreaFromId(idArea), date);
@@ -96,7 +99,10 @@ public class DataminerService {
 		return data;
 	}
 
-	public User getBestFarmer(boolean desc, Area area, Date date) throws FindBestOrWorstFarmerException {
+	//Method to retrieve the best farmer with the possibility to express an ordering preference.
+	public User getBestFarmer(boolean desc, Area area, Date date) 
+			throws FindBestOrWorstFarmerException { // Leave area and date null if you want data for all dates and areas.
+		
 		List<User> user = null;
 		try {
 			user = getFarmersInLexicographicOrder(1, desc, area, date);
@@ -113,7 +119,8 @@ public class DataminerService {
 				"[NonUniqueResultException] WARNING: More than one user is in first position, check manually.");
 	}
 
-	public Area getBestArea(boolean desc, Date date) throws AreaRetrievalException {
+	public Area getBestArea(boolean desc, Date date) 
+			throws AreaRetrievalException {
 		List<Area> areas = null;
 		areas = this.getAllAreas();
 		if (areas.size() > 0) {
@@ -136,6 +143,7 @@ public class DataminerService {
 		return areas;
 	}
 
+	//Method to retrieve summary data for users
 	@SuppressWarnings("deprecation")
 	public List<SummaryAggregateData> getLastYearMonthlyProductionSummary() throws AreaRetrievalException {
 		List<SummaryAggregateData> result = new ArrayList<>();
@@ -173,6 +181,7 @@ public class DataminerService {
 		return result;
 	}
 
+	//Method to get the summary of last year production for a given user.
 	@SuppressWarnings("deprecation")
 	public ProductionAggregateData getFarmerLastYearProductionSummary(User user) {
 		ProductionAggregateData productionData = null;
