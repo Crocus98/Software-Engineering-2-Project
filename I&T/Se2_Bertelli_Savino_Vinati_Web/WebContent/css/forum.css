@@ -17,7 +17,7 @@ strong {
 	font-family: 'Encode Sans Condensed', sans-serif;
 	font-weight: 600 !important;
 	letter-spacing: .03em !important;
-	color: #272727 !important;
+	color: #272727 ;
 }
 
 header {
@@ -76,7 +76,7 @@ main small {
 	visibility: hidden !important;
 	opacity: 0 !important;
 	transition: .3s !important;
-	background: #272727 !important;
+	
 }
 
 #nav-container:focus-within .bg {
