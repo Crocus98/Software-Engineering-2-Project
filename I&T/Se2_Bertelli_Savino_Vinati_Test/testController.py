@@ -415,7 +415,7 @@ def testGoToHomeFarmerConnection():
     #print(s.cookies.get_dict)
     link1 = 'http://localhost:8080/Se2_Bertelli_Savino_Vinati_Web/HomeFarmer'
     r1 = s.get(link1)
-    print(str(contatore.add()) + " - GoToProductionPage connection with session cookie test")
+    print(str(contatore.add()) + " - GoToHomeFarmerPage connection with session cookie test")
 
     assert r1.text.find("Yearly Production Summary")!=-1 #se ==-1 non c'è caricamento della pagina'
 
@@ -466,7 +466,7 @@ def testGoToHomeFarmerGetRightWaterConsumptionAmount():
     #go to productionPage
     link1 = 'http://localhost:8080/Se2_Bertelli_Savino_Vinati_Web/HomeFarmer'
     r1 = s.get(link1)
-    print(str(contatore.add()) + " - GoToHomeFarmer get Right Month Production Amount session cookie test")
+    print(str(contatore.add()) + " - GoToHomeFarmer get Right Month Water Consumption Amount session cookie test")
     #check prsence of all production data
     for d in listData:
         assert r1.text.find(d)!=-1 #se !=-1 se manca il dato di consumo dell'acqua'
@@ -693,7 +693,7 @@ def testGoForumConnection():
     r1 = s.get(link1)
     print(str(contatore.add()) + " - ForumPage connection with session cookie test")
 
-    assert r1.text.find("Please share your thoughts with our farmers!")!=-1 #se ==-1 non c'è caricamento della pagina'
+    assert r1.text.find("Enter Your Description")!=-1 #se ==-1 non c'è caricamento della pagina'
 
 
 def testGoToForumPageCreateDiscussion():
