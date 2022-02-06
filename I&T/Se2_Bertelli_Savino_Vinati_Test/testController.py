@@ -24,7 +24,7 @@ import mysql.connector
 db = mysql.connector.connect(
     host = '127.0.0.1', 
     user = 'root', 
-    passwd = 'Crostolo1apostolo', 
+    passwd = 'password', 
     db = 'se2_bertelli_savino_vinati', 
     port = 3306)
 
