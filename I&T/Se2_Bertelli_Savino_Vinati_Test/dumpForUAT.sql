@@ -1,3 +1,5 @@
+CREATE DATABASE  IF NOT EXISTS `se2_bertelli_savino_vinati` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `se2_bertelli_savino_vinati`;
 -- MySQL dump 10.13  Distrib 8.0.25, for Linux (x86_64)
 --
 -- Host: localhost    Database: se2_bertelli_savino_vinati
@@ -119,7 +121,7 @@ CREATE TABLE `discussion` (
   UNIQUE KEY `id_UNIQUE` (`id`),
   KEY `FK_farmer_discussion_idx` (`idfarmer`),
   CONSTRAINT `FK_farmer_discussion` FOREIGN KEY (`idfarmer`) REFERENCES `user` (`id`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=180 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=195 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -128,7 +130,7 @@ CREATE TABLE `discussion` (
 
 LOCK TABLES `discussion` WRITE;
 /*!40000 ALTER TABLE `discussion` DISABLE KEYS */;
-INSERT INTO `discussion` VALUES (1,'Miscellanea',3,'2022-01-25 13:32:20'),(175,'TESTDISCUSSION',3,'2022-02-06 17:06:58'),(176,'TESTPOST',3,'2022-02-06 17:06:58'),(177,'TESTPOST2',3,'2022-02-06 17:06:58'),(178,'TESTPOST3',3,'2022-02-06 17:06:59'),(179,'TESTPOST4',3,'2022-02-06 17:06:59');
+INSERT INTO `discussion` VALUES (1,'Miscellanea',3,'2022-01-25 13:32:20'),(190,'TESTDISCUSSION',3,'2022-02-06 17:55:10'),(191,'TESTPOST',3,'2022-02-06 17:55:10'),(192,'TESTPOST2',3,'2022-02-06 17:55:11'),(193,'TESTPOST3',3,'2022-02-06 17:55:11'),(194,'TESTPOST4',3,'2022-02-06 17:55:11');
 /*!40000 ALTER TABLE `discussion` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -243,7 +245,7 @@ CREATE TABLE `post` (
   KEY `FK_discussion_post_idx` (`iddiscussion`),
   CONSTRAINT `FK_discussion_post` FOREIGN KEY (`iddiscussion`) REFERENCES `discussion` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FK_farmer_post` FOREIGN KEY (`idfarmer`) REFERENCES `user` (`id`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=184 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=199 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -252,7 +254,7 @@ CREATE TABLE `post` (
 
 LOCK TABLES `post` WRITE;
 /*!40000 ALTER TABLE `post` DISABLE KEYS */;
-INSERT INTO `post` VALUES (1,3,1,'Here we can exchange our marvelous ideas.','2022-01-25 13:33:11'),(2,4,1,'Wonderful.','2022-01-25 13:34:09'),(3,5,1,'Great idea, Mr. Bucciarati.','2022-01-25 13:35:57'),(179,3,175,'TESTDISCUSSION','2022-02-06 17:06:58'),(180,3,176,'TESTPOST','2022-02-06 17:06:58'),(181,3,177,'TESTPOST2','2022-02-06 17:06:58'),(182,3,178,'TESTPOST3','2022-02-06 17:06:59'),(183,3,179,'TESTPOST4','2022-02-06 17:06:59');
+INSERT INTO `post` VALUES (1,3,1,'Here we can exchange our marvelous ideas.','2022-01-25 13:33:11'),(2,4,1,'Wonderful.','2022-01-25 13:34:09'),(3,5,1,'Great idea, Mr. Bucciarati.','2022-01-25 13:35:57'),(194,3,190,'TESTDISCUSSION','2022-02-06 17:55:10'),(195,3,191,'TESTPOST','2022-02-06 17:55:10'),(196,3,192,'TESTPOST2','2022-02-06 17:55:11'),(197,3,193,'TESTPOST3','2022-02-06 17:55:11'),(198,3,194,'TESTPOST4','2022-02-06 17:55:11');
 /*!40000 ALTER TABLE `post` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -274,7 +276,7 @@ CREATE TABLE `production` (
   UNIQUE KEY `id_UNIQUE` (`id`),
   KEY `FK_farm_production_idx` (`idfarm`),
   CONSTRAINT `FK_farm_production` FOREIGN KEY (`idfarm`) REFERENCES `farm` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=275 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=281 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -283,7 +285,7 @@ CREATE TABLE `production` (
 
 LOCK TABLES `production` WRITE;
 /*!40000 ALTER TABLE `production` DISABLE KEYS */;
-INSERT INTO `production` VALUES (1,5,220,'2021-12-22','Everything ok!',2),(2,6,150,'2021-12-23','Extremely harsh weather conditions.',3),(3,4,150,'2021-12-27','Everything ok!',1),(4,2,300,'2021-05-15','Everything ok!',2),(5,2,10,'2021-11-13','bad..total failure',4),(6,5,100,'2021-12-10','we did what we could',5),(7,5,234,'2021-07-08','mindblowing',3),(8,2,25,'2021-12-01','terrible year',4),(9,4,400,'2021-12-09','yeah',2),(10,1,190,'2021-06-24','Everything ok',6),(11,4,100,'2021-06-21','Everything ok',6),(12,3,25,'2021-05-19','Everything ok',7),(13,1,49,'2021-09-13','Everything ok',7),(14,2,75,'2021-04-15','Everything ok',7),(15,3,18,'2021-05-16','Everything ok',6),(16,1,23,'2021-07-14','scarse rain',2),(17,2,33,'2021-02-12','drought',3),(18,3,100,'2021-01-09','good',1),(19,4,150,'2021-12-23','ok',5),(20,5,216,'2021-10-08','nothing to say',4),(21,0,99,'2021-08-24','nothing to say',4),(22,0,23,'2022-02-01','Everything OK!',1),(23,3,100,'2022-01-04','okok',1),(24,0,34,'2021-03-01','awesome',1),(26,0,100,'2019-01-01','TEST',1),(27,0,100,'2019-01-01','TEST',1),(29,0,10000,'2018-01-01','Everything OK!',1),(30,0,100,'2019-01-01','TEST',1),(273,0,100,'2019-01-01','TESTA',1),(274,0,100,'2022-02-06','TESTA3',1);
+INSERT INTO `production` VALUES (1,5,220,'2021-12-22','Everything ok!',2),(2,6,150,'2021-12-23','Extremely harsh weather conditions.',3),(3,4,150,'2021-12-27','Everything ok!',1),(4,2,300,'2021-05-15','Everything ok!',2),(5,2,10,'2021-11-13','bad..total failure',4),(6,5,100,'2021-12-10','we did what we could',5),(7,5,234,'2021-07-08','mindblowing',3),(8,2,25,'2021-12-01','terrible year',4),(9,4,400,'2021-12-09','yeah',2),(10,1,190,'2021-06-24','Everything ok',6),(11,4,100,'2021-06-21','Everything ok',6),(12,3,25,'2021-05-19','Everything ok',7),(13,1,49,'2021-09-13','Everything ok',7),(14,2,75,'2021-04-15','Everything ok',7),(15,3,18,'2021-05-16','Everything ok',6),(16,1,23,'2021-07-14','scarse rain',2),(17,2,33,'2021-02-12','drought',3),(18,3,100,'2021-01-09','good',1),(19,4,150,'2021-12-23','ok',5),(20,5,216,'2021-10-08','nothing to say',4),(21,0,99,'2021-08-24','nothing to say',4),(22,0,23,'2022-02-01','Everything OK!',1),(23,3,100,'2022-01-04','okok',1),(24,0,34,'2021-03-01','awesome',1),(26,0,100,'2019-01-01','TEST',1),(27,0,100,'2019-01-01','TEST',1),(29,0,10000,'2018-01-01','Everything OK!',1),(30,0,100,'2019-01-01','TEST',1),(279,0,100,'2019-01-01','TESTA',1),(280,0,100,'2022-02-06','TESTA3',1);
 /*!40000 ALTER TABLE `production` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -475,4 +477,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-02-06 17:15:19
+-- Dump completed on 2022-02-06 18:48:48
