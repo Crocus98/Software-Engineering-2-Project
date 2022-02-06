@@ -693,7 +693,7 @@ def testGoForumConnection():
     r1 = s.get(link1)
     print(str(contatore.add()) + " - ForumPage connection with session cookie test")
 
-    assert r1.text.find("Enter Your Description")!=-1 #se ==-1 non c'è caricamento della pagina'
+    assert r1.text.find("Create Discussion")!=-1 #se ==-1 non c'è caricamento della pagina'
 
 
 def testGoToForumPageCreateDiscussion():
