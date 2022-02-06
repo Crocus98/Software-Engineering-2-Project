@@ -42,9 +42,10 @@
 						<div class="container">
 							<h1 class="center">Forum</h1>
 							<th:block th:if="${forum.equals('false')}">
-							<div class="wrapper">
-							<a th:href="@{/Forum}" class="btn btn-primary" style="margin:auto;" >Go back to discussions list</a>
-							</div>
+								<div class="wrapper">
+									<a th:href="@{/Forum}" class="btn btn-primary"
+										style="margin: auto;">Go back to discussions list</a>
+								</div>
 							</th:block>
 							<p class="error_text" th:text=" ${errorMsg}"></p>
 							<div class="row">
@@ -69,8 +70,7 @@
 															<div class="col-md-6 col-lg-3 my-3">
 																<div class="input-group position-relative">
 																	<input type="text" name="comment" class="form-control"
-																		placeholder="Enter Your Description" id="keywords"
-																		required>
+																		placeholder="Enter First Post" id="keywords" required>
 																</div>
 															</div>
 
@@ -97,7 +97,7 @@
 
 																		<div class="t">
 																			<h5 class="text-center text-md-left"
-																				th:text="${d.title}">Front End Developer</h5>
+																				th:text="${d.title}"></h5>
 
 																		</div>
 																	</div>
@@ -112,9 +112,6 @@
 													</th:block>
 												</div>
 
-												<!-- START Pagination -->
-
-												<!-- END Pagination -->
 											</div>
 										</div>
 
@@ -122,7 +119,7 @@
 
 
 									<th:block th:if="${forum.equals('false')}">
-									
+
 										<div class="container mt-5 mb-5">
 											<div class="d-flex justify-content-center row">
 												<div class="d-flex flex-column col-md-8">
@@ -152,11 +149,10 @@
 															<div
 																class="d-flex flex-row add-comment-section mt-4 mb-4">
 
-
 																<input type="text" name="comment"
 																	class="form-control mr-3" placeholder="Add comment">
 																<button type="submit" value="Comment"
-																	class="btn btn-primary">Comment</button>
+																	class="btn btn-primary">Create Post</button>
 																<input type="hidden" name="discussion"
 																	th:value="${discussion.id}">
 
@@ -170,22 +166,19 @@
 																	<div
 																		class="d-flex flex-row align-items-center commented-user">
 																		<h5 th:text="${p.user.name + ' ' + p.user.surname}"
-																			class="mr-2">Samoya Johns</h5>
+																			class="mr-2"></h5>
 																		<span class="dot mb-1"></span><span
 																			th:text="${#dates.format(p.datehour, 'dd-MMM-yyyy HH:mm')}"
-																			class="mb-1 ml-2">5 hours ago</span>
+																			class="mb-1 ml-2"></span>
 																	</div>
 																	<div th:text="${p.comment}" class="comment-text-sm">
-																		<span>Lorem ipsum dolor sit amet, consectetur
-																			adipiscing elit, sed do eiusmod tempor incididunt ut
-																			labore et dolore magna aliqua..</span>
 																	</div>
 
 																</div>
 																<br /> <br />
 															</div>
 														</th:block>
-														
+
 													</div>
 												</div>
 											</div>
