@@ -1,7 +1,7 @@
 package enums;
 
 public enum ClassificationF {
-	Extremly_Heavy_Rainfall(0), VeryHeavyRainfall(1), Heavy_Rainfall(2), Moderate_Rainfall(3),
+	Extremly_Heavy_Rainfall(0), Very_Heavy_Rainfall(1), Heavy_Rainfall(2), Moderate_Rainfall(3),
 	Light_Rainfall(4), Very_Light_Rainfall(5), No_Rainfall(6);
 
 	private final int value;
@@ -16,7 +16,7 @@ public enum ClassificationF {
 			case 0:
 				return ClassificationF.Extremly_Heavy_Rainfall; // x > 204 (Value in mm)
 			case 1:
-				return ClassificationF.VeryHeavyRainfall; // 115 < x <= 204
+				return ClassificationF.Very_Heavy_Rainfall; // 115 < x <= 204
 			case 2:
 				return ClassificationF.Heavy_Rainfall; // 64 < x <= 115
 			case 3:
