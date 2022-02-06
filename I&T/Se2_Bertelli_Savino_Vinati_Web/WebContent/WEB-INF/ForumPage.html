@@ -133,16 +133,9 @@
 																<span
 																	th:text="${'Author: ' + discussion.user.name + ' ' + discussion.user.surname}"
 																	class="ml-2"></span>
-
 															</div>
-
 														</div>
 													</div>
-
-
-
-
-
 
 													<div class="coment-bottom bg-white p-2 px-4">
 														<form th:action="@{/Post}" method="POST">
@@ -155,9 +148,6 @@
 																	class="btn btn-primary">Create</button>
 																<input type="hidden" name="discussion"
 																	th:value="${discussion.id}">
-
-
-
 															</div>
 														</form>
 														<th:block th:if="${discussion.posts != null}">
